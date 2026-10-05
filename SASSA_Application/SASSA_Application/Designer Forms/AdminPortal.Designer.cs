@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminPortal));
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             pictureBox1 = new PictureBox();
             pcLogo = new PictureBox();
             pnlTop = new Panel();
@@ -80,31 +80,23 @@
             label7 = new Label();
             pnlAdminDashboard = new Panel();
             pnlStaff = new Panel();
-            pnlCentres = new Panel();
-            pnlBookings = new Panel();
-            pnlReports = new Panel();
-            label12 = new Label();
-            label13 = new Label();
+            curvedCornerPanel6 = new SASSA_Application.Classes.CurvedCornerPanel();
+            cmbCentre = new SASSA_Application.Classes.RoundedComboBox();
+            label18 = new Label();
+            label16 = new Label();
+            txtEmail = new SASSA_Application.Classes.RoundedTextBox();
+            label14 = new Label();
+            btnAddStaff = new SASSA_Application.Classes.RoundedButton();
+            txtName = new SASSA_Application.Classes.RoundedTextBox();
             dgvStaffMembers = new DataGridView();
             colName = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             Centre = new DataGridViewTextBoxColumn();
             Date = new DataGridViewTextBoxColumn();
-            curvedCornerPanel6 = new SASSA_Application.Classes.CurvedCornerPanel();
-            roundedButton4 = new SASSA_Application.Classes.RoundedButton();
-            txtName = new SASSA_Application.Classes.RoundedTextBox();
-            label14 = new Label();
-            label16 = new Label();
-            roundedTextBox1 = new SASSA_Application.Classes.RoundedTextBox();
-            label18 = new Label();
-            cmbServiceCentre = new SASSA_Application.Classes.RoundedComboBox();
-            label19 = new Label();
-            label20 = new Label();
-            label21 = new Label();
-            label22 = new Label();
-            curvedCornerPanel7 = new SASSA_Application.Classes.CurvedCornerPanel();
-            roundedButton5 = new SASSA_Application.Classes.RoundedButton();
-            txtSearching = new SASSA_Application.Classes.RoundedTextBox();
+            label12 = new Label();
+            label13 = new Label();
+            pnlCentres = new Panel();
+            pnlBookings = new Panel();
             dgvTotalBookings = new DataGridView();
             Reference = new DataGridViewTextBoxColumn();
             Beneficiary = new DataGridViewTextBoxColumn();
@@ -112,6 +104,14 @@
             C = new DataGridViewTextBoxColumn();
             Time = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            curvedCornerPanel7 = new SASSA_Application.Classes.CurvedCornerPanel();
+            roundedButton5 = new SASSA_Application.Classes.RoundedButton();
+            txtSearching = new SASSA_Application.Classes.RoundedTextBox();
+            label21 = new Label();
+            label22 = new Label();
+            pnlReports = new Panel();
+            label19 = new Label();
+            label20 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcLogo).BeginInit();
             pnlTop.SuspendLayout();
@@ -125,12 +125,12 @@
             curvedCornerPanel4.SuspendLayout();
             pnlAdminDashboard.SuspendLayout();
             pnlStaff.SuspendLayout();
-            pnlBookings.SuspendLayout();
-            pnlReports.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvStaffMembers).BeginInit();
             curvedCornerPanel6.SuspendLayout();
-            curvedCornerPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvStaffMembers).BeginInit();
+            pnlBookings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTotalBookings).BeginInit();
+            curvedCornerPanel7.SuspendLayout();
+            pnlReports.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBox1
@@ -738,60 +738,98 @@
             pnlStaff.Size = new Size(1458, 710);
             pnlStaff.TabIndex = 5;
             // 
-            // pnlCentres
+            // curvedCornerPanel6
             // 
-            pnlCentres.BackColor = SystemColors.GradientActiveCaption;
-            pnlCentres.Dock = DockStyle.Fill;
-            pnlCentres.Location = new Point(0, 0);
-            pnlCentres.Name = "pnlCentres";
-            pnlCentres.Size = new Size(1458, 710);
-            pnlCentres.TabIndex = 5;
+            curvedCornerPanel6.BackColor = SystemColors.InactiveCaption;
+            curvedCornerPanel6.Controls.Add(cmbCentre);
+            curvedCornerPanel6.Controls.Add(label18);
+            curvedCornerPanel6.Controls.Add(label16);
+            curvedCornerPanel6.Controls.Add(txtEmail);
+            curvedCornerPanel6.Controls.Add(label14);
+            curvedCornerPanel6.Controls.Add(btnAddStaff);
+            curvedCornerPanel6.Controls.Add(txtName);
+            curvedCornerPanel6.Location = new Point(333, 216);
+            curvedCornerPanel6.Name = "curvedCornerPanel6";
+            curvedCornerPanel6.Size = new Size(1102, 202);
+            curvedCornerPanel6.TabIndex = 18;
             // 
-            // pnlBookings
+            // cmbCentre
             // 
-            pnlBookings.BackColor = SystemColors.GradientActiveCaption;
-            pnlBookings.Controls.Add(dgvTotalBookings);
-            pnlBookings.Controls.Add(curvedCornerPanel7);
-            pnlBookings.Controls.Add(label21);
-            pnlBookings.Controls.Add(label22);
-            pnlBookings.Dock = DockStyle.Fill;
-            pnlBookings.Location = new Point(0, 0);
-            pnlBookings.Name = "pnlBookings";
-            pnlBookings.Size = new Size(1458, 710);
-            pnlBookings.TabIndex = 5;
+            cmbCentre.BackColor = Color.White;
+            cmbCentre.Font = new Font("Segoe UI", 10F);
+            cmbCentre.ForeColor = Color.FromArgb(30, 30, 30);
+            cmbCentre.Location = new Point(815, 70);
+            cmbCentre.Name = "cmbCentre";
+            cmbCentre.PlaceholderText = "Select a centre";
+            cmbCentre.Size = new Size(279, 45);
+            cmbCentre.TabIndex = 16;
             // 
-            // pnlReports
+            // label18
             // 
-            pnlReports.BackColor = SystemColors.GradientActiveCaption;
-            pnlReports.Controls.Add(label19);
-            pnlReports.Controls.Add(label20);
-            pnlReports.Dock = DockStyle.Fill;
-            pnlReports.Location = new Point(0, 0);
-            pnlReports.Name = "pnlReports";
-            pnlReports.Size = new Size(1458, 710);
-            pnlReports.TabIndex = 5;
-            pnlReports.Paint += pnlReports_Paint;
+            label18.AutoSize = true;
+            label18.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label18.Location = new Point(836, 39);
+            label18.Name = "label18";
+            label18.Size = new Size(149, 28);
+            label18.TabIndex = 15;
+            label18.Text = "Service Centre";
             // 
-            // label12
+            // label16
             // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
-            label12.Location = new Point(320, 110);
-            label12.Name = "label12";
-            label12.Size = new Size(254, 46);
-            label12.TabIndex = 16;
-            label12.Text = "Staff Members";
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label16.Location = new Point(461, 39);
+            label16.Name = "label16";
+            label16.Size = new Size(145, 28);
+            label16.TabIndex = 13;
+            label16.Text = "Email Address";
             // 
-            // label13
+            // txtEmail
             // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 12.3F);
-            label13.ForeColor = SystemColors.GrayText;
-            label13.Location = new Point(320, 156);
-            label13.Name = "label13";
-            label13.Size = new Size(484, 30);
-            label13.TabIndex = 15;
-            label13.Text = "Service-centre employees who run the queue desk.";
+            txtEmail.BackColor = Color.White;
+            txtEmail.Font = new Font("Segoe UI", 10F);
+            txtEmail.Location = new Point(454, 70);
+            txtEmail.Name = "txtEmail";
+            txtEmail.PlaceholderText = "Search for a booking";
+            txtEmail.Size = new Size(332, 44);
+            txtEmail.TabIndex = 12;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label14.Location = new Point(19, 39);
+            label14.Name = "label14";
+            label14.Size = new Size(108, 28);
+            label14.TabIndex = 11;
+            label14.Text = "Full Name";
+            // 
+            // btnAddStaff
+            // 
+            btnAddStaff.BackColor = Color.FromArgb(26, 70, 130);
+            btnAddStaff.FlatAppearance.BorderSize = 0;
+            btnAddStaff.FlatStyle = FlatStyle.Flat;
+            btnAddStaff.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnAddStaff.ForeColor = Color.White;
+            btnAddStaff.HoverColor = Color.Empty;
+            btnAddStaff.Location = new Point(19, 137);
+            btnAddStaff.Name = "btnAddStaff";
+            btnAddStaff.PressedColor = Color.Empty;
+            btnAddStaff.Size = new Size(188, 38);
+            btnAddStaff.TabIndex = 1;
+            btnAddStaff.Text = "Add Staff Member";
+            btnAddStaff.UseVisualStyleBackColor = false;
+            btnAddStaff.Click += btnAddStaff_Click;
+            // 
+            // txtName
+            // 
+            txtName.BackColor = Color.White;
+            txtName.Font = new Font("Segoe UI", 10F);
+            txtName.Location = new Point(19, 70);
+            txtName.Name = "txtName";
+            txtName.PlaceholderText = "Search for a booking";
+            txtName.Size = new Size(402, 44);
+            txtName.TabIndex = 0;
             // 
             // dgvStaffMembers
             // 
@@ -799,14 +837,14 @@
             dgvStaffMembers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvStaffMembers.BackgroundColor = SystemColors.InactiveCaption;
             dgvStaffMembers.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = Color.FromArgb(26, 70, 130);
-            dataGridViewCellStyle10.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle10.ForeColor = SystemColors.Window;
-            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = SystemColors.ButtonShadow;
-            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
-            dgvStaffMembers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(26, 70, 130);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.Window;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.ButtonShadow;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvStaffMembers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvStaffMembers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvStaffMembers.Columns.AddRange(new DataGridViewColumn[] { colName, dataGridViewTextBoxColumn1, Centre, Date });
             dgvStaffMembers.EnableHeadersVisualStyles = false;
@@ -824,7 +862,7 @@
             // 
             colName.HeaderText = "Name";
             colName.MinimumWidth = 6;
-            colName.Name = "Name";
+            colName.Name = "colName";
             colName.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn1
@@ -848,175 +886,48 @@
             Date.Name = "Date";
             Date.ReadOnly = true;
             // 
-            // curvedCornerPanel6
+            // label12
             // 
-            curvedCornerPanel6.BackColor = SystemColors.InactiveCaption;
-            curvedCornerPanel6.Controls.Add(cmbServiceCentre);
-            curvedCornerPanel6.Controls.Add(label18);
-            curvedCornerPanel6.Controls.Add(label16);
-            curvedCornerPanel6.Controls.Add(roundedTextBox1);
-            curvedCornerPanel6.Controls.Add(label14);
-            curvedCornerPanel6.Controls.Add(roundedButton4);
-            curvedCornerPanel6.Controls.Add(txtName);
-            curvedCornerPanel6.Location = new Point(333, 216);
-            curvedCornerPanel6.Name = "curvedCornerPanel6";
-            curvedCornerPanel6.Size = new Size(1102, 202);
-            curvedCornerPanel6.TabIndex = 18;
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
+            label12.Location = new Point(320, 110);
+            label12.Name = "label12";
+            label12.Size = new Size(254, 46);
+            label12.TabIndex = 16;
+            label12.Text = "Staff Members";
             // 
-            // roundedButton4
+            // label13
             // 
-            roundedButton4.BackColor = Color.FromArgb(26, 70, 130);
-            roundedButton4.FlatAppearance.BorderSize = 0;
-            roundedButton4.FlatStyle = FlatStyle.Flat;
-            roundedButton4.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            roundedButton4.ForeColor = Color.White;
-            roundedButton4.HoverColor = Color.Empty;
-            roundedButton4.Location = new Point(19, 137);
-            roundedButton4.Name = "roundedButton4";
-            roundedButton4.PressedColor = Color.Empty;
-            roundedButton4.Size = new Size(188, 38);
-            roundedButton4.TabIndex = 1;
-            roundedButton4.Text = "Add Staff Member";
-            roundedButton4.UseVisualStyleBackColor = false;
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 12.3F);
+            label13.ForeColor = SystemColors.GrayText;
+            label13.Location = new Point(320, 156);
+            label13.Name = "label13";
+            label13.Size = new Size(484, 30);
+            label13.TabIndex = 15;
+            label13.Text = "Service-centre employees who run the queue desk.";
             // 
-            // txtName
+            // pnlCentres
             // 
-            txtName.BackColor = Color.White;
-            txtName.Font = new Font("Segoe UI", 10F);
-            txtName.Location = new Point(19, 70);
-            txtName.Name = "txtName";
-            txtName.PlaceholderText = "Search for a booking";
-            txtName.Size = new Size(402, 44);
-            txtName.TabIndex = 0;
+            pnlCentres.BackColor = SystemColors.GradientActiveCaption;
+            pnlCentres.Dock = DockStyle.Fill;
+            pnlCentres.Location = new Point(0, 0);
+            pnlCentres.Name = "pnlCentres";
+            pnlCentres.Size = new Size(1458, 710);
+            pnlCentres.TabIndex = 5;
             // 
-            // label14
+            // pnlBookings
             // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label14.Location = new Point(19, 39);
-            label14.Name = "label14";
-            label14.Size = new Size(108, 28);
-            label14.TabIndex = 11;
-            label14.Text = "Full Name";
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label16.Location = new Point(461, 39);
-            label16.Name = "label16";
-            label16.Size = new Size(145, 28);
-            label16.TabIndex = 13;
-            label16.Text = "Email Address";
-            // 
-            // roundedTextBox1
-            // 
-            roundedTextBox1.BackColor = Color.White;
-            roundedTextBox1.Font = new Font("Segoe UI", 10F);
-            roundedTextBox1.Location = new Point(454, 70);
-            roundedTextBox1.Name = "roundedTextBox1";
-            roundedTextBox1.PlaceholderText = "Search for a booking";
-            roundedTextBox1.Size = new Size(332, 44);
-            roundedTextBox1.TabIndex = 12;
-            // 
-            // label18
-            // 
-            label18.AutoSize = true;
-            label18.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label18.Location = new Point(836, 39);
-            label18.Name = "label18";
-            label18.Size = new Size(149, 28);
-            label18.TabIndex = 15;
-            label18.Text = "Service Centre";
-            // 
-            // cmbServiceCentre
-            // 
-            cmbServiceCentre.BackColor = Color.White;
-            cmbServiceCentre.Font = new Font("Segoe UI", 10F);
-            cmbServiceCentre.ForeColor = Color.FromArgb(30, 30, 30);
-            cmbServiceCentre.Location = new Point(815, 70);
-            cmbServiceCentre.Name = "cmbServiceCentre";
-            cmbServiceCentre.PlaceholderText = "Select a centre";
-            cmbServiceCentre.Size = new Size(279, 45);
-            cmbServiceCentre.TabIndex = 16;
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
-            label19.Location = new Point(315, 98);
-            label19.Name = "label19";
-            label19.Size = new Size(144, 46);
-            label19.TabIndex = 18;
-            label19.Text = "Reports";
-            // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Font = new Font("Segoe UI", 12.3F);
-            label20.ForeColor = SystemColors.GrayText;
-            label20.Location = new Point(315, 144);
-            label20.Name = "label20";
-            label20.Size = new Size(618, 30);
-            label20.TabIndex = 17;
-            label20.Text = "Daily volume, completed visits, no-shows and demand by service.";
-            // 
-            // label21
-            // 
-            label21.AutoSize = true;
-            label21.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
-            label21.Location = new Point(315, 117);
-            label21.Name = "label21";
-            label21.Size = new Size(374, 46);
-            label21.TabIndex = 20;
-            label21.Text = "Booking management";
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.Font = new Font("Segoe UI", 12.3F);
-            label22.ForeColor = SystemColors.GrayText;
-            label22.Location = new Point(315, 163);
-            label22.Name = "label22";
-            label22.Size = new Size(344, 30);
-            label22.TabIndex = 19;
-            label22.Text = "Search and filter every appointment";
-            // 
-            // curvedCornerPanel7
-            // 
-            curvedCornerPanel7.BackColor = SystemColors.InactiveCaption;
-            curvedCornerPanel7.Controls.Add(roundedButton5);
-            curvedCornerPanel7.Controls.Add(txtSearching);
-            curvedCornerPanel7.Location = new Point(320, 222);
-            curvedCornerPanel7.Name = "curvedCornerPanel7";
-            curvedCornerPanel7.Size = new Size(1075, 125);
-            curvedCornerPanel7.TabIndex = 21;
-            // 
-            // roundedButton5
-            // 
-            roundedButton5.BackColor = Color.FromArgb(26, 70, 130);
-            roundedButton5.FlatAppearance.BorderSize = 0;
-            roundedButton5.FlatStyle = FlatStyle.Flat;
-            roundedButton5.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            roundedButton5.ForeColor = Color.White;
-            roundedButton5.HoverColor = Color.Empty;
-            roundedButton5.Location = new Point(860, 45);
-            roundedButton5.Name = "roundedButton5";
-            roundedButton5.PressedColor = Color.Empty;
-            roundedButton5.Size = new Size(188, 38);
-            roundedButton5.TabIndex = 1;
-            roundedButton5.Text = "Search";
-            roundedButton5.UseVisualStyleBackColor = false;
-            // 
-            // txtSearching
-            // 
-            txtSearching.BackColor = Color.White;
-            txtSearching.Font = new Font("Segoe UI", 10F);
-            txtSearching.Location = new Point(27, 45);
-            txtSearching.Name = "txtSearching";
-            txtSearching.PlaceholderText = "Search for a booking";
-            txtSearching.Size = new Size(827, 46);
-            txtSearching.TabIndex = 0;
+            pnlBookings.BackColor = SystemColors.GradientActiveCaption;
+            pnlBookings.Controls.Add(dgvTotalBookings);
+            pnlBookings.Controls.Add(curvedCornerPanel7);
+            pnlBookings.Controls.Add(label21);
+            pnlBookings.Controls.Add(label22);
+            pnlBookings.Dock = DockStyle.Fill;
+            pnlBookings.Location = new Point(0, 0);
+            pnlBookings.Name = "pnlBookings";
+            pnlBookings.Size = new Size(1458, 710);
+            pnlBookings.TabIndex = 5;
             // 
             // dgvTotalBookings
             // 
@@ -1024,14 +935,14 @@
             dgvTotalBookings.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvTotalBookings.BackgroundColor = SystemColors.GradientActiveCaption;
             dgvTotalBookings.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = Color.FromArgb(26, 70, 130);
-            dataGridViewCellStyle11.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle11.ForeColor = SystemColors.Window;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.ButtonShadow;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            dgvTotalBookings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(26, 70, 130);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.Window;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ButtonShadow;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvTotalBookings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvTotalBookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvTotalBookings.Columns.AddRange(new DataGridViewColumn[] { Reference, Beneficiary, dataGridViewTextBoxColumn2, C, Time, dataGridViewTextBoxColumn3 });
             dgvTotalBookings.EnableHeadersVisualStyles = false;
@@ -1088,6 +999,96 @@
             dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
+            // curvedCornerPanel7
+            // 
+            curvedCornerPanel7.BackColor = SystemColors.InactiveCaption;
+            curvedCornerPanel7.Controls.Add(roundedButton5);
+            curvedCornerPanel7.Controls.Add(txtSearching);
+            curvedCornerPanel7.Location = new Point(320, 222);
+            curvedCornerPanel7.Name = "curvedCornerPanel7";
+            curvedCornerPanel7.Size = new Size(1075, 125);
+            curvedCornerPanel7.TabIndex = 21;
+            // 
+            // roundedButton5
+            // 
+            roundedButton5.BackColor = Color.FromArgb(26, 70, 130);
+            roundedButton5.FlatAppearance.BorderSize = 0;
+            roundedButton5.FlatStyle = FlatStyle.Flat;
+            roundedButton5.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            roundedButton5.ForeColor = Color.White;
+            roundedButton5.HoverColor = Color.Empty;
+            roundedButton5.Location = new Point(860, 45);
+            roundedButton5.Name = "roundedButton5";
+            roundedButton5.PressedColor = Color.Empty;
+            roundedButton5.Size = new Size(188, 38);
+            roundedButton5.TabIndex = 1;
+            roundedButton5.Text = "Search";
+            roundedButton5.UseVisualStyleBackColor = false;
+            // 
+            // txtSearching
+            // 
+            txtSearching.BackColor = Color.White;
+            txtSearching.Font = new Font("Segoe UI", 10F);
+            txtSearching.Location = new Point(27, 45);
+            txtSearching.Name = "txtSearching";
+            txtSearching.PlaceholderText = "Search for a booking";
+            txtSearching.Size = new Size(827, 46);
+            txtSearching.TabIndex = 0;
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
+            label21.Location = new Point(315, 117);
+            label21.Name = "label21";
+            label21.Size = new Size(374, 46);
+            label21.TabIndex = 20;
+            label21.Text = "Booking management";
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Font = new Font("Segoe UI", 12.3F);
+            label22.ForeColor = SystemColors.GrayText;
+            label22.Location = new Point(315, 163);
+            label22.Name = "label22";
+            label22.Size = new Size(344, 30);
+            label22.TabIndex = 19;
+            label22.Text = "Search and filter every appointment";
+            // 
+            // pnlReports
+            // 
+            pnlReports.BackColor = SystemColors.GradientActiveCaption;
+            pnlReports.Controls.Add(label19);
+            pnlReports.Controls.Add(label20);
+            pnlReports.Dock = DockStyle.Fill;
+            pnlReports.Location = new Point(0, 0);
+            pnlReports.Name = "pnlReports";
+            pnlReports.Size = new Size(1458, 710);
+            pnlReports.TabIndex = 5;
+            pnlReports.Paint += pnlReports_Paint;
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
+            label19.Location = new Point(315, 98);
+            label19.Name = "label19";
+            label19.Size = new Size(144, 46);
+            label19.TabIndex = 18;
+            label19.Text = "Reports";
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Font = new Font("Segoe UI", 12.3F);
+            label20.ForeColor = SystemColors.GrayText;
+            label20.Location = new Point(315, 144);
+            label20.Name = "label20";
+            label20.Size = new Size(618, 30);
+            label20.TabIndex = 17;
+            label20.Text = "Daily volume, completed visits, no-shows and demand by service.";
+            // 
             // AdminPortal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -1095,15 +1096,16 @@
             ClientSize = new Size(1458, 710);
             Controls.Add(pnlSidePanel);
             Controls.Add(pnlTop);
-            Controls.Add(pnlCentres);
             Controls.Add(pnlStaff);
             Controls.Add(pnlServices);
             Controls.Add(pnlAdminDashboard);
             Controls.Add(pnlReports);
             Controls.Add(pnlBookings);
+            Controls.Add(pnlCentres);
             Name = "AdminPortal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AdminPortal";
+            Load += AdminPortal_Load_1;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcLogo).EndInit();
             pnlTop.ResumeLayout(false);
@@ -1126,15 +1128,15 @@
             pnlAdminDashboard.PerformLayout();
             pnlStaff.ResumeLayout(false);
             pnlStaff.PerformLayout();
-            pnlBookings.ResumeLayout(false);
-            pnlBookings.PerformLayout();
-            pnlReports.ResumeLayout(false);
-            pnlReports.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvStaffMembers).EndInit();
             curvedCornerPanel6.ResumeLayout(false);
             curvedCornerPanel6.PerformLayout();
-            curvedCornerPanel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvStaffMembers).EndInit();
+            pnlBookings.ResumeLayout(false);
+            pnlBookings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTotalBookings).EndInit();
+            curvedCornerPanel7.ResumeLayout(false);
+            pnlReports.ResumeLayout(false);
+            pnlReports.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -1200,10 +1202,10 @@
         private DataGridViewTextBoxColumn Centre;
         private DataGridViewTextBoxColumn Date;
         private Classes.CurvedCornerPanel curvedCornerPanel6;
-        private Classes.RoundedButton roundedButton4;
+        private Classes.RoundedButton btnAddStaff;
         private Classes.RoundedTextBox txtName;
         private Label label16;
-        private Classes.RoundedTextBox roundedTextBox1;
+        private Classes.RoundedTextBox txtEmail;
         private Label label14;
         private Label label18;
         private Classes.RoundedComboBox cmbServiceCentre;
@@ -1221,5 +1223,6 @@
         private DataGridViewTextBoxColumn C;
         private DataGridViewTextBoxColumn Time;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private Classes.RoundedComboBox cmbCentre;
     }
 }

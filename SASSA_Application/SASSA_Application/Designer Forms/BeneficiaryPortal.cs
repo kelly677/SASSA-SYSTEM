@@ -56,5 +56,10 @@ namespace SASSA_Application.Designer_Forms
         {
 
         }
+
+        private void cmbServiceCentre_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

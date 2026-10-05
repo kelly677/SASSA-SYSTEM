@@ -212,6 +212,7 @@
             btnLogin.TabIndex = 0;
             btnLogin.Text = "Login to My Account";
             btnLogin.UseVisualStyleBackColor = false;
+            btnLogin.Click += btnLogin_Click;
             // 
             // frmWelcomePage
             // 

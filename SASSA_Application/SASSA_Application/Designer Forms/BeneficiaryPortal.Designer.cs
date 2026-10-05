@@ -395,6 +395,7 @@
             cmbServiceCentre.PlaceholderText = "Select a centre";
             cmbServiceCentre.Size = new Size(279, 45);
             cmbServiceCentre.TabIndex = 9;
+            cmbServiceCentre.Click += cmbServiceCentre_Click;
             // 
             // lblServiceCentre
             // 

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using SASSA_Application.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
 
 namespace SASSA_Application.Designer_Forms
 {
@@ -157,25 +158,39 @@ namespace SASSA_Application.Designer_Forms
             {
                 return;
             }
+            // ---- Create the Beneficiary object ----
+            Beneficiary newBeneficiary = new Beneficiary();
+            newBeneficiary.Name = name;
+            newBeneficiary.Surname = surname;
+            newBeneficiary.IdNumber = idNum;
+            newBeneficiary.Cell = phoneNumber;
+            newBeneficiary.Email = email;
+            newBeneficiary.PreferredCentre = centre;
+            newBeneficiary.Password = password;
+
             // ---- Save to Beneficiaries.txt ----
-            //string line = name + "|" + surname + "|" + idNum + "|" + phoneNumber + "|" +
-            //              email + "|" + centre + "|" + password;
+            string line = newBeneficiary.Name + "|" + newBeneficiary.Surname + "|" +
+                          newBeneficiary.IdNumber + "|" + newBeneficiary.Cell + "|" +
+                          newBeneficiary.Email + "|" + newBeneficiary.PreferredCentre + "|" +
+                          newBeneficiary.Password;
 
-            //File.AppendAllText("Beneficiaries.txt", line + Environment.NewLine);
+            File.AppendAllText("Beneficiaries.txt", line + Environment.NewLine);
 
-            //MessageBox.Show("Account created successfully!", "Registration Complete",
-            //                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Account created successfully!", "Registration Complete",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            // Clear the form
-            //txtFullName.Text.Clear();
+            // ---- Clear the form ----
+            //txtFullName.Clear();
             //txtLastName.Clear();
             //txtIDNumber.Clear();
             //txtPhoneNumber.Clear();
             //txtEmail.Clear();
             //cmbServiceCentre.SelectedIndex = -1;
-            //txtPassword.clear
+            //txtPassword.Clear();
             //txtConfirmPassword.Clear();
+
             this.Close();
+            
         
     }
     }
