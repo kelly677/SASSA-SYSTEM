@@ -28,17 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             lblHeading = new Label();
             label1 = new Label();
             lblServiceCentre = new Label();
             txtFullName = new SASSA_Application.Classes.RoundedTextBox();
             txtLastName = new SASSA_Application.Classes.RoundedTextBox();
             label2 = new Label();
-            roundedTextBox1 = new SASSA_Application.Classes.RoundedTextBox();
+            txtIDNumber = new SASSA_Application.Classes.RoundedTextBox();
             label3 = new Label();
-            roundedTextBox2 = new SASSA_Application.Classes.RoundedTextBox();
+            txtPhoneNumber = new SASSA_Application.Classes.RoundedTextBox();
             label4 = new Label();
-            roundedTextBox3 = new SASSA_Application.Classes.RoundedTextBox();
+            txtEmail = new SASSA_Application.Classes.RoundedTextBox();
             label5 = new Label();
             label6 = new Label();
             cmbServiceCentre = new SASSA_Application.Classes.RoundedComboBox();
@@ -46,9 +47,11 @@
             btnBack = new SASSA_Application.Classes.RoundedButton();
             txtPassword = new SASSA_Application.Classes.RoundedTextBox();
             label7 = new Label();
-            roundedTextBox5 = new SASSA_Application.Classes.RoundedTextBox();
+            txtConfirmPassword = new SASSA_Application.Classes.RoundedTextBox();
             label8 = new Label();
             lblShowPassword = new Label();
+            errorProvider1 = new ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // lblHeading
@@ -112,16 +115,16 @@
             label2.TabIndex = 13;
             label2.Text = "Last Name";
             // 
-            // roundedTextBox1
+            // txtIDNumber
             // 
-            roundedTextBox1.BackColor = Color.White;
-            roundedTextBox1.Font = new Font("Segoe UI", 10F);
-            roundedTextBox1.Location = new Point(307, 243);
-            roundedTextBox1.MaxLength = 13;
-            roundedTextBox1.Name = "roundedTextBox1";
-            roundedTextBox1.PlaceholderText = "Enter South African ID";
-            roundedTextBox1.Size = new Size(312, 45);
-            roundedTextBox1.TabIndex = 16;
+            txtIDNumber.BackColor = Color.White;
+            txtIDNumber.Font = new Font("Segoe UI", 10F);
+            txtIDNumber.Location = new Point(307, 243);
+            txtIDNumber.MaxLength = 13;
+            txtIDNumber.Name = "txtIDNumber";
+            txtIDNumber.PlaceholderText = "Enter South African ID";
+            txtIDNumber.Size = new Size(312, 45);
+            txtIDNumber.TabIndex = 16;
             // 
             // label3
             // 
@@ -133,16 +136,16 @@
             label3.TabIndex = 15;
             label3.Text = "ID Number";
             // 
-            // roundedTextBox2
+            // txtPhoneNumber
             // 
-            roundedTextBox2.BackColor = Color.White;
-            roundedTextBox2.Font = new Font("Segoe UI", 10F);
-            roundedTextBox2.Location = new Point(307, 307);
-            roundedTextBox2.MaxLength = 10;
-            roundedTextBox2.Name = "roundedTextBox2";
-            roundedTextBox2.PlaceholderText = "e.g.0725576865";
-            roundedTextBox2.Size = new Size(312, 45);
-            roundedTextBox2.TabIndex = 18;
+            txtPhoneNumber.BackColor = Color.White;
+            txtPhoneNumber.Font = new Font("Segoe UI", 10F);
+            txtPhoneNumber.Location = new Point(307, 307);
+            txtPhoneNumber.MaxLength = 10;
+            txtPhoneNumber.Name = "txtPhoneNumber";
+            txtPhoneNumber.PlaceholderText = "e.g.0725576865";
+            txtPhoneNumber.Size = new Size(312, 45);
+            txtPhoneNumber.TabIndex = 18;
             // 
             // label4
             // 
@@ -154,15 +157,15 @@
             label4.TabIndex = 17;
             label4.Text = "Phone Number";
             // 
-            // roundedTextBox3
+            // txtEmail
             // 
-            roundedTextBox3.BackColor = Color.White;
-            roundedTextBox3.Font = new Font("Segoe UI", 10F);
-            roundedTextBox3.Location = new Point(307, 370);
-            roundedTextBox3.Name = "roundedTextBox3";
-            roundedTextBox3.PlaceholderText = "e.g Sassa@gmail.com";
-            roundedTextBox3.Size = new Size(312, 45);
-            roundedTextBox3.TabIndex = 20;
+            txtEmail.BackColor = Color.White;
+            txtEmail.Font = new Font("Segoe UI", 10F);
+            txtEmail.Location = new Point(307, 370);
+            txtEmail.Name = "txtEmail";
+            txtEmail.PlaceholderText = "e.g Sassa@gmail.com";
+            txtEmail.Size = new Size(312, 45);
+            txtEmail.TabIndex = 20;
             // 
             // label5
             // 
@@ -210,7 +213,7 @@
             btnRegisterAccount.TabIndex = 23;
             btnRegisterAccount.Text = "Register";
             btnRegisterAccount.UseVisualStyleBackColor = false;
-            btnRegisterAccount.Click += roundedButton1_Click;
+            btnRegisterAccount.Click += btnRegisterAccount_Click;
             // 
             // btnBack
             // 
@@ -248,15 +251,15 @@
             label7.TabIndex = 25;
             label7.Text = "Password";
             // 
-            // roundedTextBox5
+            // txtConfirmPassword
             // 
-            roundedTextBox5.BackColor = Color.White;
-            roundedTextBox5.Font = new Font("Segoe UI", 10F);
-            roundedTextBox5.Location = new Point(307, 556);
-            roundedTextBox5.Name = "roundedTextBox5";
-            roundedTextBox5.PlaceholderText = "confirm Password";
-            roundedTextBox5.Size = new Size(312, 45);
-            roundedTextBox5.TabIndex = 28;
+            txtConfirmPassword.BackColor = Color.White;
+            txtConfirmPassword.Font = new Font("Segoe UI", 10F);
+            txtConfirmPassword.Location = new Point(307, 556);
+            txtConfirmPassword.Name = "txtConfirmPassword";
+            txtConfirmPassword.PlaceholderText = "confirm Password";
+            txtConfirmPassword.Size = new Size(312, 45);
+            txtConfirmPassword.TabIndex = 28;
             // 
             // label8
             // 
@@ -278,6 +281,10 @@
             lblShowPassword.TabIndex = 29;
             lblShowPassword.Text = "👁️Show";
             // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
             // Registration
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -285,7 +292,7 @@
             BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(753, 710);
             Controls.Add(lblShowPassword);
-            Controls.Add(roundedTextBox5);
+            Controls.Add(txtConfirmPassword);
             Controls.Add(label8);
             Controls.Add(txtPassword);
             Controls.Add(label7);
@@ -293,11 +300,11 @@
             Controls.Add(btnRegisterAccount);
             Controls.Add(cmbServiceCentre);
             Controls.Add(label6);
-            Controls.Add(roundedTextBox3);
+            Controls.Add(txtEmail);
             Controls.Add(label5);
-            Controls.Add(roundedTextBox2);
+            Controls.Add(txtPhoneNumber);
             Controls.Add(label4);
-            Controls.Add(roundedTextBox1);
+            Controls.Add(txtIDNumber);
             Controls.Add(label3);
             Controls.Add(txtLastName);
             Controls.Add(label2);
@@ -309,6 +316,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Registration";
             Load += Registration_Load;
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -321,11 +329,11 @@
         private Classes.RoundedTextBox txtFullName;
         private Classes.RoundedTextBox txtLastName;
         private Label label2;
-        private Classes.RoundedTextBox roundedTextBox1;
+        private Classes.RoundedTextBox txtIDNumber;
         private Label label3;
-        private Classes.RoundedTextBox roundedTextBox2;
+        private Classes.RoundedTextBox txtPhoneNumber;
         private Label label4;
-        private Classes.RoundedTextBox roundedTextBox3;
+        private Classes.RoundedTextBox txtEmail;
         private Label label5;
         private Label label6;
         private Classes.RoundedComboBox cmbServiceCentre;
@@ -333,8 +341,9 @@
         private Classes.RoundedButton btnBack;
         private Classes.RoundedTextBox txtPassword;
         private Label label7;
-        private Classes.RoundedTextBox roundedTextBox5;
+        private Classes.RoundedTextBox txtConfirmPassword;
         private Label label8;
         private Label lblShowPassword;
+        private ErrorProvider errorProvider1;
     }
 }
