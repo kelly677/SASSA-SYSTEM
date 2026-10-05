@@ -42,8 +42,8 @@
             label5 = new Label();
             label6 = new Label();
             cmbServiceCentre = new SASSA_Application.Classes.RoundedComboBox();
-            roundedButton1 = new SASSA_Application.Classes.RoundedButton();
-            roundedButton2 = new SASSA_Application.Classes.RoundedButton();
+            btnRegisterAccount = new SASSA_Application.Classes.RoundedButton();
+            btnBack = new SASSA_Application.Classes.RoundedButton();
             txtPassword = new SASSA_Application.Classes.RoundedTextBox();
             label7 = new Label();
             roundedTextBox5 = new SASSA_Application.Classes.RoundedTextBox();
@@ -195,37 +195,38 @@
             cmbServiceCentre.Size = new Size(312, 45);
             cmbServiceCentre.TabIndex = 22;
             // 
-            // roundedButton1
+            // btnRegisterAccount
             // 
-            roundedButton1.BackColor = Color.FromArgb(26, 70, 130);
-            roundedButton1.FlatAppearance.BorderSize = 0;
-            roundedButton1.FlatStyle = FlatStyle.Flat;
-            roundedButton1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            roundedButton1.ForeColor = SystemColors.GradientActiveCaption;
-            roundedButton1.HoverColor = Color.Empty;
-            roundedButton1.Location = new Point(102, 629);
-            roundedButton1.Name = "roundedButton1";
-            roundedButton1.PressedColor = Color.Empty;
-            roundedButton1.Size = new Size(307, 50);
-            roundedButton1.TabIndex = 23;
-            roundedButton1.Text = "Register";
-            roundedButton1.UseVisualStyleBackColor = false;
+            btnRegisterAccount.BackColor = Color.FromArgb(26, 70, 130);
+            btnRegisterAccount.FlatAppearance.BorderSize = 0;
+            btnRegisterAccount.FlatStyle = FlatStyle.Flat;
+            btnRegisterAccount.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnRegisterAccount.ForeColor = SystemColors.GradientActiveCaption;
+            btnRegisterAccount.HoverColor = Color.Empty;
+            btnRegisterAccount.Location = new Point(102, 629);
+            btnRegisterAccount.Name = "btnRegisterAccount";
+            btnRegisterAccount.PressedColor = Color.Empty;
+            btnRegisterAccount.Size = new Size(307, 50);
+            btnRegisterAccount.TabIndex = 23;
+            btnRegisterAccount.Text = "Register";
+            btnRegisterAccount.UseVisualStyleBackColor = false;
+            btnRegisterAccount.Click += roundedButton1_Click;
             // 
-            // roundedButton2
+            // btnBack
             // 
-            roundedButton2.BackColor = SystemColors.GradientActiveCaption;
-            roundedButton2.FlatAppearance.BorderSize = 0;
-            roundedButton2.FlatStyle = FlatStyle.Flat;
-            roundedButton2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            roundedButton2.ForeColor = Color.FromArgb(26, 70, 130);
-            roundedButton2.HoverColor = Color.Empty;
-            roundedButton2.Location = new Point(511, 629);
-            roundedButton2.Name = "roundedButton2";
-            roundedButton2.PressedColor = Color.Empty;
-            roundedButton2.Size = new Size(108, 50);
-            roundedButton2.TabIndex = 24;
-            roundedButton2.Text = "↩️ Back";
-            roundedButton2.UseVisualStyleBackColor = false;
+            btnBack.BackColor = SystemColors.GradientActiveCaption;
+            btnBack.FlatAppearance.BorderSize = 0;
+            btnBack.FlatStyle = FlatStyle.Flat;
+            btnBack.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnBack.ForeColor = Color.FromArgb(26, 70, 130);
+            btnBack.HoverColor = Color.Empty;
+            btnBack.Location = new Point(511, 629);
+            btnBack.Name = "btnBack";
+            btnBack.PressedColor = Color.Empty;
+            btnBack.Size = new Size(108, 50);
+            btnBack.TabIndex = 24;
+            btnBack.Text = "↩️ Back";
+            btnBack.UseVisualStyleBackColor = false;
             // 
             // txtPassword
             // 
@@ -236,7 +237,6 @@
             txtPassword.PlaceholderText = "minimum of 6 characters";
             txtPassword.Size = new Size(312, 45);
             txtPassword.TabIndex = 26;
-            txtPassword.Visible = false;
             // 
             // label7
             // 
@@ -257,7 +257,6 @@
             roundedTextBox5.PlaceholderText = "confirm Password";
             roundedTextBox5.Size = new Size(312, 45);
             roundedTextBox5.TabIndex = 28;
-            roundedTextBox5.Visible = false;
             // 
             // label8
             // 
@@ -290,8 +289,8 @@
             Controls.Add(label8);
             Controls.Add(txtPassword);
             Controls.Add(label7);
-            Controls.Add(roundedButton2);
-            Controls.Add(roundedButton1);
+            Controls.Add(btnBack);
+            Controls.Add(btnRegisterAccount);
             Controls.Add(cmbServiceCentre);
             Controls.Add(label6);
             Controls.Add(roundedTextBox3);
@@ -330,8 +329,8 @@
         private Label label5;
         private Label label6;
         private Classes.RoundedComboBox cmbServiceCentre;
-        private Classes.RoundedButton roundedButton1;
-        private Classes.RoundedButton roundedButton2;
+        private Classes.RoundedButton btnRegisterAccount;
+        private Classes.RoundedButton btnBack;
         private Classes.RoundedTextBox txtPassword;
         private Label label7;
         private Classes.RoundedTextBox roundedTextBox5;

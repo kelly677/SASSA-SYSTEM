@@ -19,5 +19,11 @@ namespace SASSA_Application.Designer_Forms
         {
             cmbServiceCentre.AddRange("Johannesburg Central", "Soweto", "Pretoria Marabastad", "Tembisa");
         }
+
+        private void roundedButton1_Click(object sender, EventArgs e)
+        {
+            //Validation For Later
+
+        }
     }
 }
