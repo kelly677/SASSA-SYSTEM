@@ -32,7 +32,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             pnlTop = new Panel();
             lblUserName = new Label();
-            label15 = new Label();
+            lblBeneficiaryPortal = new Label();
             pictureBox1 = new PictureBox();
             pcLogo = new PictureBox();
             pnlSidePanel = new Panel();
@@ -44,9 +44,10 @@
             btnDashboard = new SASSA_Application.Classes.RoundedButton();
             pnlNewBooking = new Panel();
             curvedCornerPanel1 = new SASSA_Application.Classes.CurvedCornerPanel();
+            cmbTimeSlot = new SASSA_Application.Classes.RoundedComboBox();
             lblAvailableTime = new Label();
             btnConfirmBooking = new SASSA_Application.Classes.RoundedButton();
-            dateTimePicker1 = new DateTimePicker();
+            dtpDate = new DateTimePicker();
             lblDate = new Label();
             cmbServiceRequired = new SASSA_Application.Classes.RoundedComboBox();
             lblServiceRequired = new Label();
@@ -55,52 +56,47 @@
             lblHeading = new Label();
             label1 = new Label();
             pnlQueueStatus = new Panel();
-            label2 = new Label();
+            lblQueueStatus = new Label();
+            lblUpdatesWhenStaffCallsTheNextPerson = new Label();
             curvedCornerPanel3 = new SASSA_Application.Classes.CurvedCornerPanel();
-            lblTime = new Label();
+            lblEstimatedWait = new Label();
             lblPeopleAhead = new Label();
             lblStatus = new Label();
-            label18 = new Label();
-            label17 = new Label();
-            label16 = new Label();
+            lblQueueStatusTitle = new Label();
+            lblPeopleAheadTiltle = new Label();
+            lblEstimatedWaitTitle = new Label();
             lblQueueNumber = new Label();
-            label4 = new Label();
-            label3 = new Label();
+            lblUpcomingAndPreviousVisits = new Label();
             curvedCornerPanel2 = new SASSA_Application.Classes.CurvedCornerPanel();
             dgvMyBooking = new DataGridView();
-            Reference = new DataGridViewTextBoxColumn();
-            Service = new DataGridViewTextBoxColumn();
-            Centre = new DataGridViewTextBoxColumn();
-            Date = new DataGridViewTextBoxColumn();
-            Status = new DataGridViewTextBoxColumn();
             lblMyBooking = new Label();
             pnlMyBooking = new Panel();
             pnlProfile = new Panel();
-            roundedButton3 = new SASSA_Application.Classes.RoundedButton();
-            roundedButton2 = new SASSA_Application.Classes.RoundedButton();
-            roundedComboBox1 = new SASSA_Application.Classes.RoundedComboBox();
-            label7 = new Label();
-            roundedTextBox3 = new SASSA_Application.Classes.RoundedTextBox();
-            label10 = new Label();
-            roundedTextBox2 = new SASSA_Application.Classes.RoundedTextBox();
-            label11 = new Label();
-            roundedTextBox1 = new SASSA_Application.Classes.RoundedTextBox();
-            label12 = new Label();
+            btnSaveChanges = new SASSA_Application.Classes.RoundedButton();
+            btnEditDetails = new SASSA_Application.Classes.RoundedButton();
+            cmbPreferredServiceCentre = new SASSA_Application.Classes.RoundedComboBox();
+            lblPreferredServiceCentre = new Label();
+            txtEmailAddress = new SASSA_Application.Classes.RoundedTextBox();
+            lblEmailAddress = new Label();
+            txtPhoneNumber = new SASSA_Application.Classes.RoundedTextBox();
+            lblPhoneNumber = new Label();
+            txtIDNumber = new SASSA_Application.Classes.RoundedTextBox();
+            lblIDNumber = new Label();
             txtLastName = new SASSA_Application.Classes.RoundedTextBox();
-            label13 = new Label();
+            lblLastName = new Label();
             txtFullName = new SASSA_Application.Classes.RoundedTextBox();
-            label14 = new Label();
+            lblFullName = new Label();
             lblPersonalInfo = new Label();
             pnlDashboard = new Panel();
             btnDashNewBook = new SASSA_Application.Classes.RoundedButton();
             curvedCornerPanel5 = new SASSA_Application.Classes.CurvedCornerPanel();
-            roundedButton1 = new SASSA_Application.Classes.RoundedButton();
+            btnViewQueue = new SASSA_Application.Classes.RoundedButton();
             lblQnum = new Label();
-            label9 = new Label();
+            lblCurrentQueueStatusTitle = new Label();
             lblQstatus = new Label();
             curvedCornerPanel4 = new SASSA_Application.Classes.CurvedCornerPanel();
-            label8 = new Label();
-            label6 = new Label();
+            lblUpcomingBooking = new Label();
+            lblUpcomingBookingTitle = new Label();
             label5 = new Label();
             lblDashboard = new Label();
             pnlTop.SuspendLayout();
@@ -124,13 +120,14 @@
             // 
             pnlTop.BackColor = Color.FromArgb(26, 70, 130);
             pnlTop.Controls.Add(lblUserName);
-            pnlTop.Controls.Add(label15);
+            pnlTop.Controls.Add(lblBeneficiaryPortal);
             pnlTop.Controls.Add(pictureBox1);
             pnlTop.Controls.Add(pcLogo);
             pnlTop.Dock = DockStyle.Top;
             pnlTop.Location = new Point(0, 0);
+            pnlTop.Margin = new Padding(3, 2, 3, 2);
             pnlTop.Name = "pnlTop";
-            pnlTop.Size = new Size(1267, 91);
+            pnlTop.Size = new Size(1109, 68);
             pnlTop.TabIndex = 0;
             // 
             // lblUserName
@@ -138,28 +135,29 @@
             lblUserName.AutoSize = true;
             lblUserName.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             lblUserName.ForeColor = SystemColors.GradientActiveCaption;
-            lblUserName.Location = new Point(1063, 35);
+            lblUserName.Location = new Point(930, 26);
             lblUserName.Name = "lblUserName";
-            lblUserName.Size = new Size(153, 28);
+            lblUserName.Size = new Size(122, 21);
             lblUserName.TabIndex = 10;
             lblUserName.Text = " 👤(UserName)";
             // 
-            // label15
+            // lblBeneficiaryPortal
             // 
-            label15.AutoSize = true;
-            label15.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label15.Location = new Point(1063, 63);
-            label15.Name = "label15";
-            label15.Size = new Size(183, 28);
-            label15.TabIndex = 9;
-            label15.Text = "Beneficiary Portal";
+            lblBeneficiaryPortal.AutoSize = true;
+            lblBeneficiaryPortal.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblBeneficiaryPortal.Location = new Point(930, 47);
+            lblBeneficiaryPortal.Name = "lblBeneficiaryPortal";
+            lblBeneficiaryPortal.Size = new Size(147, 21);
+            lblBeneficiaryPortal.TabIndex = 9;
+            lblBeneficiaryPortal.Text = "Beneficiary Portal";
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(133, 0);
+            pictureBox1.Location = new Point(116, 0);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(187, 84);
+            pictureBox1.Size = new Size(164, 63);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
@@ -167,9 +165,10 @@
             // pcLogo
             // 
             pcLogo.Image = (Image)resources.GetObject("pcLogo.Image");
-            pcLogo.Location = new Point(12, 3);
+            pcLogo.Location = new Point(10, 2);
+            pcLogo.Margin = new Padding(3, 2, 3, 2);
             pcLogo.Name = "pcLogo";
-            pcLogo.Size = new Size(115, 81);
+            pcLogo.Size = new Size(101, 61);
             pcLogo.SizeMode = PictureBoxSizeMode.Zoom;
             pcLogo.TabIndex = 0;
             pcLogo.TabStop = false;
@@ -183,9 +182,10 @@
             pnlSidePanel.Controls.Add(btnQueueStatus);
             pnlSidePanel.Controls.Add(btnDashboard);
             pnlSidePanel.Dock = DockStyle.Left;
-            pnlSidePanel.Location = new Point(0, 91);
+            pnlSidePanel.Location = new Point(0, 68);
+            pnlSidePanel.Margin = new Padding(3, 2, 3, 2);
             pnlSidePanel.Name = "pnlSidePanel";
-            pnlSidePanel.Size = new Size(297, 632);
+            pnlSidePanel.Size = new Size(260, 474);
             pnlSidePanel.TabIndex = 1;
             // 
             // btnLogout
@@ -196,10 +196,11 @@
             btnLogout.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLogout.ForeColor = Color.Firebrick;
             btnLogout.HoverColor = Color.Empty;
-            btnLogout.Location = new Point(29, 542);
+            btnLogout.Location = new Point(25, 406);
+            btnLogout.Margin = new Padding(3, 2, 3, 2);
             btnLogout.Name = "btnLogout";
             btnLogout.PressedColor = Color.Empty;
-            btnLogout.Size = new Size(217, 52);
+            btnLogout.Size = new Size(190, 39);
             btnLogout.TabIndex = 5;
             btnLogout.Text = " \u23fb Logout";
             btnLogout.UseVisualStyleBackColor = false;
@@ -213,10 +214,11 @@
             btnProfile.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             btnProfile.ForeColor = Color.LightGray;
             btnProfile.HoverColor = Color.Empty;
-            btnProfile.Location = new Point(12, 342);
+            btnProfile.Location = new Point(10, 256);
+            btnProfile.Margin = new Padding(3, 2, 3, 2);
             btnProfile.Name = "btnProfile";
             btnProfile.PressedColor = Color.Empty;
-            btnProfile.Size = new Size(265, 50);
+            btnProfile.Size = new Size(232, 38);
             btnProfile.TabIndex = 4;
             btnProfile.Text = "👤 Profile";
             btnProfile.UseVisualStyleBackColor = false;
@@ -230,10 +232,11 @@
             btnNewBooking.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             btnNewBooking.ForeColor = Color.LightGray;
             btnNewBooking.HoverColor = Color.Empty;
-            btnNewBooking.Location = new Point(12, 102);
+            btnNewBooking.Location = new Point(10, 76);
+            btnNewBooking.Margin = new Padding(3, 2, 3, 2);
             btnNewBooking.Name = "btnNewBooking";
             btnNewBooking.PressedColor = Color.Empty;
-            btnNewBooking.Size = new Size(265, 50);
+            btnNewBooking.Size = new Size(232, 38);
             btnNewBooking.TabIndex = 3;
             btnNewBooking.Text = "📅 New Booking";
             btnNewBooking.UseVisualStyleBackColor = false;
@@ -247,10 +250,11 @@
             btnMyBookings.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             btnMyBookings.ForeColor = Color.LightGray;
             btnMyBookings.HoverColor = Color.Empty;
-            btnMyBookings.Location = new Point(12, 182);
+            btnMyBookings.Location = new Point(10, 136);
+            btnMyBookings.Margin = new Padding(3, 2, 3, 2);
             btnMyBookings.Name = "btnMyBookings";
             btnMyBookings.PressedColor = Color.Empty;
-            btnMyBookings.Size = new Size(265, 50);
+            btnMyBookings.Size = new Size(232, 38);
             btnMyBookings.TabIndex = 2;
             btnMyBookings.Text = "📋 My Bookings";
             btnMyBookings.UseVisualStyleBackColor = false;
@@ -264,10 +268,11 @@
             btnQueueStatus.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             btnQueueStatus.ForeColor = Color.LightGray;
             btnQueueStatus.HoverColor = Color.Empty;
-            btnQueueStatus.Location = new Point(12, 262);
+            btnQueueStatus.Location = new Point(10, 196);
+            btnQueueStatus.Margin = new Padding(3, 2, 3, 2);
             btnQueueStatus.Name = "btnQueueStatus";
             btnQueueStatus.PressedColor = Color.Empty;
-            btnQueueStatus.Size = new Size(265, 50);
+            btnQueueStatus.Size = new Size(232, 38);
             btnQueueStatus.TabIndex = 1;
             btnQueueStatus.Text = "⏱️ Queue Status";
             btnQueueStatus.UseVisualStyleBackColor = false;
@@ -281,10 +286,11 @@
             btnDashboard.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             btnDashboard.ForeColor = Color.LightGray;
             btnDashboard.HoverColor = Color.Empty;
-            btnDashboard.Location = new Point(12, 22);
+            btnDashboard.Location = new Point(10, 16);
+            btnDashboard.Margin = new Padding(3, 2, 3, 2);
             btnDashboard.Name = "btnDashboard";
             btnDashboard.PressedColor = Color.Empty;
-            btnDashboard.Size = new Size(265, 50);
+            btnDashboard.Size = new Size(232, 38);
             btnDashboard.TabIndex = 0;
             btnDashboard.Text = "🏠 Dashboard";
             btnDashboard.TextAlign = ContentAlignment.MiddleLeft;
@@ -299,25 +305,38 @@
             pnlNewBooking.Controls.Add(label1);
             pnlNewBooking.Dock = DockStyle.Fill;
             pnlNewBooking.Location = new Point(0, 0);
+            pnlNewBooking.Margin = new Padding(3, 2, 3, 2);
             pnlNewBooking.Name = "pnlNewBooking";
-            pnlNewBooking.Size = new Size(1267, 723);
+            pnlNewBooking.Size = new Size(1109, 542);
             pnlNewBooking.TabIndex = 2;
             // 
             // curvedCornerPanel1
             // 
             curvedCornerPanel1.BackColor = SystemColors.InactiveCaption;
+            curvedCornerPanel1.Controls.Add(cmbTimeSlot);
             curvedCornerPanel1.Controls.Add(lblAvailableTime);
             curvedCornerPanel1.Controls.Add(btnConfirmBooking);
-            curvedCornerPanel1.Controls.Add(dateTimePicker1);
+            curvedCornerPanel1.Controls.Add(dtpDate);
             curvedCornerPanel1.Controls.Add(lblDate);
             curvedCornerPanel1.Controls.Add(cmbServiceRequired);
             curvedCornerPanel1.Controls.Add(lblServiceRequired);
             curvedCornerPanel1.Controls.Add(cmbServiceCentre);
             curvedCornerPanel1.Controls.Add(lblServiceCentre);
-            curvedCornerPanel1.Location = new Point(311, 249);
+            curvedCornerPanel1.Location = new Point(272, 187);
+            curvedCornerPanel1.Margin = new Padding(3, 2, 3, 2);
             curvedCornerPanel1.Name = "curvedCornerPanel1";
-            curvedCornerPanel1.Size = new Size(935, 345);
+            curvedCornerPanel1.Size = new Size(818, 259);
             curvedCornerPanel1.TabIndex = 5;
+            // 
+            // cmbTimeSlot
+            // 
+            cmbTimeSlot.BackColor = Color.White;
+            cmbTimeSlot.Font = new Font("Segoe UI", 10F);
+            cmbTimeSlot.ForeColor = Color.FromArgb(30, 30, 30);
+            cmbTimeSlot.Location = new Point(3, 114);
+            cmbTimeSlot.Name = "cmbTimeSlot";
+            cmbTimeSlot.Size = new Size(244, 34);
+            cmbTimeSlot.TabIndex = 7;
             // 
             // lblAvailableTime
             // 
@@ -325,9 +344,9 @@
             lblAvailableTime.Cursor = Cursors.Hand;
             lblAvailableTime.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
             lblAvailableTime.ForeColor = SystemColors.MenuText;
-            lblAvailableTime.Location = new Point(32, 120);
+            lblAvailableTime.Location = new Point(28, 90);
             lblAvailableTime.Name = "lblAvailableTime";
-            lblAvailableTime.Size = new Size(176, 25);
+            lblAvailableTime.Size = new Size(139, 19);
             lblAvailableTime.TabIndex = 15;
             lblAvailableTime.Text = "Available Time Slot";
             // 
@@ -339,28 +358,31 @@
             btnConfirmBooking.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnConfirmBooking.ForeColor = Color.LightGray;
             btnConfirmBooking.HoverColor = Color.Empty;
-            btnConfirmBooking.Location = new Point(26, 277);
+            btnConfirmBooking.Location = new Point(23, 208);
+            btnConfirmBooking.Margin = new Padding(3, 2, 3, 2);
             btnConfirmBooking.Name = "btnConfirmBooking";
             btnConfirmBooking.PressedColor = Color.Empty;
-            btnConfirmBooking.Size = new Size(256, 50);
+            btnConfirmBooking.Size = new Size(224, 38);
             btnConfirmBooking.TabIndex = 14;
             btnConfirmBooking.Text = "Confirm Booking";
             btnConfirmBooking.UseVisualStyleBackColor = false;
+            btnConfirmBooking.Click += btnConfirmBooking_Click;
             // 
-            // dateTimePicker1
+            // dtpDate
             // 
-            dateTimePicker1.Location = new Point(660, 65);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(250, 27);
-            dateTimePicker1.TabIndex = 13;
+            dtpDate.Location = new Point(578, 49);
+            dtpDate.Margin = new Padding(3, 2, 3, 2);
+            dtpDate.Name = "dtpDate";
+            dtpDate.Size = new Size(219, 23);
+            dtpDate.TabIndex = 13;
             // 
             // lblDate
             // 
             lblDate.AutoSize = true;
             lblDate.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
-            lblDate.Location = new Point(692, 22);
+            lblDate.Location = new Point(606, 16);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(52, 25);
+            lblDate.Size = new Size(40, 19);
             lblDate.TabIndex = 12;
             lblDate.Text = "Date";
             // 
@@ -369,19 +391,20 @@
             cmbServiceRequired.BackColor = Color.White;
             cmbServiceRequired.Font = new Font("Segoe UI", 10F);
             cmbServiceRequired.ForeColor = Color.FromArgb(30, 30, 30);
-            cmbServiceRequired.Location = new Point(343, 58);
+            cmbServiceRequired.Location = new Point(300, 44);
+            cmbServiceRequired.Margin = new Padding(3, 2, 3, 2);
             cmbServiceRequired.Name = "cmbServiceRequired";
             cmbServiceRequired.PlaceholderText = "Select a Service";
-            cmbServiceRequired.Size = new Size(279, 45);
+            cmbServiceRequired.Size = new Size(244, 34);
             cmbServiceRequired.TabIndex = 11;
             // 
             // lblServiceRequired
             // 
             lblServiceRequired.AutoSize = true;
             lblServiceRequired.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
-            lblServiceRequired.Location = new Point(372, 22);
+            lblServiceRequired.Location = new Point(326, 16);
             lblServiceRequired.Name = "lblServiceRequired";
-            lblServiceRequired.Size = new Size(156, 25);
+            lblServiceRequired.Size = new Size(124, 19);
             lblServiceRequired.TabIndex = 10;
             lblServiceRequired.Text = "Service Required";
             // 
@@ -390,20 +413,20 @@
             cmbServiceCentre.BackColor = Color.White;
             cmbServiceCentre.Font = new Font("Segoe UI", 10F);
             cmbServiceCentre.ForeColor = Color.FromArgb(30, 30, 30);
-            cmbServiceCentre.Location = new Point(3, 58);
+            cmbServiceCentre.Location = new Point(3, 44);
+            cmbServiceCentre.Margin = new Padding(3, 2, 3, 2);
             cmbServiceCentre.Name = "cmbServiceCentre";
             cmbServiceCentre.PlaceholderText = "Select a centre";
-            cmbServiceCentre.Size = new Size(279, 45);
+            cmbServiceCentre.Size = new Size(244, 34);
             cmbServiceCentre.TabIndex = 9;
-            cmbServiceCentre.Click += cmbServiceCentre_Click;
             // 
             // lblServiceCentre
             // 
             lblServiceCentre.AutoSize = true;
             lblServiceCentre.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
-            lblServiceCentre.Location = new Point(32, 22);
+            lblServiceCentre.Location = new Point(28, 16);
             lblServiceCentre.Name = "lblServiceCentre";
-            lblServiceCentre.Size = new Size(135, 25);
+            lblServiceCentre.Size = new Size(107, 19);
             lblServiceCentre.TabIndex = 8;
             lblServiceCentre.Text = "Service Centre";
             // 
@@ -411,9 +434,9 @@
             // 
             lblHeading.AutoSize = true;
             lblHeading.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
-            lblHeading.Location = new Point(321, 110);
+            lblHeading.Location = new Point(281, 82);
             lblHeading.Name = "lblHeading";
-            lblHeading.Size = new Size(266, 46);
+            lblHeading.Size = new Size(215, 37);
             lblHeading.TabIndex = 0;
             lblHeading.Text = "Create Booking";
             // 
@@ -422,68 +445,81 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12.3F);
             label1.ForeColor = SystemColors.GrayText;
-            label1.Location = new Point(321, 156);
+            label1.Location = new Point(281, 117);
             label1.Name = "label1";
-            label1.Size = new Size(347, 30);
+            label1.Size = new Size(285, 23);
             label1.TabIndex = 4;
             label1.Text = "Choose a centre, a service and time.";
             // 
             // pnlQueueStatus
             // 
             pnlQueueStatus.BackColor = SystemColors.GradientActiveCaption;
-            pnlQueueStatus.Controls.Add(label2);
+            pnlQueueStatus.Controls.Add(lblQueueStatus);
+            pnlQueueStatus.Controls.Add(lblUpdatesWhenStaffCallsTheNextPerson);
             pnlQueueStatus.Controls.Add(curvedCornerPanel3);
-            pnlQueueStatus.Controls.Add(label4);
             pnlQueueStatus.Dock = DockStyle.Fill;
             pnlQueueStatus.Location = new Point(0, 0);
+            pnlQueueStatus.Margin = new Padding(3, 2, 3, 2);
             pnlQueueStatus.Name = "pnlQueueStatus";
-            pnlQueueStatus.Size = new Size(1267, 723);
+            pnlQueueStatus.Size = new Size(1109, 542);
             pnlQueueStatus.TabIndex = 8;
             // 
-            // label2
+            // lblQueueStatus
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
-            label2.Location = new Point(321, 110);
-            label2.Name = "label2";
-            label2.Size = new Size(231, 46);
-            label2.TabIndex = 10;
-            label2.Text = "Queue Status";
+            lblQueueStatus.AutoSize = true;
+            lblQueueStatus.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
+            lblQueueStatus.Location = new Point(281, 82);
+            lblQueueStatus.Name = "lblQueueStatus";
+            lblQueueStatus.Size = new Size(185, 37);
+            lblQueueStatus.TabIndex = 10;
+            lblQueueStatus.Text = "Queue Status";
+            // 
+            // lblUpdatesWhenStaffCallsTheNextPerson
+            // 
+            lblUpdatesWhenStaffCallsTheNextPerson.AutoSize = true;
+            lblUpdatesWhenStaffCallsTheNextPerson.Font = new Font("Segoe UI", 12.3F);
+            lblUpdatesWhenStaffCallsTheNextPerson.ForeColor = SystemColors.GrayText;
+            lblUpdatesWhenStaffCallsTheNextPerson.Location = new Point(281, 117);
+            lblUpdatesWhenStaffCallsTheNextPerson.Name = "lblUpdatesWhenStaffCallsTheNextPerson";
+            lblUpdatesWhenStaffCallsTheNextPerson.Size = new Size(322, 23);
+            lblUpdatesWhenStaffCallsTheNextPerson.TabIndex = 8;
+            lblUpdatesWhenStaffCallsTheNextPerson.Text = "Updates when staff calls the next person.";
             // 
             // curvedCornerPanel3
             // 
             curvedCornerPanel3.BackColor = SystemColors.InactiveCaption;
-            curvedCornerPanel3.Controls.Add(lblTime);
+            curvedCornerPanel3.Controls.Add(lblEstimatedWait);
             curvedCornerPanel3.Controls.Add(lblPeopleAhead);
             curvedCornerPanel3.Controls.Add(lblStatus);
-            curvedCornerPanel3.Controls.Add(label18);
-            curvedCornerPanel3.Controls.Add(label17);
-            curvedCornerPanel3.Controls.Add(label16);
+            curvedCornerPanel3.Controls.Add(lblQueueStatusTitle);
+            curvedCornerPanel3.Controls.Add(lblPeopleAheadTiltle);
+            curvedCornerPanel3.Controls.Add(lblEstimatedWaitTitle);
             curvedCornerPanel3.Controls.Add(lblQueueNumber);
-            curvedCornerPanel3.Location = new Point(375, 263);
+            curvedCornerPanel3.Location = new Point(328, 197);
+            curvedCornerPanel3.Margin = new Padding(3, 2, 3, 2);
             curvedCornerPanel3.Name = "curvedCornerPanel3";
-            curvedCornerPanel3.Size = new Size(690, 365);
+            curvedCornerPanel3.Size = new Size(604, 274);
             curvedCornerPanel3.TabIndex = 9;
             // 
-            // lblTime
+            // lblEstimatedWait
             // 
-            lblTime.AutoSize = true;
-            lblTime.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTime.ForeColor = Color.FromArgb(26, 70, 130);
-            lblTime.Location = new Point(39, 193);
-            lblTime.Name = "lblTime";
-            lblTime.Size = new Size(180, 46);
-            lblTime.TabIndex = 14;
-            lblTime.Text = "0 Minutes";
+            lblEstimatedWait.AutoSize = true;
+            lblEstimatedWait.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblEstimatedWait.ForeColor = Color.FromArgb(26, 70, 130);
+            lblEstimatedWait.Location = new Point(34, 145);
+            lblEstimatedWait.Name = "lblEstimatedWait";
+            lblEstimatedWait.Size = new Size(144, 37);
+            lblEstimatedWait.TabIndex = 14;
+            lblEstimatedWait.Text = "0 Minutes";
             // 
             // lblPeopleAhead
             // 
             lblPeopleAhead.AutoSize = true;
             lblPeopleAhead.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPeopleAhead.ForeColor = Color.FromArgb(26, 70, 130);
-            lblPeopleAhead.Location = new Point(337, 193);
+            lblPeopleAhead.Location = new Point(295, 145);
             lblPeopleAhead.Name = "lblPeopleAhead";
-            lblPeopleAhead.Size = new Size(49, 46);
+            lblPeopleAhead.Size = new Size(40, 37);
             lblPeopleAhead.TabIndex = 11;
             lblPeopleAhead.Text = "0 ";
             // 
@@ -493,83 +529,73 @@
             lblStatus.BackColor = Color.NavajoWhite;
             lblStatus.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic);
             lblStatus.ForeColor = Color.SaddleBrown;
-            lblStatus.Location = new Point(545, 206);
+            lblStatus.Location = new Point(477, 154);
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(88, 28);
+            lblStatus.Size = new Size(70, 21);
             lblStatus.TabIndex = 13;
             lblStatus.Text = "Waiting";
             // 
-            // label18
+            // lblQueueStatusTitle
             // 
-            label18.AutoSize = true;
-            label18.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label18.Location = new Point(543, 139);
-            label18.Name = "label18";
-            label18.Size = new Size(71, 28);
-            label18.TabIndex = 12;
-            label18.Text = "Status";
+            lblQueueStatusTitle.AutoSize = true;
+            lblQueueStatusTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblQueueStatusTitle.Location = new Point(475, 104);
+            lblQueueStatusTitle.Name = "lblQueueStatusTitle";
+            lblQueueStatusTitle.Size = new Size(57, 21);
+            lblQueueStatusTitle.TabIndex = 12;
+            lblQueueStatusTitle.Text = "Status";
             // 
-            // label17
+            // lblPeopleAheadTiltle
             // 
-            label17.AutoSize = true;
-            label17.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label17.Location = new Point(300, 139);
-            label17.Name = "label17";
-            label17.Size = new Size(141, 28);
-            label17.TabIndex = 11;
-            label17.Text = "People Ahead";
+            lblPeopleAheadTiltle.AutoSize = true;
+            lblPeopleAheadTiltle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblPeopleAheadTiltle.Location = new Point(262, 104);
+            lblPeopleAheadTiltle.Name = "lblPeopleAheadTiltle";
+            lblPeopleAheadTiltle.Size = new Size(116, 21);
+            lblPeopleAheadTiltle.TabIndex = 11;
+            lblPeopleAheadTiltle.Text = "People Ahead";
             // 
-            // label16
+            // lblEstimatedWaitTitle
             // 
-            label16.AutoSize = true;
-            label16.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label16.Location = new Point(39, 139);
-            label16.Name = "label16";
-            label16.Size = new Size(156, 28);
-            label16.TabIndex = 10;
-            label16.Text = "Estimated Wait";
+            lblEstimatedWaitTitle.AutoSize = true;
+            lblEstimatedWaitTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblEstimatedWaitTitle.Location = new Point(34, 104);
+            lblEstimatedWaitTitle.Name = "lblEstimatedWaitTitle";
+            lblEstimatedWaitTitle.Size = new Size(125, 21);
+            lblEstimatedWaitTitle.TabIndex = 10;
+            lblEstimatedWaitTitle.Text = "Estimated Wait";
             // 
             // lblQueueNumber
             // 
             lblQueueNumber.AutoSize = true;
             lblQueueNumber.Font = new Font("Segoe UI", 28.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblQueueNumber.ForeColor = Color.FromArgb(26, 70, 130);
-            lblQueueNumber.Location = new Point(263, 22);
+            lblQueueNumber.Location = new Point(230, 16);
             lblQueueNumber.Name = "lblQueueNumber";
-            lblQueueNumber.Size = new Size(163, 62);
+            lblQueueNumber.Size = new Size(132, 51);
             lblQueueNumber.TabIndex = 0;
             lblQueueNumber.Text = "Q-000";
             // 
-            // label4
+            // lblUpcomingAndPreviousVisits
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12.3F);
-            label4.ForeColor = SystemColors.GrayText;
-            label4.Location = new Point(321, 156);
-            label4.Name = "label4";
-            label4.Size = new Size(394, 30);
-            label4.TabIndex = 8;
-            label4.Text = "Updates when staff calls the next person.";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12.3F);
-            label3.ForeColor = SystemColors.GrayText;
-            label3.Location = new Point(343, 156);
-            label3.Name = "label3";
-            label3.Size = new Size(284, 30);
-            label3.TabIndex = 6;
-            label3.Text = "Upcoming and Previous visits";
+            lblUpcomingAndPreviousVisits.AutoSize = true;
+            lblUpcomingAndPreviousVisits.Font = new Font("Segoe UI", 12.3F);
+            lblUpcomingAndPreviousVisits.ForeColor = SystemColors.GrayText;
+            lblUpcomingAndPreviousVisits.Location = new Point(300, 117);
+            lblUpcomingAndPreviousVisits.Name = "lblUpcomingAndPreviousVisits";
+            lblUpcomingAndPreviousVisits.Size = new Size(233, 23);
+            lblUpcomingAndPreviousVisits.TabIndex = 6;
+            lblUpcomingAndPreviousVisits.Text = "Upcoming and Previous visits";
             // 
             // curvedCornerPanel2
             // 
             curvedCornerPanel2.BackColor = Color.White;
             curvedCornerPanel2.Controls.Add(dgvMyBooking);
-            curvedCornerPanel2.Location = new Point(311, 249);
+            curvedCornerPanel2.Location = new Point(272, 187);
+            curvedCornerPanel2.Margin = new Padding(3, 2, 3, 2);
             curvedCornerPanel2.Name = "curvedCornerPanel2";
-            curvedCornerPanel2.Padding = new Padding(10);
-            curvedCornerPanel2.Size = new Size(935, 290);
+            curvedCornerPanel2.Padding = new Padding(9, 8, 9, 8);
+            curvedCornerPanel2.Size = new Size(818, 218);
             curvedCornerPanel2.TabIndex = 7;
             // 
             // dgvMyBooking
@@ -587,61 +613,26 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvMyBooking.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvMyBooking.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvMyBooking.Columns.AddRange(new DataGridViewColumn[] { Reference, Service, Centre, Date, Status });
             dgvMyBooking.Dock = DockStyle.Fill;
             dgvMyBooking.EnableHeadersVisualStyles = false;
             dgvMyBooking.GridColor = SystemColors.InactiveCaption;
-            dgvMyBooking.Location = new Point(10, 10);
+            dgvMyBooking.Location = new Point(9, 8);
+            dgvMyBooking.Margin = new Padding(3, 2, 3, 2);
             dgvMyBooking.Name = "dgvMyBooking";
             dgvMyBooking.ReadOnly = true;
             dgvMyBooking.RowHeadersVisible = false;
             dgvMyBooking.RowHeadersWidth = 51;
             dgvMyBooking.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvMyBooking.Size = new Size(915, 270);
+            dgvMyBooking.Size = new Size(800, 202);
             dgvMyBooking.TabIndex = 1;
-            // 
-            // Reference
-            // 
-            Reference.HeaderText = "Reference";
-            Reference.MinimumWidth = 6;
-            Reference.Name = "Reference";
-            Reference.ReadOnly = true;
-            // 
-            // Service
-            // 
-            Service.HeaderText = "Service";
-            Service.MinimumWidth = 6;
-            Service.Name = "Service";
-            Service.ReadOnly = true;
-            // 
-            // Centre
-            // 
-            Centre.HeaderText = "Centre";
-            Centre.MinimumWidth = 6;
-            Centre.Name = "Centre";
-            Centre.ReadOnly = true;
-            // 
-            // Date
-            // 
-            Date.HeaderText = "Date";
-            Date.MinimumWidth = 6;
-            Date.Name = "Date";
-            Date.ReadOnly = true;
-            // 
-            // Status
-            // 
-            Status.HeaderText = "Status";
-            Status.MinimumWidth = 6;
-            Status.Name = "Status";
-            Status.ReadOnly = true;
             // 
             // lblMyBooking
             // 
             lblMyBooking.AutoSize = true;
             lblMyBooking.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
-            lblMyBooking.Location = new Point(337, 110);
+            lblMyBooking.Location = new Point(295, 82);
             lblMyBooking.Name = "lblMyBooking";
-            lblMyBooking.Size = new Size(215, 46);
+            lblMyBooking.Size = new Size(172, 37);
             lblMyBooking.TabIndex = 8;
             lblMyBooking.Text = "My Booking";
             // 
@@ -650,205 +641,217 @@
             pnlMyBooking.BackColor = SystemColors.GradientActiveCaption;
             pnlMyBooking.Controls.Add(lblMyBooking);
             pnlMyBooking.Controls.Add(curvedCornerPanel2);
-            pnlMyBooking.Controls.Add(label3);
+            pnlMyBooking.Controls.Add(lblUpcomingAndPreviousVisits);
             pnlMyBooking.Dock = DockStyle.Fill;
             pnlMyBooking.Location = new Point(0, 0);
+            pnlMyBooking.Margin = new Padding(3, 2, 3, 2);
             pnlMyBooking.Name = "pnlMyBooking";
-            pnlMyBooking.Size = new Size(1267, 723);
+            pnlMyBooking.Size = new Size(1109, 542);
             pnlMyBooking.TabIndex = 2;
             pnlMyBooking.Paint += pnlMyBooking_Paint;
             // 
             // pnlProfile
             // 
             pnlProfile.BackColor = SystemColors.GradientActiveCaption;
-            pnlProfile.Controls.Add(roundedButton3);
-            pnlProfile.Controls.Add(roundedButton2);
-            pnlProfile.Controls.Add(roundedComboBox1);
-            pnlProfile.Controls.Add(label7);
-            pnlProfile.Controls.Add(roundedTextBox3);
-            pnlProfile.Controls.Add(label10);
-            pnlProfile.Controls.Add(roundedTextBox2);
-            pnlProfile.Controls.Add(label11);
-            pnlProfile.Controls.Add(roundedTextBox1);
-            pnlProfile.Controls.Add(label12);
+            pnlProfile.Controls.Add(btnSaveChanges);
+            pnlProfile.Controls.Add(btnEditDetails);
+            pnlProfile.Controls.Add(cmbPreferredServiceCentre);
+            pnlProfile.Controls.Add(lblPreferredServiceCentre);
+            pnlProfile.Controls.Add(txtEmailAddress);
+            pnlProfile.Controls.Add(lblEmailAddress);
+            pnlProfile.Controls.Add(txtPhoneNumber);
+            pnlProfile.Controls.Add(lblPhoneNumber);
+            pnlProfile.Controls.Add(txtIDNumber);
+            pnlProfile.Controls.Add(lblIDNumber);
             pnlProfile.Controls.Add(txtLastName);
-            pnlProfile.Controls.Add(label13);
+            pnlProfile.Controls.Add(lblLastName);
             pnlProfile.Controls.Add(txtFullName);
-            pnlProfile.Controls.Add(label14);
+            pnlProfile.Controls.Add(lblFullName);
             pnlProfile.Controls.Add(lblPersonalInfo);
             pnlProfile.Dock = DockStyle.Fill;
             pnlProfile.Location = new Point(0, 0);
+            pnlProfile.Margin = new Padding(3, 2, 3, 2);
             pnlProfile.Name = "pnlProfile";
-            pnlProfile.Size = new Size(1267, 723);
+            pnlProfile.Size = new Size(1109, 542);
             pnlProfile.TabIndex = 9;
             // 
-            // roundedButton3
+            // btnSaveChanges
             // 
-            roundedButton3.BackColor = Color.FromArgb(26, 70, 130);
-            roundedButton3.FlatAppearance.BorderSize = 0;
-            roundedButton3.FlatStyle = FlatStyle.Flat;
-            roundedButton3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            roundedButton3.ForeColor = SystemColors.GradientActiveCaption;
-            roundedButton3.HoverColor = Color.Empty;
-            roundedButton3.Location = new Point(779, 679);
-            roundedButton3.Name = "roundedButton3";
-            roundedButton3.PressedColor = Color.Empty;
-            roundedButton3.Size = new Size(178, 41);
-            roundedButton3.TabIndex = 37;
-            roundedButton3.Text = "💾Save Changes";
-            roundedButton3.UseVisualStyleBackColor = false;
+            btnSaveChanges.BackColor = Color.FromArgb(26, 70, 130);
+            btnSaveChanges.FlatAppearance.BorderSize = 0;
+            btnSaveChanges.FlatStyle = FlatStyle.Flat;
+            btnSaveChanges.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnSaveChanges.ForeColor = SystemColors.GradientActiveCaption;
+            btnSaveChanges.HoverColor = Color.Empty;
+            btnSaveChanges.Location = new Point(682, 509);
+            btnSaveChanges.Margin = new Padding(3, 2, 3, 2);
+            btnSaveChanges.Name = "btnSaveChanges";
+            btnSaveChanges.PressedColor = Color.Empty;
+            btnSaveChanges.Size = new Size(156, 31);
+            btnSaveChanges.TabIndex = 37;
+            btnSaveChanges.Text = "💾Save Changes";
+            btnSaveChanges.UseVisualStyleBackColor = false;
+            btnSaveChanges.Click += btnSaveChanges_Click;
             // 
-            // roundedButton2
+            // btnEditDetails
             // 
-            roundedButton2.BackColor = Color.FromArgb(26, 70, 130);
-            roundedButton2.FlatAppearance.BorderSize = 0;
-            roundedButton2.FlatStyle = FlatStyle.Flat;
-            roundedButton2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            roundedButton2.ForeColor = SystemColors.GradientActiveCaption;
-            roundedButton2.HoverColor = Color.Empty;
-            roundedButton2.Location = new Point(949, 124);
-            roundedButton2.Name = "roundedButton2";
-            roundedButton2.PressedColor = Color.Empty;
-            roundedButton2.Size = new Size(153, 39);
-            roundedButton2.TabIndex = 36;
-            roundedButton2.Text = "✏️Edit Details";
-            roundedButton2.UseVisualStyleBackColor = false;
+            btnEditDetails.BackColor = Color.FromArgb(26, 70, 130);
+            btnEditDetails.FlatAppearance.BorderSize = 0;
+            btnEditDetails.FlatStyle = FlatStyle.Flat;
+            btnEditDetails.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnEditDetails.ForeColor = SystemColors.GradientActiveCaption;
+            btnEditDetails.HoverColor = Color.Empty;
+            btnEditDetails.Location = new Point(830, 93);
+            btnEditDetails.Margin = new Padding(3, 2, 3, 2);
+            btnEditDetails.Name = "btnEditDetails";
+            btnEditDetails.PressedColor = Color.Empty;
+            btnEditDetails.Size = new Size(134, 29);
+            btnEditDetails.TabIndex = 36;
+            btnEditDetails.Text = "✏️Edit Details";
+            btnEditDetails.UseVisualStyleBackColor = false;
+            btnEditDetails.Click += btnEditDetails_Click;
             // 
-            // roundedComboBox1
+            // cmbPreferredServiceCentre
             // 
-            roundedComboBox1.BackColor = Color.White;
-            roundedComboBox1.Font = new Font("Segoe UI", 10F);
-            roundedComboBox1.ForeColor = Color.FromArgb(30, 30, 30);
-            roundedComboBox1.Location = new Point(324, 627);
-            roundedComboBox1.Name = "roundedComboBox1";
-            roundedComboBox1.PlaceholderText = "";
-            roundedComboBox1.Size = new Size(628, 41);
-            roundedComboBox1.TabIndex = 35;
+            cmbPreferredServiceCentre.BackColor = Color.White;
+            cmbPreferredServiceCentre.Font = new Font("Segoe UI", 10F);
+            cmbPreferredServiceCentre.ForeColor = Color.FromArgb(30, 30, 30);
+            cmbPreferredServiceCentre.Location = new Point(284, 470);
+            cmbPreferredServiceCentre.Margin = new Padding(3, 2, 3, 2);
+            cmbPreferredServiceCentre.Name = "cmbPreferredServiceCentre";
+            cmbPreferredServiceCentre.PlaceholderText = "";
+            cmbPreferredServiceCentre.Size = new Size(550, 31);
+            cmbPreferredServiceCentre.TabIndex = 35;
             // 
-            // label7
+            // lblPreferredServiceCentre
             // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
-            label7.Location = new Point(324, 590);
-            label7.Name = "label7";
-            label7.Size = new Size(216, 25);
-            label7.TabIndex = 34;
-            label7.Text = "Preferred service centre";
+            lblPreferredServiceCentre.AutoSize = true;
+            lblPreferredServiceCentre.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
+            lblPreferredServiceCentre.Location = new Point(284, 442);
+            lblPreferredServiceCentre.Name = "lblPreferredServiceCentre";
+            lblPreferredServiceCentre.Size = new Size(172, 19);
+            lblPreferredServiceCentre.TabIndex = 34;
+            lblPreferredServiceCentre.Text = "Preferred service centre";
             // 
-            // roundedTextBox3
+            // txtEmailAddress
             // 
-            roundedTextBox3.BackColor = Color.White;
-            roundedTextBox3.Font = new Font("Segoe UI", 10F);
-            roundedTextBox3.Location = new Point(324, 544);
-            roundedTextBox3.Name = "roundedTextBox3";
-            roundedTextBox3.PlaceholderText = "e.g Sassa@gmail.com";
-            roundedTextBox3.ReadOnly = true;
-            roundedTextBox3.Size = new Size(628, 41);
-            roundedTextBox3.TabIndex = 33;
+            txtEmailAddress.BackColor = Color.White;
+            txtEmailAddress.Font = new Font("Segoe UI", 10F);
+            txtEmailAddress.Location = new Point(284, 408);
+            txtEmailAddress.Margin = new Padding(3, 2, 3, 2);
+            txtEmailAddress.Name = "txtEmailAddress";
+            txtEmailAddress.PlaceholderText = "e.g Sassa@gmail.com";
+            txtEmailAddress.ReadOnly = true;
+            txtEmailAddress.Size = new Size(550, 31);
+            txtEmailAddress.TabIndex = 33;
             // 
-            // label10
+            // lblEmailAddress
             // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
-            label10.Location = new Point(324, 506);
-            label10.Name = "label10";
-            label10.Size = new Size(131, 25);
-            label10.TabIndex = 32;
-            label10.Text = "Email Address";
+            lblEmailAddress.AutoSize = true;
+            lblEmailAddress.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
+            lblEmailAddress.Location = new Point(284, 380);
+            lblEmailAddress.Name = "lblEmailAddress";
+            lblEmailAddress.Size = new Size(103, 19);
+            lblEmailAddress.TabIndex = 32;
+            lblEmailAddress.Text = "Email Address";
             // 
-            // roundedTextBox2
+            // txtPhoneNumber
             // 
-            roundedTextBox2.BackColor = Color.White;
-            roundedTextBox2.Font = new Font("Segoe UI", 10F);
-            roundedTextBox2.Location = new Point(324, 461);
-            roundedTextBox2.MaxLength = 10;
-            roundedTextBox2.Name = "roundedTextBox2";
-            roundedTextBox2.PlaceholderText = "e.g.0725576865";
-            roundedTextBox2.ReadOnly = true;
-            roundedTextBox2.Size = new Size(628, 41);
-            roundedTextBox2.TabIndex = 31;
+            txtPhoneNumber.BackColor = Color.White;
+            txtPhoneNumber.Font = new Font("Segoe UI", 10F);
+            txtPhoneNumber.Location = new Point(284, 346);
+            txtPhoneNumber.Margin = new Padding(3, 2, 3, 2);
+            txtPhoneNumber.MaxLength = 10;
+            txtPhoneNumber.Name = "txtPhoneNumber";
+            txtPhoneNumber.PlaceholderText = "e.g.0725576865";
+            txtPhoneNumber.ReadOnly = true;
+            txtPhoneNumber.Size = new Size(550, 31);
+            txtPhoneNumber.TabIndex = 31;
             // 
-            // label11
+            // lblPhoneNumber
             // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
-            label11.Location = new Point(324, 422);
-            label11.Name = "label11";
-            label11.Size = new Size(140, 25);
-            label11.TabIndex = 30;
-            label11.Text = "Phone Number";
+            lblPhoneNumber.AutoSize = true;
+            lblPhoneNumber.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
+            lblPhoneNumber.Location = new Point(284, 316);
+            lblPhoneNumber.Name = "lblPhoneNumber";
+            lblPhoneNumber.Size = new Size(110, 19);
+            lblPhoneNumber.TabIndex = 30;
+            lblPhoneNumber.Text = "Phone Number";
             // 
-            // roundedTextBox1
+            // txtIDNumber
             // 
-            roundedTextBox1.BackColor = Color.White;
-            roundedTextBox1.Font = new Font("Segoe UI", 10F);
-            roundedTextBox1.Location = new Point(324, 378);
-            roundedTextBox1.MaxLength = 13;
-            roundedTextBox1.Name = "roundedTextBox1";
-            roundedTextBox1.PlaceholderText = "Enter South African ID";
-            roundedTextBox1.ReadOnly = true;
-            roundedTextBox1.Size = new Size(628, 41);
-            roundedTextBox1.TabIndex = 29;
+            txtIDNumber.BackColor = Color.White;
+            txtIDNumber.Font = new Font("Segoe UI", 10F);
+            txtIDNumber.Location = new Point(284, 284);
+            txtIDNumber.Margin = new Padding(3, 2, 3, 2);
+            txtIDNumber.MaxLength = 13;
+            txtIDNumber.Name = "txtIDNumber";
+            txtIDNumber.PlaceholderText = "Enter South African ID";
+            txtIDNumber.ReadOnly = true;
+            txtIDNumber.Size = new Size(550, 31);
+            txtIDNumber.TabIndex = 29;
             // 
-            // label12
+            // lblIDNumber
             // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
-            label12.Location = new Point(324, 338);
-            label12.Name = "label12";
-            label12.Size = new Size(105, 25);
-            label12.TabIndex = 28;
-            label12.Text = "ID Number";
+            lblIDNumber.AutoSize = true;
+            lblIDNumber.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
+            lblIDNumber.Location = new Point(284, 254);
+            lblIDNumber.Name = "lblIDNumber";
+            lblIDNumber.Size = new Size(82, 19);
+            lblIDNumber.TabIndex = 28;
+            lblIDNumber.Text = "ID Number";
             // 
             // txtLastName
             // 
             txtLastName.BackColor = Color.White;
             txtLastName.Font = new Font("Segoe UI", 10F);
-            txtLastName.Location = new Point(324, 295);
+            txtLastName.Location = new Point(284, 221);
+            txtLastName.Margin = new Padding(3, 2, 3, 2);
             txtLastName.Name = "txtLastName";
             txtLastName.PlaceholderText = "Enter Your Last Name";
             txtLastName.ReadOnly = true;
-            txtLastName.Size = new Size(628, 41);
+            txtLastName.Size = new Size(550, 31);
             txtLastName.TabIndex = 27;
             // 
-            // label13
+            // lblLastName
             // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
-            label13.Location = new Point(324, 254);
-            label13.Name = "label13";
-            label13.Size = new Size(101, 25);
-            label13.TabIndex = 26;
-            label13.Text = "Last Name";
+            lblLastName.AutoSize = true;
+            lblLastName.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
+            lblLastName.Location = new Point(284, 190);
+            lblLastName.Name = "lblLastName";
+            lblLastName.Size = new Size(79, 19);
+            lblLastName.TabIndex = 26;
+            lblLastName.Text = "Last Name";
             // 
             // txtFullName
             // 
             txtFullName.BackColor = Color.White;
             txtFullName.Font = new Font("Segoe UI", 10F);
-            txtFullName.Location = new Point(324, 212);
+            txtFullName.Location = new Point(284, 159);
+            txtFullName.Margin = new Padding(3, 2, 3, 2);
             txtFullName.Name = "txtFullName";
             txtFullName.PlaceholderText = "Enter Your Full Name";
             txtFullName.ReadOnly = true;
-            txtFullName.Size = new Size(628, 41);
+            txtFullName.Size = new Size(550, 31);
             txtFullName.TabIndex = 25;
             // 
-            // label14
+            // lblFullName
             // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
-            label14.Location = new Point(324, 180);
-            label14.Name = "label14";
-            label14.Size = new Size(97, 25);
-            label14.TabIndex = 24;
-            label14.Text = "Full Name";
+            lblFullName.AutoSize = true;
+            lblFullName.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
+            lblFullName.Location = new Point(284, 135);
+            lblFullName.Name = "lblFullName";
+            lblFullName.Size = new Size(76, 19);
+            lblFullName.TabIndex = 24;
+            lblFullName.Text = "Full Name";
             // 
             // lblPersonalInfo
             // 
             lblPersonalInfo.AutoSize = true;
             lblPersonalInfo.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
-            lblPersonalInfo.Location = new Point(321, 110);
+            lblPersonalInfo.Location = new Point(281, 82);
             lblPersonalInfo.Name = "lblPersonalInfo";
-            lblPersonalInfo.Size = new Size(360, 46);
+            lblPersonalInfo.Size = new Size(289, 37);
             lblPersonalInfo.TabIndex = 9;
             lblPersonalInfo.Text = "Personal Information";
             // 
@@ -862,8 +865,9 @@
             pnlDashboard.Controls.Add(lblDashboard);
             pnlDashboard.Dock = DockStyle.Fill;
             pnlDashboard.Location = new Point(0, 0);
+            pnlDashboard.Margin = new Padding(3, 2, 3, 2);
             pnlDashboard.Name = "pnlDashboard";
-            pnlDashboard.Size = new Size(1267, 723);
+            pnlDashboard.Size = new Size(1109, 542);
             pnlDashboard.TabIndex = 10;
             // 
             // btnDashNewBook
@@ -874,62 +878,66 @@
             btnDashNewBook.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             btnDashNewBook.ForeColor = Color.LightGray;
             btnDashNewBook.HoverColor = Color.Empty;
-            btnDashNewBook.Location = new Point(328, 433);
+            btnDashNewBook.Location = new Point(287, 325);
+            btnDashNewBook.Margin = new Padding(3, 2, 3, 2);
             btnDashNewBook.Name = "btnDashNewBook";
             btnDashNewBook.PressedColor = Color.Empty;
-            btnDashNewBook.Size = new Size(265, 50);
+            btnDashNewBook.Size = new Size(232, 38);
             btnDashNewBook.TabIndex = 13;
             btnDashNewBook.Text = "New Booking";
             btnDashNewBook.UseVisualStyleBackColor = false;
+            btnDashNewBook.Click += btnNewBooking_Click;
             // 
             // curvedCornerPanel5
             // 
             curvedCornerPanel5.BackColor = SystemColors.InactiveCaption;
-            curvedCornerPanel5.Controls.Add(roundedButton1);
+            curvedCornerPanel5.Controls.Add(btnViewQueue);
             curvedCornerPanel5.Controls.Add(lblQnum);
-            curvedCornerPanel5.Controls.Add(label9);
+            curvedCornerPanel5.Controls.Add(lblCurrentQueueStatusTitle);
             curvedCornerPanel5.Controls.Add(lblQstatus);
-            curvedCornerPanel5.Location = new Point(779, 208);
+            curvedCornerPanel5.Location = new Point(682, 156);
+            curvedCornerPanel5.Margin = new Padding(3, 2, 3, 2);
             curvedCornerPanel5.Name = "curvedCornerPanel5";
-            curvedCornerPanel5.Size = new Size(390, 186);
+            curvedCornerPanel5.Size = new Size(341, 140);
             curvedCornerPanel5.TabIndex = 12;
             // 
-            // roundedButton1
+            // btnViewQueue
             // 
-            roundedButton1.BackColor = Color.FromArgb(26, 70, 130);
-            roundedButton1.FlatAppearance.BorderSize = 0;
-            roundedButton1.FlatStyle = FlatStyle.Flat;
-            roundedButton1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            roundedButton1.ForeColor = Color.LightGray;
-            roundedButton1.HoverColor = Color.Empty;
-            roundedButton1.Location = new Point(28, 135);
-            roundedButton1.Name = "roundedButton1";
-            roundedButton1.PressedColor = Color.Empty;
-            roundedButton1.Size = new Size(145, 33);
-            roundedButton1.TabIndex = 5;
-            roundedButton1.Text = "View Queue";
-            roundedButton1.UseVisualStyleBackColor = false;
+            btnViewQueue.BackColor = Color.FromArgb(26, 70, 130);
+            btnViewQueue.FlatAppearance.BorderSize = 0;
+            btnViewQueue.FlatStyle = FlatStyle.Flat;
+            btnViewQueue.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnViewQueue.ForeColor = Color.LightGray;
+            btnViewQueue.HoverColor = Color.Empty;
+            btnViewQueue.Location = new Point(24, 101);
+            btnViewQueue.Margin = new Padding(3, 2, 3, 2);
+            btnViewQueue.Name = "btnViewQueue";
+            btnViewQueue.PressedColor = Color.Empty;
+            btnViewQueue.Size = new Size(127, 25);
+            btnViewQueue.TabIndex = 5;
+            btnViewQueue.Text = "View Queue";
+            btnViewQueue.UseVisualStyleBackColor = false;
             // 
             // lblQnum
             // 
             lblQnum.AutoSize = true;
             lblQnum.Font = new Font("Segoe UI", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             lblQnum.ForeColor = Color.FromArgb(26, 70, 130);
-            lblQnum.Location = new Point(25, 77);
+            lblQnum.Location = new Point(22, 58);
             lblQnum.Name = "lblQnum";
-            lblQnum.Size = new Size(204, 28);
+            lblQnum.Size = new Size(164, 21);
             lblQnum.TabIndex = 4;
             lblQnum.Text = "Queue number Q-000";
             // 
-            // label9
+            // lblCurrentQueueStatusTitle
             // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.Location = new Point(25, 18);
-            label9.Name = "label9";
-            label9.Size = new Size(298, 38);
-            label9.TabIndex = 3;
-            label9.Text = "Current Queue Status";
+            lblCurrentQueueStatusTitle.AutoSize = true;
+            lblCurrentQueueStatusTitle.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCurrentQueueStatusTitle.Location = new Point(22, 14);
+            lblCurrentQueueStatusTitle.Name = "lblCurrentQueueStatusTitle";
+            lblCurrentQueueStatusTitle.Size = new Size(235, 30);
+            lblCurrentQueueStatusTitle.TabIndex = 3;
+            lblCurrentQueueStatusTitle.Text = "Current Queue Status";
             // 
             // lblQstatus
             // 
@@ -937,51 +945,52 @@
             lblQstatus.BackColor = Color.NavajoWhite;
             lblQstatus.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             lblQstatus.ForeColor = Color.SaddleBrown;
-            lblQstatus.Location = new Point(234, 80);
+            lblQstatus.Location = new Point(205, 60);
             lblQstatus.Name = "lblQstatus";
-            lblQstatus.Size = new Size(73, 23);
+            lblQstatus.Size = new Size(60, 19);
             lblQstatus.TabIndex = 1;
             lblQstatus.Text = "Waiting";
             // 
             // curvedCornerPanel4
             // 
             curvedCornerPanel4.BackColor = SystemColors.InactiveCaption;
-            curvedCornerPanel4.Controls.Add(label8);
-            curvedCornerPanel4.Controls.Add(label6);
-            curvedCornerPanel4.Location = new Point(321, 208);
+            curvedCornerPanel4.Controls.Add(lblUpcomingBooking);
+            curvedCornerPanel4.Controls.Add(lblUpcomingBookingTitle);
+            curvedCornerPanel4.Location = new Point(281, 156);
+            curvedCornerPanel4.Margin = new Padding(3, 2, 3, 2);
             curvedCornerPanel4.Name = "curvedCornerPanel4";
-            curvedCornerPanel4.Size = new Size(390, 186);
+            curvedCornerPanel4.Size = new Size(341, 140);
             curvedCornerPanel4.TabIndex = 11;
             // 
-            // label8
+            // lblUpcomingBooking
             // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            label8.ForeColor = Color.FromArgb(26, 70, 130);
-            label8.Location = new Point(22, 77);
-            label8.Name = "label8";
-            label8.Size = new Size(209, 28);
-            label8.TabIndex = 2;
-            label8.Text = "No Upcoming Booking";
+            lblUpcomingBooking.AutoSize = true;
+            lblUpcomingBooking.Font = new Font("Segoe UI", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblUpcomingBooking.ForeColor = Color.FromArgb(26, 70, 130);
+            lblUpcomingBooking.Location = new Point(19, 58);
+            lblUpcomingBooking.Name = "lblUpcomingBooking";
+            lblUpcomingBooking.Size = new Size(168, 21);
+            lblUpcomingBooking.TabIndex = 2;
+            lblUpcomingBooking.Text = "No Upcoming Booking";
             // 
-            // label6
+            // lblUpcomingBookingTitle
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(22, 18);
-            label6.Name = "label6";
-            label6.Size = new Size(270, 38);
-            label6.TabIndex = 0;
-            label6.Text = "Upcoming Booking";
+            lblUpcomingBookingTitle.AutoSize = true;
+            lblUpcomingBookingTitle.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUpcomingBookingTitle.Location = new Point(19, 14);
+            lblUpcomingBookingTitle.Name = "lblUpcomingBookingTitle";
+            lblUpcomingBookingTitle.Size = new Size(211, 30);
+            lblUpcomingBookingTitle.TabIndex = 0;
+            lblUpcomingBookingTitle.Text = "Upcoming Booking";
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12.3F);
             label5.ForeColor = SystemColors.GrayText;
-            label5.Location = new Point(321, 156);
+            label5.Location = new Point(281, 117);
             label5.Name = "label5";
-            label5.Size = new Size(296, 30);
+            label5.Size = new Size(241, 23);
             label5.TabIndex = 10;
             label5.Text = "Your SASSA visits in one place.";
             // 
@@ -989,24 +998,25 @@
             // 
             lblDashboard.AutoSize = true;
             lblDashboard.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
-            lblDashboard.Location = new Point(314, 110);
+            lblDashboard.Location = new Point(275, 82);
             lblDashboard.Name = "lblDashboard";
-            lblDashboard.Size = new Size(193, 46);
+            lblDashboard.Size = new Size(157, 37);
             lblDashboard.TabIndex = 9;
             lblDashboard.Text = "Dashboard";
             // 
             // BeneficiaryPortal
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1267, 723);
+            ClientSize = new Size(1109, 542);
             Controls.Add(pnlSidePanel);
             Controls.Add(pnlTop);
+            Controls.Add(pnlMyBooking);
             Controls.Add(pnlNewBooking);
             Controls.Add(pnlQueueStatus);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlProfile);
-            Controls.Add(pnlMyBooking);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "BeneficiaryPortal";
             Text = "BeneficiaryPortal";
             Load += BeneficiaryPortal_Load;
@@ -1059,22 +1069,17 @@
         private Classes.RoundedComboBox cmbServiceRequired;
         private Label lblServiceRequired;
         private Classes.RoundedButton btnConfirmBooking;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dtpDate;
         private Label lblDate;
         private Label lblAvailableTime;
         private Panel pnlQueueStatus;
         private Classes.CurvedCornerPanel curvedCornerPanel3;
-        private Label label4;
+        private Label lblUpdatesWhenStaffCallsTheNextPerson;
         private Label lblQueueNumber;
-        private Label label2;
-        private Label label3;
+        private Label lblQueueStatus;
+        private Label lblUpcomingAndPreviousVisits;
         private Classes.CurvedCornerPanel curvedCornerPanel2;
         private DataGridView dgvMyBooking;
-        private DataGridViewTextBoxColumn Reference;
-        private DataGridViewTextBoxColumn Service;
-        private DataGridViewTextBoxColumn Centre;
-        private DataGridViewTextBoxColumn Date;
-        private DataGridViewTextBoxColumn Status;
         private Label lblMyBooking;
         private Panel pnlMyBooking;
         private Panel pnlProfile;
@@ -1084,34 +1089,35 @@
         private Classes.CurvedCornerPanel curvedCornerPanel5;
         private Classes.CurvedCornerPanel curvedCornerPanel4;
         private Label label5;
-        private Label label9;
+        private Label lblCurrentQueueStatusTitle;
         private Label lblQstatus;
-        private Label label8;
-        private Label label6;
+        private Label lblUpcomingBooking;
+        private Label lblUpcomingBookingTitle;
         private Label lblQnum;
-        private Classes.RoundedButton roundedButton1;
+        private Classes.RoundedButton btnViewQueue;
         private Classes.RoundedButton btnDashNewBook;
-        private Classes.RoundedButton roundedButton2;
-        private Classes.RoundedComboBox roundedComboBox1;
-        private Label label7;
-        private Classes.RoundedTextBox roundedTextBox3;
-        private Label label10;
-        private Classes.RoundedTextBox roundedTextBox2;
-        private Label label11;
-        private Classes.RoundedTextBox roundedTextBox1;
-        private Label label12;
+        private Classes.RoundedButton btnEditDetails;
+        private Classes.RoundedComboBox cmbPreferredServiceCentre;
+        private Label lblPreferredServiceCentre;
+        private Classes.RoundedTextBox txtEmailAddress;
+        private Label lblEmailAddress;
+        private Classes.RoundedTextBox txtPhoneNumber;
+        private Label lblPhoneNumber;
+        private Classes.RoundedTextBox txtIDNumber;
+        private Label lblIDNumber;
         private Classes.RoundedTextBox txtLastName;
-        private Label label13;
+        private Label lblLastName;
         private Classes.RoundedTextBox txtFullName;
-        private Label label14;
-        private Classes.RoundedButton roundedButton3;
+        private Label lblFullName;
+        private Classes.RoundedButton btnSaveChanges;
         private Label lblUserName;
-        private Label label15;
-        private Label label18;
-        private Label label17;
-        private Label label16;
+        private Label lblBeneficiaryPortal;
+        private Label lblQueueStatusTitle;
+        private Label lblPeopleAheadTiltle;
+        private Label lblEstimatedWaitTitle;
         private Label lblPeopleAhead;
         private Label lblStatus;
-        private Label lblTime;
+        private Label lblEstimatedWait;
+        private Classes.RoundedComboBox cmbTimeSlot;
     }
 }
