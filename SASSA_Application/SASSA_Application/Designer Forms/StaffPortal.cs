@@ -193,7 +193,7 @@ namespace SASSA_Application.Designer_Forms
             if (dgvTotalBookings != null)
             {
                 dgvTotalBookings.DataSource = null;
-                dgvTotalBookings.DataSource = allBookings;
+                dgvTotalBookings.DataSource = displayList;
             }
 
 

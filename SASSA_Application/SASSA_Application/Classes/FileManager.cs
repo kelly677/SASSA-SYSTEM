@@ -10,9 +10,10 @@ namespace SASSA_Application.Classes
         {
             List<Beneficiary> list = new List<Beneficiary>();
 
-            if (!File.Exists("Users.txt")) return list;
+            string filepath = Path.Combine(Application.StartupPath, "Users.txt");
+            if (!File.Exists(filepath)) return list;
 
-            foreach (string line in File.ReadAllLines("Users.txt"))
+            foreach (string line in File.ReadAllLines(filepath))
             {
                 if (string.IsNullOrWhiteSpace(line)) continue;
                 string[] parts = line.Split('|');
@@ -32,45 +33,67 @@ namespace SASSA_Application.Classes
             list.Add(b);
         }
             return list;
-        } 
-        //public static string GeneratedStaffCode()
+        }
+        //public static List<Beneficiary> LoadBeneficiaries()
         //{
-        //    int count = 0;
-        //    if (File.Exists("Staff.txt"))
+        //    List<Beneficiary> list = new List<Beneficiary>();
+
+        //    string filepath = Path.Combine(Application.StartupPath, "Users.txt");
+        //    if (!File.Exists(filepath)) return list;
+
+        //    foreach (string line in File.ReadAllLines(filepath))
         //    {
-        //        count = File.ReadAllLines("Staff.txt").Length;
+        //        if (string.IsNullOrWhiteSpace(line)) continue;
+        //        string[] parts = line.Split('|');
+        //        if (parts.Length < 8) continue;
+
+        //        Beneficiary b = new Beneficiary();
+        //        b.Name = parts[0].Trim();
+        //        b.Surname = parts[1].Trim();
+        //        b.IdNumber = parts[2].Trim();
+        //        b.UserCode = parts[3].Trim();
+        //        b.Cell = parts[4].Trim();
+        //        b.Email = parts[5].Trim();
+        //        b.PreferredCentre = parts[6].Trim();
+        //        b.Password = parts[7].Trim();
+
+
+        //        list.Add(b);
         //    }
-        //    return $"STAFF{(count + 1): D3}";
-        //}
-        //public static void SaveStaff(StaffMember s)
-        //{
-        //    string line = $"{s.Name}|{s.Surname}|{s.UserCode}|{s.Email}|{s.Password}";
-        //    File.AppendAllText("Staff.txt", line + Environment.NewLine);
+        //    return list;
         //}
         //public static List<StaffMember> LoadStaff()
         //{
         //    List<StaffMember> list = new List<StaffMember>();
 
-        //    if (!File.Exists("Staff.txt")) return list;
+        //    string filepath = Path.Combine(Application.StartupPath, "Users.txt");
+        //    if (!File.Exists(filepath)) return list;
 
-        //    foreach (string line in File.ReadAllLines("Staff.txt"))
+        //    foreach (string line in File.ReadAllLines(filepath))
         //    {
         //        if (string.IsNullOrWhiteSpace(line)) continue;
         //        string[] parts = line.Split('|');
-        //        if (parts.Length < 7) continue;
 
-        //        StaffMember s = new StaffMember();
-        //        s.Name = parts[0];
-        //        s.Surname = parts[1];
-        //        s.UserCode = parts[3];
-        //        s.Email = parts[5];
-        //        s.Password = parts[6];
+        //        if (parts.Length < 8) continue;
 
-        //        list.Add(s);
+
+        //        if (parts[3].Trim().Equals("STAFF", StringComparison.OrdinalIgnoreCase))
+        //        {
+        //            StaffMember s = new StaffMember();
+        //            s.Name = parts[0].Trim();
+        //            s.StaffNumber = parts[2].Trim();
+        //            s.Email = parts[5].Trim();
+        //            s.CentreId = parts[6].Trim();
+        //            s.Password = parts[7].Trim();
+
+
+        //            list.Add(s);
+        //        }
         //    }
-        //    return list;
-        //}
-        // ---- Bookings ----
+        //        return list;
+        //    }
+        
+
         public static List<Booking> LoadBookings()
         {
             List<Booking> list = new List<Booking>();

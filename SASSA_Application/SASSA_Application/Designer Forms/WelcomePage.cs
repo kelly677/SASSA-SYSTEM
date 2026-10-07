@@ -34,85 +34,66 @@ namespace SASSA_Application
                 return;
             }
 
-            // ---- STAFF LOGIN (password is an email) ----
-            if (password.Contains("@") && password.Contains("."))
+            string filepath = Path.Combine(Application.StartupPath, "Users.txt");
+            if (!File.Exists(filepath))
             {
-                if (File.Exists("Users.txt"))
-                {
-                    foreach (string line in File.ReadAllLines("Users.txt"))
-                    {
-                        if (string.IsNullOrWhiteSpace(line)) continue;
-                        string[] parts = line.Split('|');
-                        if (parts.Length < 8) continue;
-
-                        string savedStaffNumber = parts[3].Trim();
-                        string savedEmail = parts[5].Trim();
-
-                        if (savedStaffNumber.Equals(id.Trim(), StringComparison.OrdinalIgnoreCase)
-                            && savedEmail.Equals(password.Trim(), StringComparison.OrdinalIgnoreCase))
-                        {
-                            string centre = parts[6].Trim();
-                            MessageBox.Show("Welcome " + parts[0] + "!", "Staff Login",
-                                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                            StaffPortal staff = new StaffPortal();
-                            staff.Show();
-                            this.Hide();
-                            return;
-                        }
-                    }
-                }
-
-                MessageBox.Show("Invalid staff number or email.", "Login Failed",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No, accounts registered yet", "Login failed", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
-
-            // ---- ADMIN / BENEFICIARY LOGIN ----
-            if (!File.Exists("Users.txt"))
-            {
-                MessageBox.Show("No accounts registered yet.", "Login Failed",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            string[] lines = File.ReadAllLines("Users.txt");
+            
+            string[] lines = File.ReadAllLines(filepath);
             bool isAuthenticated = false;
 
             foreach (string line in lines)
             {
                 if (string.IsNullOrWhiteSpace(line)) continue;
 
-                string[] parts = line.Split(new char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] parts = line.Split('|');
                 if (parts.Length < 8) continue;
 
-                string savedId = parts[2].Trim();
+                string savedIdNum = parts[2].Trim();//SA ID
+                string savedUserCode = parts[3].Trim();//beneficiary
+                string savedEmail = parts[5].Trim();
                 string savedPassword = parts[7].Trim();
 
-                if (savedId.Equals(id.Trim(), StringComparison.OrdinalIgnoreCase)
-                    && savedPassword == password.Trim())
+                bool idMatches = id.Equals(savedIdNum, StringComparison.OrdinalIgnoreCase) ||
+                                 id.Equals(savedUserCode, StringComparison.OrdinalIgnoreCase) ||
+                                 id.Equals(savedEmail, StringComparison.OrdinalIgnoreCase);
+
+                bool passMatches = password.Equals(savedPassword);
+                if (idMatches && passMatches)
                 {
                     isAuthenticated = true;
-
-                    if (savedPassword.Contains("Admin") || parts[3].StartsWith("STAFF", StringComparison.OrdinalIgnoreCase))
+                    if (savedPassword.Contains("Admin") || savedUserCode.StartsWith("ADMIN", StringComparison.OrdinalIgnoreCase))
                     {
                         AdminPortal admin = new AdminPortal();
                         admin.Show();
                     }
+                    else if (savedUserCode.StartsWith("STAFF", StringComparison.OrdinalIgnoreCase))
+                        // || savedIdNum.Length == 13 && !savedUserCode.StartsWith("BENEFICIARY", StringComparison.OrdinalIgnoreCase))
+                    {
+                        StaffPortal staff = new StaffPortal();
+                        staff.Show();
+                    }
                     else
                     {
-                        BeneficiaryPortal bene = new BeneficiaryPortal();
-                        bene.Show();
+                        BeneficiaryPortal beneficiary = new BeneficiaryPortal();
+                        beneficiary.Show();
                     }
-
                     this.Hide();
                     return;
                 }
             }
             if (!isAuthenticated)
             {
-                MessageBox.Show("Invalid ID number or password.", "Login Failed",
+                MessageBox.Show("Invalid credentials.", "Login Failed",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        
     }
 }
+    
+

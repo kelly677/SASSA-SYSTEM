@@ -367,8 +367,7 @@ namespace SASSA_Application.Designer_Forms
         //private void cmbServiceRequired_Click(object sender, EventArgs e)
         //{
         //    cmbServiceRequired.AddRange("New Grant application", "Existing grant enquiry", "Grant information update",
-        //          "Payment enquiry", "Document submission");
-        //}
+        // 
     }
 }
 

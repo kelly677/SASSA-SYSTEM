@@ -81,9 +81,9 @@ namespace SASSA_Application.Designer_Forms
 
         private void btnAddStaff_Click(object sender, EventArgs e)
         {
-            string name = txtName.Text;
+            string name = txtName.Text.Trim();
             string email = txtEmail.Text.Trim();
-            string centre = cmbCentre.Text;
+            string centre = cmbCentre.Text.Trim();
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(centre))
             {
                 MessageBox.Show("Please fill in all fields.", "Validation Error",
@@ -100,15 +100,22 @@ namespace SASSA_Application.Designer_Forms
 
             // Generate a random 13-digit staff number
             Random rnd = new Random();
+
             string staffNumber = "";
+
             for (int i = 0; i < 13; i++)
             {
                 staffNumber += rnd.Next(0, 10).ToString();
             }
 
             // Save to file: Name|StaffNumber|Centre|Email
-            string line = name + "|" + staffNumber + "|" + centre + "|" + email;
-            File.AppendAllText("Staff.txt", line + Environment.NewLine);
+            string filepath =Path.Combine(Application.StartupPath, "Users.txt");
+
+            int count = File.Exists(filepath) ? File.ReadAllLines(filepath).Length : 0;
+            
+
+            string line =$"{name}|Staff|{staffNumber}|STAFF|N/A|{email}|{centre}|{email}";
+            File.AppendAllText(filepath, line + Environment.NewLine);
 
             // Add row to the grid
             dgvStaffMembers.Rows.Add(name, staffNumber, centre, email);
@@ -133,10 +140,7 @@ namespace SASSA_Application.Designer_Forms
 
         }
 
-        //private void AdminPortal_Load(object sender, EventArgs e)
-        //{
-        //    cmbServiceCentre.AddRange("Johannesburg Central", "Soweto", "Pretoria Marabastad", "Tembisa");
-        //}
+        
 
         private void AdminPortal_Load_1(object sender, EventArgs e)
         {
