@@ -917,6 +917,7 @@
             btnViewQueue.TabIndex = 5;
             btnViewQueue.Text = "View Queue";
             btnViewQueue.UseVisualStyleBackColor = false;
+            btnViewQueue.Click += btnQueueStatus_Click;
             // 
             // lblQnum
             // 
@@ -1011,11 +1012,11 @@
             ClientSize = new Size(1109, 542);
             Controls.Add(pnlSidePanel);
             Controls.Add(pnlTop);
+            Controls.Add(pnlDashboard);
+            Controls.Add(pnlProfile);
             Controls.Add(pnlMyBooking);
             Controls.Add(pnlNewBooking);
             Controls.Add(pnlQueueStatus);
-            Controls.Add(pnlDashboard);
-            Controls.Add(pnlProfile);
             Margin = new Padding(3, 2, 3, 2);
             Name = "BeneficiaryPortal";
             Text = "BeneficiaryPortal";

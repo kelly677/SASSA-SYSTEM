@@ -37,19 +37,21 @@ namespace SASSA_Application
             // ---- STAFF LOGIN (password is an email) ----
             if (password.Contains("@") && password.Contains("."))
             {
-                if (File.Exists("Staff.txt"))
+                if (File.Exists("Users.txt"))
                 {
-                    foreach (string line in File.ReadAllLines("Staff.txt"))
+                    foreach (string line in File.ReadAllLines("Users.txt"))
                     {
                         if (string.IsNullOrWhiteSpace(line)) continue;
                         string[] parts = line.Split('|');
-                        if (parts.Length < 4) continue;
+                        if (parts.Length < 8) continue;
 
-                        string savedStaffNumber = parts[1];
-                        string savedEmail = parts[3];
+                        string savedStaffNumber = parts[3].Trim();
+                        string savedEmail = parts[5].Trim();
 
-                        if (savedStaffNumber == id && savedEmail == password)
+                        if (savedStaffNumber.Equals(id.Trim(), StringComparison.OrdinalIgnoreCase)
+                            && savedEmail.Equals(password.Trim(), StringComparison.OrdinalIgnoreCase))
                         {
+                            string centre = parts[6].Trim();
                             MessageBox.Show("Welcome " + parts[0] + "!", "Staff Login",
                                             MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -67,26 +69,31 @@ namespace SASSA_Application
             }
 
             // ---- ADMIN / BENEFICIARY LOGIN ----
-            if (!File.Exists("Beneficiaries.txt"))
+            if (!File.Exists("Users.txt"))
             {
                 MessageBox.Show("No accounts registered yet.", "Login Failed",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            string[] lines = File.ReadAllLines("Users.txt");
+            bool isAuthenticated = false;
 
-            foreach (string line in File.ReadAllLines("Beneficiaries.txt"))
+            foreach (string line in lines)
             {
                 if (string.IsNullOrWhiteSpace(line)) continue;
 
-                string[] parts = line.Split('|');
-                if (parts.Length < 7) continue;
+                string[] parts = line.Split(new char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length < 8) continue;
 
-                string savedId = parts[2];
-                string savedPassword = parts[6];
+                string savedId = parts[2].Trim();
+                string savedPassword = parts[7].Trim();
 
-                if (savedId == id && savedPassword == password)
+                if (savedId.Equals(id.Trim(), StringComparison.OrdinalIgnoreCase)
+                    && savedPassword == password.Trim())
                 {
-                    if (savedPassword.Contains("Admin"))
+                    isAuthenticated = true;
+
+                    if (savedPassword.Contains("Admin") || parts[3].StartsWith("STAFF", StringComparison.OrdinalIgnoreCase))
                     {
                         AdminPortal admin = new AdminPortal();
                         admin.Show();
@@ -101,9 +108,11 @@ namespace SASSA_Application
                     return;
                 }
             }
-
-            MessageBox.Show("Invalid ID number or password.", "Login Failed",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if (!isAuthenticated)
+            {
+                MessageBox.Show("Invalid ID number or password.", "Login Failed",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

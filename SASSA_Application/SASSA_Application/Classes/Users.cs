@@ -2,11 +2,11 @@
 {
     public abstract class User
     {
-        public string Name { get; set; }          // for staff this holds the full name
+        public string Name { get; set; } = "";      // for staff this holds the full name
         public string Surname { get; set; } = "";
-        public string Email { get; set; }
-        public string Password { get; set; }
-
+        public string Email { get; set; } = "";
+        public string Password { get; set; } = "";
+        public string UserCode { get; set; } = "";
         public abstract string Role { get; }
         public abstract string LoginId { get; }   // each type decides what it logs in with
 
@@ -15,9 +15,10 @@
 
     public class Beneficiary : User
     {
-        public string IdNumber { get; set; }
-        public string Cell { get; set; }
-        public string PreferredCentre { get; set; }
+        public string IdNumber { get; set; } = "";
+        //public string UserCode { get; set; } = "";
+        public string Cell { get; set; } = "";
+        public string PreferredCentre { get; set; } = "";
 
         public override string Role { get { return "Beneficiary"; } }
         public override string LoginId { get { return IdNumber; } }
@@ -30,10 +31,26 @@
 
     public class StaffMember : User
     {
-        public string StaffNumber { get; set; }
-        public string CentreId { get; set; }
+        public string StaffNumber { get; set; } = "";
+        public string CentreId { get; set; } = "";
 
         public override string Role { get { return "Staff"; } }
         public override string LoginId { get { return StaffNumber; } }
     }
-}
+    public static class IdGenerator
+    {
+        public static string GenerateUserId(string role, int currentCount)
+        {
+            string prefix = role.Trim().ToUpper() switch
+            {
+                "STAFF" => "STAFF",
+                "ADMIN" => "ADMIN",
+                "BENEFICIARY" => "BENEFICIARY",
+                _ => "USER"
+            };
+
+            int newNumber = currentCount + 1;
+            return $"{prefix}{newNumber:D3}";
+            }
+        }
+    }

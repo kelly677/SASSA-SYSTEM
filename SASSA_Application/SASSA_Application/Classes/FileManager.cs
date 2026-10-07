@@ -10,28 +10,66 @@ namespace SASSA_Application.Classes
         {
             List<Beneficiary> list = new List<Beneficiary>();
 
-            if (!File.Exists("Beneficiaries.txt")) return list;
+            if (!File.Exists("Users.txt")) return list;
 
-            foreach (string line in File.ReadAllLines("Beneficiaries.txt"))
+            foreach (string line in File.ReadAllLines("Users.txt"))
             {
                 if (string.IsNullOrWhiteSpace(line)) continue;
                 string[] parts = line.Split('|');
-                if (parts.Length < 7) continue;
+                if (parts.Length < 8) continue;
 
                 Beneficiary b = new Beneficiary();
-                b.Name = parts[0];
-                b.Surname = parts[1];
-                b.IdNumber = parts[2];
-                b.Cell = parts[3];
-                b.Email = parts[4];
-                b.PreferredCentre = parts[5];
-                b.Password = parts[6];
+                b.Name = parts[0].Trim();
+                b.Surname = parts[1].Trim();
+                b.IdNumber = parts[2].Trim();
+                b.UserCode = parts[3].Trim();
+                b.Cell = parts[4].Trim();
+                b.Email = parts[5].Trim();
+                b.PreferredCentre = parts[6].Trim();
+                b.Password = parts[7].Trim();
 
-                list.Add(b);
-            }
-            return list;
+  
+            list.Add(b);
         }
+            return list;
+        } 
+        //public static string GeneratedStaffCode()
+        //{
+        //    int count = 0;
+        //    if (File.Exists("Staff.txt"))
+        //    {
+        //        count = File.ReadAllLines("Staff.txt").Length;
+        //    }
+        //    return $"STAFF{(count + 1): D3}";
+        //}
+        //public static void SaveStaff(StaffMember s)
+        //{
+        //    string line = $"{s.Name}|{s.Surname}|{s.UserCode}|{s.Email}|{s.Password}";
+        //    File.AppendAllText("Staff.txt", line + Environment.NewLine);
+        //}
+        //public static List<StaffMember> LoadStaff()
+        //{
+        //    List<StaffMember> list = new List<StaffMember>();
 
+        //    if (!File.Exists("Staff.txt")) return list;
+
+        //    foreach (string line in File.ReadAllLines("Staff.txt"))
+        //    {
+        //        if (string.IsNullOrWhiteSpace(line)) continue;
+        //        string[] parts = line.Split('|');
+        //        if (parts.Length < 7) continue;
+
+        //        StaffMember s = new StaffMember();
+        //        s.Name = parts[0];
+        //        s.Surname = parts[1];
+        //        s.UserCode = parts[3];
+        //        s.Email = parts[5];
+        //        s.Password = parts[6];
+
+        //        list.Add(s);
+        //    }
+        //    return list;
+        //}
         // ---- Bookings ----
         public static List<Booking> LoadBookings()
         {

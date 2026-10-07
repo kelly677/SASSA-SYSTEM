@@ -98,12 +98,7 @@ namespace SASSA_Application.Designer_Forms
             this.Close();
         }
 
-        //private void cmbServiceCentre_Click(object sender, EventArgs e)
-        //{
-        //    cmbServiceCentre.AddRange(
-        //         "Johannesburg Central", "Soweto", "Pretoria Marabastad", "Tembisa"
-        //     );
-        //}
+        
 
         #region Data Population & UI Refresh Methods
 
@@ -201,15 +196,17 @@ namespace SASSA_Application.Designer_Forms
             {
                 BookingStore.Bookings.Add(new Booking
                 {
-                    Reference = "REF1001",
-                    BeneficiaryId = currentBeneficiary?.IdNumber ?? "12345",
-                    BeneficiaryName = currentBeneficiary?.FullName ?? "Guest",
-                    ServiceName = "Child Support Grant",
-                    CentreName = "Johannesburg Central",
+                    Reference = "REF" + new Random().Next(1000, 9999),
+                    //BeneficiaryId = currentBeneficiary?.IdNumber ?? "12345",
+                    //BeneficiaryName = currentBeneficiary?.FullName ?? "Guest",
+                    BeneficiaryId = txtIDNumber.Text.Trim(),
+                    BeneficiaryName = txtFullName.Text.Trim(),
+                    ServiceName = cmbServiceRequired.SelectedItem?.ToString() ?? "General",
+                    CentreName = cmbServiceCentre.SelectedItem?.ToString() ?? "Johannesburg Central",
                     Date = dtpDate.Value.ToString("yyyy-MM-dd"),
-                    Time = "09:30",
-                    Status = "Confirmed",
-                    QueueNumber = "Q-101"
+                    Time = cmbTimeSlot.SelectedItem?.ToString() ?? "09:30",
+                    Status = "Booked",
+                    QueueNumber = "Q-" + new Random().Next(100, 999)
                 });
             }
             MessageBox.Show($"Total bookings in memory: {BookingStore.Bookings.Count}", "Debug Info");
@@ -226,24 +223,13 @@ namespace SASSA_Application.Designer_Forms
             {
                 dt.Rows.Add(b.Reference, b.ServiceName, b.CentreName, b.Date, b.Status);
             }
-            //var displayList = string.IsNullOrEmpty(currentId)
-            //        ? BookingStore.Bookings.ToList()
-            //        : BookingStore.Bookings.Where(b => b.BeneficiaryId == currentId).ToList();
-
-            //.Where(b => b.BeneficiaryId == currentBeneficiary.IdNumber)
-            //.ToList();
+            
 
             dgvMyBooking.DataSource = null;
-            //if (dgvMyBooking.Columns.Count >= 5)
-            //{
-            //    dgvMyBooking.Columns[0].DataPropertyName = "Reference";
-            //    dgvMyBooking.Columns[1].DataPropertyName = "ServiceName";
-            //    dgvMyBooking.Columns[2].DataPropertyName = "CentreName";
-            //    dgvMyBooking.Columns[3].DataPropertyName = "Date";
-            //    dgvMyBooking.Columns[4].DataPropertyName = "Status";
-            //}
+            
             dgvMyBooking.AutoGenerateColumns = true;
                 dgvMyBooking.DataSource = dt;
+                
             
         }
 
@@ -253,13 +239,13 @@ namespace SASSA_Application.Designer_Forms
             //if (currentBeneficiary == null) return;
 
             var activeBooking = BookingStore.Bookings
-                .FirstOrDefault(b => (string.IsNullOrEmpty(currentId) || b.BeneficiaryId == currentId) && b.Status == "CheckedIn");
+                .FirstOrDefault(b => (string.IsNullOrEmpty(currentId) || b.BeneficiaryId == currentId) && b.Status == "Checked In");
 
             if (activeBooking != null)
             {
                 lblQueueNumber.Text = activeBooking.QueueNumber;
-                lblEstimatedWaitTitle.Text = "15 Minutes";
-                lblPeopleAhead.Text = "2";
+                lblEstimatedWaitTitle.Text = "";
+                lblPeopleAhead.Text = "";
                 lblQueueStatus.Text = activeBooking.Status;
             }
             else
@@ -315,18 +301,23 @@ namespace SASSA_Application.Designer_Forms
             Booking newBooking = new Booking
             {
                 Reference = "REF" + new Random().Next(1000, 9999),
-                BeneficiaryId = currentBeneficiary != null ? currentBeneficiary.IdNumber : "UNKNOWN",
-                BeneficiaryName = currentBeneficiary != null ? currentBeneficiary.FullName : "Guest",
-                ServiceName = cmbServiceRequired.Text,
-                CentreName = cmbServiceCentre.Text,
+                //BeneficiaryId = currentBeneficiary != null ? currentBeneficiary.IdNumber : "UNKNOWN",
+                //BeneficiaryName = currentBeneficiary != null ? currentBeneficiary.FullName : "Guest",
+                BeneficiaryId = txtIDNumber.Text.Trim(),
+                BeneficiaryName = txtFullName.Text.Trim(),
+                ServiceName = cmbServiceRequired.SelectedItem?.ToString() ?? "General",
+                CentreName = cmbServiceCentre.SelectedItem?.ToString() ?? "Johannesburg",
                 Date = dtpDate.Value.ToString("yyyy-MM-dd"),
-                Time = cmbTimeSlot.Text,
+                Time = cmbTimeSlot.SelectedItem?.ToString() ?? "09:30",
                 Status = "Booked",
                 QueueNumber = "Q-" + new Random().Next(100, 999)
             };
 
-            BookingStore.Bookings.Add(newBooking);
-            FileManager.SaveBooking(newBooking);
+            //BookingStore.Bookings.Add(newBooking);
+            //FileManager.SaveBooking(newBooking);
+            List<Booking> currentBookings = FileManager.LoadBookings();
+            currentBookings.Add(newBooking);
+            FileManager.SaveAllBookings(currentBookings);
 
             MessageBox.Show($"Booking confirmed successfully! Reference: {newBooking.Reference}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
