@@ -34,7 +34,7 @@ namespace SASSA_Application
                 return;
             }
 
-            string filepath = Path.Combine(Application.StartupPath, "Users.txt");
+            string filepath ="Users.txt";
             if (!File.Exists(filepath))
             {
                 MessageBox.Show("No, accounts registered yet", "Login failed", MessageBoxButtons.OK,

@@ -109,7 +109,7 @@ namespace SASSA_Application.Designer_Forms
             }
 
             // Save to file: Name|StaffNumber|Centre|Email
-            string filepath =Path.Combine(Application.StartupPath, "Users.txt");
+            string filepath ="Users.txt";
 
             int count = File.Exists(filepath) ? File.ReadAllLines(filepath).Length : 0;
             

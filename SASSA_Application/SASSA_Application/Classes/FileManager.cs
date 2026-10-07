@@ -10,7 +10,7 @@ namespace SASSA_Application.Classes
         {
             List<Beneficiary> list = new List<Beneficiary>();
 
-            string filepath = Path.Combine(Application.StartupPath, "Users.txt");
+            string filepath = "Users.txt";
             if (!File.Exists(filepath)) return list;
 
             foreach (string line in File.ReadAllLines(filepath))

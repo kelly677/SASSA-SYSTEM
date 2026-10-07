@@ -161,7 +161,7 @@ namespace SASSA_Application.Designer_Forms
                     return;
                 }
 
-                string filepath = Path.Combine(Application.StartupPath, "Users.txt");
+                string filepath ="Users.txt";
 
                 int count = 0;
                 if (File.Exists(filepath))
