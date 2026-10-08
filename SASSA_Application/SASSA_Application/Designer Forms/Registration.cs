@@ -31,13 +31,14 @@ namespace SASSA_Application.Designer_Forms
                     string[] parts = line.Split('|');
                     if (parts.Length < 3) continue;
                     cmbServiceCentre.Items.Add(parts[0]);
+
                 }
             }
         }
 
         private void btnRegisterAccount_Click(object sender, EventArgs e)
         {
-             string name = txtFullName.Text.Trim();
+            string name = txtFullName.Text.Trim();
             string surname = txtLastName.Text.Trim();
             string idNum = txtIDNumber.Text.Trim();
             string phoneNumber = txtPhoneNumber.Text.Trim();
@@ -221,7 +222,11 @@ namespace SASSA_Application.Designer_Forms
 
             this.Close();
         }
-    
+
+        private void cmbServiceCentre_TextChanged(object sender, EventArgs e)
+        {
+            cmbServiceCentre.AddRange("Johannesburg Central", "Soweto", "Pretoria Marabastad", "Tembisa");
+        }
     }
 }
 
