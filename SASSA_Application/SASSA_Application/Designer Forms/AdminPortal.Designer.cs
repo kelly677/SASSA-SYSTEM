@@ -431,7 +431,7 @@
             label9.Size = new Size(355, 46);
             label9.TabIndex = 17;
             label9.Text = "Service Management";
-            label9.Click += label9_Click;
+           
             // 
             // label10
             // 
@@ -632,7 +632,7 @@
             roundedButton1.Text = "Services";
             roundedButton1.TextAlign = ContentAlignment.MiddleLeft;
             roundedButton1.UseVisualStyleBackColor = false;
-            roundedButton1.Click += roundedButton1_Click;
+           
             // 
             // label1
             // 
@@ -661,7 +661,7 @@
             roundedButton2.Text = "Centres and Slots";
             roundedButton2.TextAlign = ContentAlignment.MiddleLeft;
             roundedButton2.UseVisualStyleBackColor = false;
-            roundedButton2.Click += roundedButton2_Click;
+           
             // 
             // label3
             // 
@@ -689,7 +689,7 @@
             roundedButton3.TabIndex = 26;
             roundedButton3.Text = "Reports";
             roundedButton3.UseVisualStyleBackColor = false;
-            roundedButton3.Click += roundedButton3_Click;
+          
             // 
             // label7
             // 

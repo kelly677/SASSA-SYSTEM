@@ -28,12 +28,12 @@ namespace SASSA_Application.Designer_Forms
 
         private void btnAdminDashboard_Click(object sender, EventArgs e)
         {
-            pnlBookings.BringToFront();
+            pnlAdminDashboard.BringToFront();
         }
 
         private void btnServices_Click(object sender, EventArgs e)
         {
-            pnlBookings.BringToFront();
+            pnlServices.BringToFront();
         }
 
         private void btnStaff_Click(object sender, EventArgs e)
@@ -54,30 +54,10 @@ namespace SASSA_Application.Designer_Forms
 
         private void btnReports_Click(object sender, EventArgs e)
         {
-            pnlBookings.BringToFront();
-        }
-
-        private void roundedButton1_Click(object sender, EventArgs e)
-        {
-            pnlServices.BringToFront();
-
-        }
-
-        private void roundedButton2_Click(object sender, EventArgs e)
-        {
-            pnlCentres.BringToFront();
-
-        }
-
-        private void roundedButton3_Click(object sender, EventArgs e)
-        {
             pnlReports.BringToFront();
         }
 
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
+      
 
         private void btnAddStaff_Click(object sender, EventArgs e)
         {
