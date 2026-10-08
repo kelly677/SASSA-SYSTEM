@@ -70,7 +70,7 @@ namespace SASSA_Application
                         AdminPortal admin = new AdminPortal();
                         admin.Show();
                     }
-                    else if (savedUserCode.StartsWith("STAFF", StringComparison.OrdinalIgnoreCase))
+                    else if (savedUserCode.Equals("STAFF", StringComparison.OrdinalIgnoreCase))
                         // || savedIdNum.Length == 13 && !savedUserCode.StartsWith("BENEFICIARY", StringComparison.OrdinalIgnoreCase))
                     {
                         StaffPortal staff = new StaffPortal();

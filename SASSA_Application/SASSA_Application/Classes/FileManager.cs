@@ -62,37 +62,37 @@ namespace SASSA_Application.Classes
         //    }
         //    return list;
         //}
-        //public static List<StaffMember> LoadStaff()
-        //{
-        //    List<StaffMember> list = new List<StaffMember>();
+        public static List<StaffMember> LoadStaff()
+        {
+            List<StaffMember> list = new List<StaffMember>();
 
-        //    string filepath = Path.Combine(Application.StartupPath, "Users.txt");
-        //    if (!File.Exists(filepath)) return list;
+            string filepath = "Users.txt";
+            if (!File.Exists(filepath)) return list;
 
-        //    foreach (string line in File.ReadAllLines(filepath))
-        //    {
-        //        if (string.IsNullOrWhiteSpace(line)) continue;
-        //        string[] parts = line.Split('|');
+            foreach (string line in File.ReadAllLines(filepath))
+            {
+                if (string.IsNullOrWhiteSpace(line)) continue;
+                string[] parts = line.Split('|');
 
-        //        if (parts.Length < 8) continue;
-
-
-        //        if (parts[3].Trim().Equals("STAFF", StringComparison.OrdinalIgnoreCase))
-        //        {
-        //            StaffMember s = new StaffMember();
-        //            s.Name = parts[0].Trim();
-        //            s.StaffNumber = parts[2].Trim();
-        //            s.Email = parts[5].Trim();
-        //            s.CentreId = parts[6].Trim();
-        //            s.Password = parts[7].Trim();
+                if (parts.Length < 8) continue;
 
 
-        //            list.Add(s);
-        //        }
-        //    }
-        //        return list;
-        //    }
-        
+                if (parts[3].Trim().Equals("STAFF", StringComparison.OrdinalIgnoreCase))
+                {
+                    StaffMember s = new StaffMember();
+                    s.Name = parts[0].Trim();
+                    s.StaffNumber = parts[2].Trim();
+                    s.Email = parts[5].Trim();
+                    s.CentreId = parts[6].Trim();
+                    s.Password = parts[7].Trim();
+
+
+                    list.Add(s);
+                }
+            }
+            return list;
+        }
+
 
         public static List<Booking> LoadBookings()
         {

@@ -14,6 +14,7 @@ namespace SASSA_Application.Designer_Forms
     public partial class StaffPortal : Form
     {
         private List<Booking> allBookings = new List<Booking>();
+        //private List<StaffMember> staff = new List<StaffMember>();
         private string staffCentre;
         public StaffPortal(string currentCentre)
         {
