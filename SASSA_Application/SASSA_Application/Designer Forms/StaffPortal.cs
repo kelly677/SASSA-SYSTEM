@@ -32,6 +32,7 @@ namespace SASSA_Application.Designer_Forms
         // ============================================================
         private void StaffPortal_Load(object sender, EventArgs e)
         {
+           
             lblUserName.Text = "👤 " + loggedInName;
             RefreshDashboardData();
             LoadAllBookings();
@@ -80,27 +81,52 @@ namespace SASSA_Application.Designer_Forms
         {
             allBookings = FileManager.LoadBookings();
 
-            var centreBookings = allBookings
-                .Where(b => b.CentreName != null &&
-                       b.CentreName.StartsWith(staffCentre.Split(' ')[0], StringComparison.OrdinalIgnoreCase))
-                .ToList();
+            var centreBookings = allBookings.Where(b =>
+                                b.CentreName != null && (
+                                string.IsNullOrWhiteSpace(staffCentre) ||
+                                b.CentreName.Contains(staffCentre.Split(' ')[0], StringComparison.OrdinalIgnoreCase) ||
+                                staffCentre.Contains(b.CentreName, StringComparison.OrdinalIgnoreCase)
+                                )
+                                ).ToList();
+            lblBookedCount.Text = centreBookings.Count(b => b.Status.Equals("Booked", StringComparison.OrdinalIgnoreCase)).ToString();
+            lblCheckedInCount.Text = centreBookings.Count(b => b.Status.Equals("Checked In", StringComparison.OrdinalIgnoreCase)).ToString();
+            lblWaitingCount.Text = centreBookings.Count(b => b.Status.Equals("Waiting", StringComparison.OrdinalIgnoreCase)).ToString();
+            lblServingCount.Text = centreBookings.Count(b => b.Status.Equals("Serving", StringComparison.OrdinalIgnoreCase)).ToString();
+            lblCompletedCount.Text = centreBookings.Count(b => b.Status.Equals("Completed", StringComparison.OrdinalIgnoreCase)).ToString();
+            lblNoShowCount.Text = centreBookings.Count(b => b.Status.Equals("No-Show", StringComparison.OrdinalIgnoreCase)).ToString();
 
-            lblBookedCount.Text = centreBookings.Count(b => b.Status == "Booked").ToString();
-            lblCheckedInCount.Text = centreBookings.Count(b => b.Status == "Checked In").ToString();
-            lblWaitingCount.Text = centreBookings.Count(b => b.Status == "Waiting").ToString();
-            lblServingCount.Text = centreBookings.Count(b => b.Status == "Serving").ToString();
-            lblCompletedCount.Text = centreBookings.Count(b => b.Status == "Completed").ToString();
-            lblNoShowCount.Text = centreBookings.Count(b => b.Status == "No-Show").ToString();
-
-            var currentServing = centreBookings.FirstOrDefault(b => b.Status == "Serving");
+            var currentServing = centreBookings.FirstOrDefault(b => b.Status.Equals("Serving", StringComparison.OrdinalIgnoreCase));
             lblQueueNumberNowServing.Text = currentServing != null
-                ? currentServing.QueueNumber + " - " + currentServing.BeneficiaryName
-                : "None";
+                ?$"{currentServing.QueueNumber} - {currentServing.BeneficiaryName}"
+               : "None";
 
-            var nextWaiting = centreBookings.FirstOrDefault(b => b.Status == "Checked In" || b.Status == "Waiting");
+            var nextWaiting = centreBookings.FirstOrDefault(b => b.Status.Equals("Checked In", StringComparison.OrdinalIgnoreCase)
+            || b.Status.Equals("Waiting", StringComparison.OrdinalIgnoreCase));
+
             lblQueueNumberAndBeneficiaryNameNowServing.Text = nextWaiting != null
-                ? nextWaiting.QueueNumber + " - " + nextWaiting.BeneficiaryName
-                : "No one waiting";
+                ?$"{nextWaiting.QueueNumber} - {nextWaiting.BeneficiaryName}"
+               : "No one waiting";
+
+            //    .Where(b => b.CentreName != null &&
+            //           b.CentreName.StartsWith(staffCentre.Split(' ')[0], StringComparison.OrdinalIgnoreCase))
+            //    .ToList();
+
+            //lblBookedCount.Text = centreBookings.Count(b => b.Status == "Booked").ToString();
+            //lblCheckedInCount.Text = centreBookings.Count(b => b.Status == "Checked In").ToString();
+            //lblWaitingCount.Text = centreBookings.Count(b => b.Status == "Waiting").ToString();
+            //lblServingCount.Text = centreBookings.Count(b => b.Status == "Serving").ToString();
+            //lblCompletedCount.Text = centreBookings.Count(b => b.Status == "Completed").ToString();
+            //lblNoShowCount.Text = centreBookings.Count(b => b.Status == "No-Show").ToString();
+
+            //var currentServing = centreBookings.FirstOrDefault(b => b.Status == "Serving");
+            //lblQueueNumberNowServing.Text = currentServing != null
+            //    ? currentServing.QueueNumber + " - " + currentServing.BeneficiaryName
+            //    : "None";
+
+            //var nextWaiting = centreBookings.FirstOrDefault(b => b.Status == "Checked In" || b.Status == "Waiting");
+            //lblQueueNumberAndBeneficiaryNameNowServing.Text = nextWaiting != null
+            //    ? nextWaiting.QueueNumber + " - " + nextWaiting.BeneficiaryName
+            //    : "No one waiting";
         }
 
         // ============================================================
@@ -126,6 +152,7 @@ namespace SASSA_Application.Designer_Forms
         {
             pnlBookings.BringToFront();
             LoadAllBookings();
+            
         }
 
 
@@ -324,5 +351,10 @@ namespace SASSA_Application.Designer_Forms
             LoadActiveQueue();
             RefreshDashboardData();
         }
+
+        //private void pnlStaffDash_Paint(object sender, PaintEventArgs e)
+        //{
+
+        //}
     }
 }
