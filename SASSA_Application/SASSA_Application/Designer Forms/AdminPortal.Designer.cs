@@ -1096,12 +1096,12 @@
             ClientSize = new Size(1458, 710);
             Controls.Add(pnlSidePanel);
             Controls.Add(pnlTop);
+            Controls.Add(pnlBookings);
+            Controls.Add(pnlCentres);
             Controls.Add(pnlStaff);
             Controls.Add(pnlServices);
             Controls.Add(pnlAdminDashboard);
             Controls.Add(pnlReports);
-            Controls.Add(pnlBookings);
-            Controls.Add(pnlCentres);
             Name = "AdminPortal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AdminPortal";
