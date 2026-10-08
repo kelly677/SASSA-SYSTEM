@@ -107,6 +107,7 @@
             lblShowPassword.Size = new Size(66, 20);
             lblShowPassword.TabIndex = 30;
             lblShowPassword.Text = "👁️Show";
+            lblShowPassword.Click += lblShowPassword_Click_1;
             // 
             // lblForgotPassword
             // 
@@ -118,6 +119,7 @@
             lblForgotPassword.Size = new Size(130, 20);
             lblForgotPassword.TabIndex = 8;
             lblForgotPassword.Text = "Forgot password?";
+            lblForgotPassword.Click += lblForgotPassword_Click_1;
             // 
             // lblPassword
             // 
@@ -226,6 +228,7 @@
             Name = "frmWelcomePage";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Welcome Page";
+            Load += frmWelcomePage_Load;
             pnlLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminPortal));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             pictureBox1 = new PictureBox();
             pcLogo = new PictureBox();
             pnlTop = new Panel();
@@ -45,10 +46,6 @@
             btnCentres = new SASSA_Application.Classes.RoundedButton();
             btnAdminDashboard = new SASSA_Application.Classes.RoundedButton();
             pnlServices = new Panel();
-            dataGridView1 = new DataGridView();
-            Service = new DataGridViewTextBoxColumn();
-            Description = new DataGridViewTextBoxColumn();
-            Status = new DataGridViewTextBoxColumn();
             curvedCornerPanel5 = new SASSA_Application.Classes.CurvedCornerPanel();
             lbl = new Label();
             txtDescribe = new SASSA_Application.Classes.RoundedTextBox();
@@ -96,6 +93,19 @@
             label12 = new Label();
             label13 = new Label();
             pnlCentres = new Panel();
+            dgvCentres = new DataGridView();
+            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            Required = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+            btnSave = new SASSA_Application.Classes.RoundedButton();
+            txtAddress = new SASSA_Application.Classes.RoundedTextBox();
+            label25 = new Label();
+            cmbProvinces = new SASSA_Application.Classes.RoundedComboBox();
+            txtNameCentre = new SASSA_Application.Classes.RoundedTextBox();
+            label24 = new Label();
+            lblCentre = new Label();
+            label23 = new Label();
+            Centres = new Label();
             pnlBookings = new Panel();
             dgvTotalBookings = new DataGridView();
             Reference = new DataGridViewTextBoxColumn();
@@ -117,7 +127,6 @@
             pnlTop.SuspendLayout();
             pnlSidePanel.SuspendLayout();
             pnlServices.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             curvedCornerPanel5.SuspendLayout();
             curvedCornerPanel2.SuspendLayout();
             curvedCornerPanel1.SuspendLayout();
@@ -127,6 +136,8 @@
             pnlStaff.SuspendLayout();
             curvedCornerPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvStaffMembers).BeginInit();
+            pnlCentres.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvCentres).BeginInit();
             pnlBookings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTotalBookings).BeginInit();
             curvedCornerPanel7.SuspendLayout();
@@ -251,6 +262,7 @@
             btnLogout.TabIndex = 5;
             btnLogout.Text = " \u23fb Logout";
             btnLogout.UseVisualStyleBackColor = false;
+            btnLogout.Click += btnLogout_Click;
             // 
             // btnServices
             // 
@@ -324,7 +336,6 @@
             // pnlServices
             // 
             pnlServices.BackColor = SystemColors.GradientActiveCaption;
-            pnlServices.Controls.Add(dataGridView1);
             pnlServices.Controls.Add(curvedCornerPanel5);
             pnlServices.Controls.Add(label9);
             pnlServices.Controls.Add(label10);
@@ -334,41 +345,6 @@
             pnlServices.Name = "pnlServices";
             pnlServices.Size = new Size(1458, 710);
             pnlServices.TabIndex = 4;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Service, Description, Status });
-            dataGridView1.Location = new Point(432, 444);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(300, 188);
-            dataGridView1.TabIndex = 19;
-            // 
-            // Service
-            // 
-            Service.HeaderText = "Service";
-            Service.MinimumWidth = 6;
-            Service.Name = "Service";
-            Service.ReadOnly = true;
-            Service.Width = 125;
-            // 
-            // Description
-            // 
-            Description.HeaderText = "Description";
-            Description.MinimumWidth = 6;
-            Description.Name = "Description";
-            Description.ReadOnly = true;
-            Description.Width = 125;
-            // 
-            // Status
-            // 
-            Status.HeaderText = "Status";
-            Status.MinimumWidth = 6;
-            Status.Name = "Status";
-            Status.ReadOnly = true;
-            Status.Width = 125;
             // 
             // curvedCornerPanel5
             // 
@@ -431,7 +407,6 @@
             label9.Size = new Size(355, 46);
             label9.TabIndex = 17;
             label9.Text = "Service Management";
-           
             // 
             // label10
             // 
@@ -632,7 +607,6 @@
             roundedButton1.Text = "Services";
             roundedButton1.TextAlign = ContentAlignment.MiddleLeft;
             roundedButton1.UseVisualStyleBackColor = false;
-           
             // 
             // label1
             // 
@@ -661,7 +635,6 @@
             roundedButton2.Text = "Centres and Slots";
             roundedButton2.TextAlign = ContentAlignment.MiddleLeft;
             roundedButton2.UseVisualStyleBackColor = false;
-           
             // 
             // label3
             // 
@@ -689,7 +662,6 @@
             roundedButton3.TabIndex = 26;
             roundedButton3.Text = "Reports";
             roundedButton3.UseVisualStyleBackColor = false;
-          
             // 
             // label7
             // 
@@ -910,11 +882,168 @@
             // pnlCentres
             // 
             pnlCentres.BackColor = SystemColors.GradientActiveCaption;
+            pnlCentres.Controls.Add(dgvCentres);
+            pnlCentres.Controls.Add(btnSave);
+            pnlCentres.Controls.Add(txtAddress);
+            pnlCentres.Controls.Add(label25);
+            pnlCentres.Controls.Add(cmbProvinces);
+            pnlCentres.Controls.Add(txtNameCentre);
+            pnlCentres.Controls.Add(label24);
+            pnlCentres.Controls.Add(lblCentre);
+            pnlCentres.Controls.Add(label23);
+            pnlCentres.Controls.Add(Centres);
             pnlCentres.Dock = DockStyle.Fill;
             pnlCentres.Location = new Point(0, 0);
             pnlCentres.Name = "pnlCentres";
             pnlCentres.Size = new Size(1458, 710);
             pnlCentres.TabIndex = 5;
+            // 
+            // dgvCentres
+            // 
+            dgvCentres.AllowUserToAddRows = false;
+            dgvCentres.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvCentres.BackgroundColor = SystemColors.InactiveCaption;
+            dgvCentres.BorderStyle = BorderStyle.None;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(26, 70, 130);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.Window;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ButtonShadow;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvCentres.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dgvCentres.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvCentres.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn4, Required, dataGridViewTextBoxColumn5 });
+            dgvCentres.EnableHeadersVisualStyles = false;
+            dgvCentres.GridColor = SystemColors.InactiveCaption;
+            dgvCentres.Location = new Point(315, 513);
+            dgvCentres.Name = "dgvCentres";
+            dgvCentres.ReadOnly = true;
+            dgvCentres.RowHeadersVisible = false;
+            dgvCentres.RowHeadersWidth = 51;
+            dgvCentres.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvCentres.Size = new Size(927, 172);
+            dgvCentres.TabIndex = 39;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewTextBoxColumn4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewTextBoxColumn4.HeaderText = "Name of Centre";
+            dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // Required
+            // 
+            Required.HeaderText = "Province";
+            Required.MinimumWidth = 6;
+            Required.Name = "Required";
+            Required.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            dataGridViewTextBoxColumn5.HeaderText = "Address";
+            dataGridViewTextBoxColumn5.MinimumWidth = 6;
+            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // btnSave
+            // 
+            btnSave.BackColor = Color.FromArgb(26, 70, 130);
+            btnSave.FlatAppearance.BorderSize = 0;
+            btnSave.FlatStyle = FlatStyle.Flat;
+            btnSave.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnSave.ForeColor = SystemColors.GradientActiveCaption;
+            btnSave.HoverColor = Color.Empty;
+            btnSave.Location = new Point(981, 440);
+            btnSave.Name = "btnSave";
+            btnSave.PressedColor = Color.Empty;
+            btnSave.Size = new Size(178, 41);
+            btnSave.TabIndex = 38;
+            btnSave.Text = "💾Save";
+            btnSave.UseVisualStyleBackColor = false;
+            btnSave.Click += btnSave_Click;
+            // 
+            // txtAddress
+            // 
+            txtAddress.BackColor = Color.White;
+            txtAddress.Font = new Font("Segoe UI", 10F);
+            txtAddress.Location = new Point(329, 437);
+            txtAddress.Name = "txtAddress";
+            txtAddress.PlaceholderText = "Enter Adress";
+            txtAddress.Size = new Size(618, 46);
+            txtAddress.TabIndex = 33;
+            // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
+            label25.Location = new Point(323, 399);
+            label25.Name = "label25";
+            label25.Size = new Size(80, 25);
+            label25.TabIndex = 32;
+            label25.Text = "Address";
+            // 
+            // cmbProvinces
+            // 
+            cmbProvinces.BackColor = Color.White;
+            cmbProvinces.Font = new Font("Segoe UI", 10F);
+            cmbProvinces.ForeColor = Color.FromArgb(30, 30, 30);
+            cmbProvinces.Location = new Point(329, 337);
+            cmbProvinces.Name = "cmbProvinces";
+            cmbProvinces.Size = new Size(618, 45);
+            cmbProvinces.TabIndex = 31;
+            // 
+            // txtNameCentre
+            // 
+            txtNameCentre.BackColor = Color.White;
+            txtNameCentre.Font = new Font("Segoe UI", 10F);
+            txtNameCentre.Location = new Point(329, 231);
+            txtNameCentre.Name = "txtNameCentre";
+            txtNameCentre.PlaceholderText = "Enter The new Centre Name";
+            txtNameCentre.Size = new Size(618, 46);
+            txtNameCentre.TabIndex = 30;
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
+            label24.Location = new Point(323, 300);
+            label24.Name = "label24";
+            label24.Size = new Size(94, 25);
+            label24.TabIndex = 28;
+            label24.Text = "Provinces";
+            // 
+            // lblCentre
+            // 
+            lblCentre.AutoSize = true;
+            lblCentre.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
+            lblCentre.Location = new Point(323, 193);
+            lblCentre.Name = "lblCentre";
+            lblCentre.Size = new Size(146, 25);
+            lblCentre.TabIndex = 26;
+            lblCentre.Text = "Name of Centre";
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Font = new Font("Segoe UI", 12.3F);
+            label23.ForeColor = SystemColors.GrayText;
+            label23.Location = new Point(320, 144);
+            label23.Name = "label23";
+            label23.Size = new Size(253, 30);
+            label23.TabIndex = 12;
+            label23.Text = "Add And Edit new centres";
+            // 
+            // Centres
+            // 
+            Centres.AutoSize = true;
+            Centres.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
+            Centres.Location = new Point(313, 97);
+            Centres.Name = "Centres";
+            Centres.Size = new Size(140, 46);
+            Centres.TabIndex = 11;
+            Centres.Text = "Centres";
             // 
             // pnlBookings
             // 
@@ -935,14 +1064,14 @@
             dgvTotalBookings.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvTotalBookings.BackgroundColor = SystemColors.GradientActiveCaption;
             dgvTotalBookings.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(26, 70, 130);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.Window;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ButtonShadow;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvTotalBookings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(26, 70, 130);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.Window;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.ButtonShadow;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvTotalBookings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvTotalBookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvTotalBookings.Columns.AddRange(new DataGridViewColumn[] { Reference, Beneficiary, dataGridViewTextBoxColumn2, C, Time, dataGridViewTextBoxColumn3 });
             dgvTotalBookings.EnableHeadersVisualStyles = false;
@@ -1096,12 +1225,12 @@
             ClientSize = new Size(1458, 710);
             Controls.Add(pnlSidePanel);
             Controls.Add(pnlTop);
-            Controls.Add(pnlBookings);
-            Controls.Add(pnlCentres);
             Controls.Add(pnlStaff);
             Controls.Add(pnlServices);
             Controls.Add(pnlAdminDashboard);
             Controls.Add(pnlReports);
+            Controls.Add(pnlBookings);
+            Controls.Add(pnlCentres);
             Name = "AdminPortal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AdminPortal";
@@ -1113,7 +1242,6 @@
             pnlSidePanel.ResumeLayout(false);
             pnlServices.ResumeLayout(false);
             pnlServices.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             curvedCornerPanel5.ResumeLayout(false);
             curvedCornerPanel5.PerformLayout();
             curvedCornerPanel2.ResumeLayout(false);
@@ -1131,6 +1259,9 @@
             curvedCornerPanel6.ResumeLayout(false);
             curvedCornerPanel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvStaffMembers).EndInit();
+            pnlCentres.ResumeLayout(false);
+            pnlCentres.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvCentres).EndInit();
             pnlBookings.ResumeLayout(false);
             pnlBookings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTotalBookings).EndInit();
@@ -1190,10 +1321,6 @@
         private Label label11;
         private Label lbl;
         private Classes.RoundedTextBox txtDescribe;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Service;
-        private DataGridViewTextBoxColumn Description;
-        private DataGridViewTextBoxColumn Status;
         private Label label12;
         private Label label13;
         private DataGridView dgvStaffMembers;
@@ -1224,5 +1351,18 @@
         private DataGridViewTextBoxColumn Time;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private Classes.RoundedComboBox cmbCentre;
+        private Label label23;
+        private Label Centres;
+        private Classes.RoundedTextBox txtNameCentre;
+        private Label label24;
+        private Label lblCentre;
+        private Classes.RoundedTextBox txtAddress;
+        private Label label25;
+        private Classes.RoundedComboBox cmbProvinces;
+        private Classes.RoundedButton btnSave;
+        private DataGridView dgvCentres;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private DataGridViewTextBoxColumn Required;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
     }
 }

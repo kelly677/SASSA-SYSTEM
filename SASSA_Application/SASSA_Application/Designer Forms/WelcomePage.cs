@@ -1,6 +1,8 @@
 using SASSA_Application.Designer_Forms;
 using SASSA_Application.Classes;
+using System;
 using System.IO;
+using System.Windows.Forms;
 
 namespace SASSA_Application
 {
@@ -9,6 +11,15 @@ namespace SASSA_Application
         public frmWelcomePage()
         {
             InitializeComponent();
+        }
+
+        // ============================================================
+        // FORM LOAD — hide password initially
+        // ============================================================
+        private void frmWelcomePage_Load(object sender, EventArgs e)
+        {
+            txtPassword.PasswordChar = '*';
+            lblShowPassword.Text = "👁️ Show";
         }
 
         // ============================================================
@@ -25,19 +36,19 @@ namespace SASSA_Application
         // ============================================================
         // SHOW / HIDE PASSWORD
         // ============================================================
-        private void lblShowPassword_Click(object sender, EventArgs e)
-        {
-            if (txtPassword.PasswordChar == '*')
-            {
-                txtPassword.PasswordChar = '\0';   // show the text
-                lblShowPassword.Text = " Hide";
-            }
-            else
-            {
-                txtPassword.PasswordChar = '*';    // hide the text
-                lblShowPassword.Text = "👁️ Show";
-            }
-        }
+        //private void lblShowPassword_Click(object sender, EventArgs e)
+        //{
+        //    if (txtPassword.PasswordChar == '*')
+        //    {
+        //        txtPassword.PasswordChar = '\0';
+        //        lblShowPassword.Text = "🙈 Hide";
+        //    }
+        //    else
+        //    {
+        //        txtPassword.PasswordChar = '*';
+        //        lblShowPassword.Text = "👁️ Show";
+        //    }
+        //}
 
         // ============================================================
         // LOGIN BUTTON
@@ -47,7 +58,6 @@ namespace SASSA_Application
             string id = txtUserName.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-            // ---- Basic validation ----
             if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("Please enter your ID and password.", "Validation Error",
@@ -69,15 +79,17 @@ namespace SASSA_Application
                         string[] parts = line.Split('|');
                         if (parts.Length < 4) continue;
 
+                        string staffName = parts[0];
                         string savedStaffNumber = parts[1];
+                        string savedCentre = parts[2];
                         string savedEmail = parts[3];
 
                         if (savedStaffNumber == id && savedEmail == password)
                         {
-                            MessageBox.Show("Welcome " + parts[0] + "!", "Staff Login",
+                            MessageBox.Show("Welcome " + staffName + "!", "Staff Login",
                                             MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                            StaffPortal staff = new StaffPortal();
+                            StaffPortal staff = new StaffPortal(staffName, savedCentre);
                             staff.Show();
                             this.Hide();
                             return;
@@ -107,6 +119,8 @@ namespace SASSA_Application
                 string[] parts = line.Split('|');
                 if (parts.Length < 7) continue;
 
+                string savedName = parts[0];
+                string savedSurname = parts[1];
                 string savedId = parts[2];
                 string savedPassword = parts[6];
 
@@ -114,12 +128,25 @@ namespace SASSA_Application
                 {
                     if (savedPassword.Contains("Admin"))
                     {
-                        AdminPortal admin = new AdminPortal();
+                        string adminFullName = savedName + " " + savedSurname;
+                        AdminPortal admin = new AdminPortal(adminFullName);
                         admin.Show();
                     }
                     else
                     {
-                        BeneficiaryPortal bene = new BeneficiaryPortal();
+                        // Build the full Beneficiary object and pass it in
+                        Beneficiary loggedIn = new Beneficiary
+                        {
+                            Name = savedName,
+                            Surname = savedSurname,
+                            IdNumber = savedId,
+                            Cell = parts[3],
+                            Email = parts[4],
+                            PreferredCentre = parts[5],
+                            Password = savedPassword
+                        };
+
+                        BeneficiaryPortal bene = new BeneficiaryPortal(loggedIn);
                         bene.Show();
                     }
 
@@ -135,11 +162,31 @@ namespace SASSA_Application
         // ============================================================
         // FORGOT PASSWORD
         // ============================================================
-        private void lblForgotPassword_Click(object sender, EventArgs e)
+        //private void lblForgotPassword_Click(object sender, EventArgs e)
+        //{
+        //    MessageBox.Show("Please contact your nearest SASSA service centre to reset your password.",
+        //                    "Forgot Password",
+        //                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //}
+
+        private void lblShowPassword_Click_1(object sender, EventArgs e)
         {
-            MessageBox.Show("Please contact your nearest SASSA service centre to reset your password.",
-                            "Forgot Password",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (txtPassword.PasswordChar == '*')
+            {
+                txtPassword.PasswordChar = '\0';
+                lblShowPassword.Text = "🙈 Hide";
+            }
+            else
+            {
+                txtPassword.PasswordChar = '*';
+                lblShowPassword.Text = "👁️ Show";
+            }
+        }
+
+        private void lblForgotPassword_Click_1(object sender, EventArgs e)
+        {
+            ForgotPasswordForm form = new ForgotPasswordForm();
+            form.ShowDialog();
         }
     }
 }

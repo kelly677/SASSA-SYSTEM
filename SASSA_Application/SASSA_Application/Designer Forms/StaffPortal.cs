@@ -1,206 +1,328 @@
 ﻿using SASSA_Application.Classes;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SASSA_Application.Designer_Forms
 {
     public partial class StaffPortal : Form
     {
         private List<Booking> allBookings = new List<Booking>();
-        //private List<StaffMember> staff = new List<StaffMember>();
         private string staffCentre;
-        public StaffPortal(string currentCentre)
+        private string loggedInName;
+
+        public StaffPortal(string name, string currentCentre)
         {
             InitializeComponent();
-            this.staffCentre =string.IsNullOrWhiteSpace(currentCentre) ? "Johannesburg Central" : currentCentre;
+            this.loggedInName = name;
+            this.staffCentre = string.IsNullOrWhiteSpace(currentCentre) ? "Johannesburg Central" : currentCentre;
         }
+
         public StaffPortal()
         {
             InitializeComponent();
+            this.loggedInName = "Guest";
             this.staffCentre = "Johannesburg Central";
         }
 
-        
-        private void LoadQueue()
+        // ============================================================
+        // FORM LOAD
+        // ============================================================
+        private void StaffPortal_Load(object sender, EventArgs e)
+        {
+            lblUserName.Text = "👤 " + loggedInName;
+            RefreshDashboardData();
+            LoadAllBookings();
+        }
+
+        // ============================================================
+        // LOAD ALL BOOKINGS — Bookings panel
+        // ============================================================
+        private void LoadAllBookings()
+        {
+            dgvTotalBookings.Rows.Clear();
+
+            allBookings = FileManager.LoadBookings();
+
+            foreach (Booking b in allBookings)
+            {
+                dgvTotalBookings.Rows.Add(b.Reference, b.BeneficiaryName, b.ServiceName,
+                                           b.CentreName, b.Date, b.Status);
+            }
+        }
+
+        // ============================================================
+        // LOAD ACTIVE QUEUE — Queue Management panel
+        // ============================================================
+        private void LoadActiveQueue()
+        {
+            dgvQueue.Rows.Clear();
+
+            allBookings = FileManager.LoadBookings();
+
+            foreach (Booking b in allBookings)
+            {
+                if (b.Status == "Booked" || b.Status == "Checked In" ||
+                    b.Status == "Waiting" || b.Status == "Serving")
+                {
+                    dgvQueue.Rows.Add(b.Reference, b.BeneficiaryName, b.ServiceName,
+                                       b.CentreName, b.Date, b.Status);
+                }
+            }
+        }
+
+        // ============================================================
+        // DASHBOARD REFRESH
+        // ============================================================
+        private void RefreshDashboardData()
         {
             allBookings = FileManager.LoadBookings();
-            flpQueue.SuspendLayout();
-            flpQueue.Controls.Clear();
 
-            int cardWidth = flpQueue.ClientSize.Width - 25;
-            var activeStatuses = new[] { "Booked", "Checked In", "Waiting", "Serving" };
-
-            var queueGroup = allBookings
-                .Where(b => b.CentreName != null && 
-            b.CentreName.Equals(staffCentre, StringComparison.OrdinalIgnoreCase) &&
-            activeStatuses.Any(s => s.Equals(b.Status, StringComparison.OrdinalIgnoreCase)))
+            var centreBookings = allBookings
+                .Where(b => b.CentreName != null &&
+                       b.CentreName.StartsWith(staffCentre.Split(' ')[0], StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
-            foreach (Booking b in queueGroup)
-            {
-                QueueCard card = new QueueCard(b.Reference,
-                    b.BeneficiaryName,
-                    b.ServiceName,
-                    b.Time,
-                    b.QueueNumberText,
-                    b.Status
-                    );
-                card.Width = cardWidth;
-                flpQueue.Controls.Add(card);
-            }
-            flpQueue.ResumeLayout();
-            
+            lblBookedCount.Text = centreBookings.Count(b => b.Status == "Booked").ToString();
+            lblCheckedInCount.Text = centreBookings.Count(b => b.Status == "Checked In").ToString();
+            lblWaitingCount.Text = centreBookings.Count(b => b.Status == "Waiting").ToString();
+            lblServingCount.Text = centreBookings.Count(b => b.Status == "Serving").ToString();
+            lblCompletedCount.Text = centreBookings.Count(b => b.Status == "Completed").ToString();
+            lblNoShowCount.Text = centreBookings.Count(b => b.Status == "No-Show").ToString();
+
+            var currentServing = centreBookings.FirstOrDefault(b => b.Status == "Serving");
+            lblQueueNumberNowServing.Text = currentServing != null
+                ? currentServing.QueueNumber + " - " + currentServing.BeneficiaryName
+                : "None";
+
+            var nextWaiting = centreBookings.FirstOrDefault(b => b.Status == "Checked In" || b.Status == "Waiting");
+            lblQueueNumberAndBeneficiaryNameNowServing.Text = nextWaiting != null
+                ? nextWaiting.QueueNumber + " - " + nextWaiting.BeneficiaryName
+                : "No one waiting";
         }
-        private void btnCallNext_Click(object sender, EventArgs e)
-        {
-            allBookings = FileManager.LoadBookings();
 
-            var currentServing = allBookings.FirstOrDefault(b => b.Status == "Serving");
+        // ============================================================
+        // CALL NEXT
+        // ============================================================
 
-            if (currentServing != null) currentServing.Status = "Completed";
-
-            var nextInLine = allBookings.FirstOrDefault(b => b.Status == "Waiting" || b.Status == "Checked In");
-            if (nextInLine != null)
-            {
-                nextInLine.Status = "Serving";
-                MessageBox.Show($"Now calling ticket {nextInLine.QueueNumberText}: {nextInLine.BeneficiaryName}", "Call Next", MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("There are no beneficiaries currently waiting in queue.", "Queue Empty", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            FileManager.SaveAllBookings(allBookings);
-            RefreshDashboardData();
-            LoadQueue();
-        }
-        // Panel Navigation & Search Handlers
+        // ============================================================
+        // SIDEBAR BUTTONS
+        // ============================================================
         private void btnQManagement_Click(object sender, EventArgs e)
         {
             pnlQManagement.BringToFront();
-            LoadQueue();
+            LoadActiveQueue();
         }
+
         private void btnStaffDashboard_Click(object sender, EventArgs e)
         {
             pnlStaffDash.BringToFront();
             RefreshDashboardData();
         }
+
         private void btnBookings_Click(object sender, EventArgs e)
         {
             pnlBookings.BringToFront();
-            LoadBookingsTable();
+            LoadAllBookings();
         }
-        private void btnSearch_Click_Tab(object sender, EventArgs e)
+
+
+
+
+
+        // ============================================================
+        // SEARCH BUTTON
+        // ============================================================
+
+
+        // ============================================================
+        // LOGOUT
+        // ============================================================
+        private void btnLogout_Click(object sender, EventArgs e)
         {
-            pnlSearch.BringToFront();
+            DialogResult answer = MessageBox.Show("Are you sure you want to log out?",
+                                                   "Logout", MessageBoxButtons.YesNo,
+                                                   MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes)
+            {
+                frmWelcomePage welcome = new frmWelcomePage();
+                welcome.Show();
+                this.Close();
+            }
         }
+
         private void pnlBookings_Paint(object sender, PaintEventArgs e) { }
+        private void pnlTop_Paint(object sender, PaintEventArgs e) { }
 
-        //private void pnlBookings_Paint(object sender, PaintEventArgs e)
-        //{
 
-        //}
 
-        private void StaffPortal_Load(object sender, EventArgs e)
+
+        private void btnMarkServed_Click(object sender, EventArgs e)
         {
-
-            RefreshDashboardData();
-            LoadQueue();
-            LoadBookingsTable();
-        }
-
-        private void RefreshDashboardData()
-        {
-            allBookings = FileManager.LoadBookings();
-            var centreBookings = allBookings
-                .Where(b => b.CentreName != null && b.CentreName.StartsWith(staffCentre.Split(' ')[0],
-                StringComparison.OrdinalIgnoreCase))
-                .ToList();
-
-   if (lblBookedCount != null) lblBookedCount.Text = centreBookings.Count(b => b.Status.Equals("Booked", StringComparison.OrdinalIgnoreCase)).ToString();
-   if (lblCheckedInCount != null) lblCheckedInCount.Text = centreBookings.Count(b => b.Status.Equals("Checked In", StringComparison.OrdinalIgnoreCase)).ToString();
-     if (lblWaitingCount != null) lblWaitingCount.Text = centreBookings.Count(b => b.Status.Equals("Waiting", StringComparison.OrdinalIgnoreCase)).ToString();
-    if (lblServingCount != null) lblServingCount.Text = centreBookings.Count(b => b.Status.Equals("Serving", StringComparison.OrdinalIgnoreCase)).ToString();
-   if (lblCompletedCount != null) lblCompletedCount.Text = centreBookings.Count(b => b.Status.Equals("Completed", StringComparison.OrdinalIgnoreCase)).ToString();
-  if (lblNoShowCount != null) lblNoShowCount.Text = centreBookings.Count(b => b.Status.Equals("No-Show", StringComparison.OrdinalIgnoreCase)).ToString();
-            var currentServing = centreBookings.FirstOrDefault(b => b.Status == "Serving");
-            if (currentServing != null)
+            if (dgvQueue.SelectedRows.Count == 0)
             {
-                if (lblQueueNumberNowServing != null) lblQueueNumberNowServing.Text = currentServing.QueueNumberText;
-                if (lblQueueNumberNowServing != null) lblQueueNumberNowServing.Text = currentServing.BeneficiaryName;
-            }
-            else
-            {
-                if (lblQueueNumberNowServing != null) lblQueueNumberNowServing.Text = "Q-000";
-                if (lblQueueNumberNowServing != null) lblQueueNumberNowServing.Text = "None";
-            }
-            var nextWaiting = centreBookings.FirstOrDefault(b => b.Status == "Waiting" || b.Status == "Checked In");
-            if (nextWaiting != null)
-            {
-                if (lblQueueNumberAndBeneficiaryNameNowServing != null)
-                    lblQueueNumberAndBeneficiaryNameNowServing.Text = $"{nextWaiting.QueueNumberText} - {nextWaiting.BeneficiaryName}";
-            }
-            else
-            {
-                if (lblQueueNumberAndBeneficiaryNameNowServing != null) lblQueueNumberAndBeneficiaryNameNowServing.Text = "No one Waiting";
-            }
-
-        }
-        
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            if (txtSearching == null) return;
-            string query = txtSearching.Text.Trim();
-
-            if (string.IsNullOrEmpty(query))
-            {
-                LoadBookingsTable();
-                //    MessageBox.Show("Please enter a booking reference or beneficiary name", "Search Error",
-                //        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Select a booking first.", "No Selection",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            allBookings = FileManager.LoadBookings();
-            var searchResults = allBookings.Where(b =>
-            (b.Reference != null && b.Reference.Equals(query, StringComparison.OrdinalIgnoreCase)) ||
-            (b.BeneficiaryName != null && b.BeneficiaryName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0) ||
-            (b.BeneficiaryId != null && b.BeneficiaryId.Equals(query, StringComparison.OrdinalIgnoreCase))
-            ).ToList();
 
-            if (searchResults.Count > 0)
+            string reference = dgvQueue.SelectedRows[0].Cells[0].Value.ToString();
+
+            List<Booking> bookings = FileManager.LoadBookings();
+            for (int i = 0; i < bookings.Count; i++)
             {
-                pnlBookings.BringToFront();
-                LoadBookingsTable(searchResults);
+                if (bookings[i].Reference == reference)
+                {
+                    bookings[i].Status = "Completed";
+                    break;
+                }
+            }
+
+            FileManager.SaveAllBookings(bookings);
+            LoadActiveQueue();
+            RefreshDashboardData();
+        }
+
+        private void btnNoShow_Click(object sender, EventArgs e)
+        {
+            if (dgvQueue.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Select a booking first.", "No Selection",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string reference = dgvQueue.SelectedRows[0].Cells[0].Value.ToString();
+
+            List<Booking> bookings = FileManager.LoadBookings();
+            for (int i = 0; i < bookings.Count; i++)
+            {
+                if (bookings[i].Reference == reference)
+                {
+                    bookings[i].Status = "No-Show";
+                    break;
+                }
+            }
+
+            FileManager.SaveAllBookings(bookings);
+            LoadActiveQueue();
+            RefreshDashboardData();
+        }
+
+        private void btnSerchingBooking_Click(object sender, EventArgs e)
+        {
+            string query = txtSearching.Text.Trim();
+
+            dgvTotalBookings.Rows.Clear();
+
+            List<Booking> bookings = FileManager.LoadBookings();
+            bool found = false;
+
+            foreach (Booking b in bookings)
+            {
+                bool match = string.IsNullOrEmpty(query)
+                    || b.Reference.ToLower().Contains(query.ToLower())
+                    || b.BeneficiaryName.ToLower().Contains(query.ToLower())
+                    || b.BeneficiaryId.Contains(query);
+
+                if (match)
+                {
+                    dgvTotalBookings.Rows.Add(b.Reference, b.BeneficiaryName, b.ServiceName,
+                                               b.CentreName, b.Date, b.Status);
+                    found = true;
+                }
+            }
+
+            if (!found && !string.IsNullOrEmpty(query))
+            {
+                MessageBox.Show("No matching bookings found.", "Not Found",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            pnlBookings.BringToFront();
+        }
+
+        private void btnCheckIn_Click(object sender, EventArgs e)
+        {
+            if (dgvQueue.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Select a booking from the queue first.", "No Selection",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string reference = dgvQueue.SelectedRows[0].Cells[0].Value.ToString();
+
+            List<Booking> bookings = FileManager.LoadBookings();
+            bool updated = false;
+
+            for (int i = 0; i < bookings.Count; i++)
+            {
+                if (bookings[i].Reference == reference)
+                {
+                    if (bookings[i].Status != "Booked")
+                    {
+                        MessageBox.Show("Only 'Booked' items can be checked in.",
+                                        "Invalid Action", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    bookings[i].Status = "Checked In";
+                    updated = true;
+                    break;
+                }
+            }
+
+            if (updated)
+            {
+                FileManager.SaveAllBookings(bookings);
+                MessageBox.Show("Beneficiary checked in.", "Success",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadActiveQueue();
+                RefreshDashboardData();
+            }
+        }
+
+        private void btnCallNext_Click(object sender, EventArgs e)
+        {
+            List<Booking> bookings = FileManager.LoadBookings();
+
+            // Complete whoever is currently serving
+            for (int i = 0; i < bookings.Count; i++)
+            {
+                if (bookings[i].Status == "Serving")
+                {
+                    bookings[i].Status = "Completed";
+                }
+            }
+
+            // Find the next person waiting
+            Booking next = null;
+            for (int i = 0; i < bookings.Count; i++)
+            {
+                if (bookings[i].Status == "Checked In" || bookings[i].Status == "Waiting")
+                {
+                    next = bookings[i];
+                    break;
+                }
+            }
+
+            if (next != null)
+            {
+                next.Status = "Serving";
+                MessageBox.Show("Now serving " + next.QueueNumber + " - " + next.BeneficiaryName,
+                                "Call Next", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("No matching bookings found", "Not found", MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-            }
-        }
-        private void LoadBookingsTable(List<Booking> listToDisplay = null)
-        {
-            allBookings = FileManager.LoadBookings();
-
-            var displayList = listToDisplay ?? allBookings;
-
-            if (dgvTotalBookings != null)
-            {
-                dgvTotalBookings.DataSource = null;
-                dgvTotalBookings.DataSource = displayList;
+                MessageBox.Show("No one waiting in the queue.", "Queue Empty",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-
+            FileManager.SaveAllBookings(bookings);
+            LoadActiveQueue();
+            RefreshDashboardData();
         }
-
-        
     }
 }
-

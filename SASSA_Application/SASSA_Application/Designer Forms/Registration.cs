@@ -21,7 +21,18 @@ namespace SASSA_Application.Designer_Forms
 
         private void Registration_Load(object sender, EventArgs e)
         {
-            cmbServiceCentre.AddRange("Johannesburg Central", "Soweto", "Pretoria Marabastad", "Tembisa");
+            //cmbServiceCentre.AddRange("Johannesburg Central", "Soweto", "Pretoria Marabastad", "Tembisa");
+            cmbServiceCentre.Items.Clear();
+            if (File.Exists("Centres.txt"))
+            {
+                foreach (string line in File.ReadAllLines("Centres.txt"))
+                {
+                    if (string.IsNullOrWhiteSpace(line)) continue;
+                    string[] parts = line.Split('|');
+                    if (parts.Length < 3) continue;
+                    cmbServiceCentre.Items.Add(parts[0]);
+                }
+            }
         }
 
         private void btnRegisterAccount_Click(object sender, EventArgs e)
