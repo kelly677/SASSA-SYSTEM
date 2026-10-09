@@ -21,6 +21,9 @@ namespace SASSA_Application.Designer_Forms
 
         private void Registration_Load(object sender, EventArgs e)
         {
+            txtPassword.PasswordChar = '*';
+            txtConfirmPassword.PasswordChar = '*';
+            lblShowPassword.Text = "👁️ Show";
             cmbServiceCentre.Items.Clear();
 
             bool loadedFromFile = false;
@@ -244,12 +247,28 @@ namespace SASSA_Application.Designer_Forms
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-        
+
             frmWelcomePage welcome = new frmWelcomePage();
             welcome.Show();
             this.Close();
-        
-    }
+
+        }
+
+        private void lblShowPassword_Click(object sender, EventArgs e)
+        {
+            if (txtPassword.PasswordChar == '*')
+            {
+                txtPassword.PasswordChar = '\0';
+                txtConfirmPassword.PasswordChar = '\0';
+                lblShowPassword.Text = "🙈 Hide";
+            }
+            else
+            {
+                txtPassword.PasswordChar = '*';
+                txtConfirmPassword.PasswordChar = '*';
+                lblShowPassword.Text = "👁️ Show";
+            }
+        }
     }
 }
 

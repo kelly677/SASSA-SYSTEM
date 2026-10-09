@@ -178,6 +178,7 @@
             Controls.Add(txtEmail);
             Controls.Add(label5);
             Name = "ForgotPasswordForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ForgotPasswordForm";
             Load += ForgotPasswordForm_Load;
             ResumeLayout(false);

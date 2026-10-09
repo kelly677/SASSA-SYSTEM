@@ -1,8 +1,10 @@
-﻿using System;
+﻿using SASSA_Application.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -12,14 +14,37 @@ namespace SASSA_Application.Designer_Forms
     {
         private string generatedOtp = "";
         private string targetEmail = "";
+
         public ForgotPasswordForm()
         {
             InitializeComponent();
         }
 
+        // ============================================================
+        // FORM LOAD — only Step 1 visible
+        // ============================================================
+        private void ForgotPasswordForm_Load(object sender, EventArgs e)
+        {
+            // Step 1 visible
+            txtEmail.Visible = true;
+            btnSentOTP.Visible = true;
+
+            // Step 2 hidden
+            txtOTP.Visible = false;
+            lblEnterOTP.Visible = false;
+            btnConfirmOTP.Visible = false;
+
+            // Step 3 hidden
+            txtNewpasword.Visible = false;
+            lblEnterPassword.Visible = false;
+            btnSavePassword.Visible = false;
+        }
+
+        // ============================================================
+        // STEP 1 — SEND OTP
+        // ============================================================
         private void btnSentOTP_Click(object sender, EventArgs e)
         {
-
             targetEmail = txtEmail.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(targetEmail) || !targetEmail.Contains("@"))
@@ -63,11 +88,15 @@ namespace SASSA_Application.Designer_Forms
                             "\n\n(In a real system this would be sent via email/SMS)",
                             "OTP Sent", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            // Reveal step 2, keep step 1 visible (email box stays so user remembers)
+            // Reveal step 2 (field + caption + button)
             txtOTP.Visible = true;
+            lblEnterOTP.Visible = true;
             btnConfirmOTP.Visible = true;
         }
 
+        // ============================================================
+        // STEP 2 — CONFIRM OTP
+        // ============================================================
         private void btnConfirmOTP_Click(object sender, EventArgs e)
         {
             if (generatedOtp == "")
@@ -87,19 +116,22 @@ namespace SASSA_Application.Designer_Forms
             MessageBox.Show("OTP verified. Please choose a new password.", "Verified",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            // Reveal step 3
-            txtNewpasword.Visible = true;
-            btnSavePassword.Visible = true;
+            // Hide Step 1 + Step 2
+            txtEmail.Visible = true;
+            btnSentOTP.Visible = true;
+            txtOTP.Visible = true;
             lblEnterOTP.Visible = true;
-            lblEnterPassword.Visible = true;
+            btnConfirmOTP.Visible = true;
 
-            // Hide earlier steps
-            txtEmail.Visible = false;
-            btnSentOTP.Visible = false;
-            txtOTP.Visible = false;
-            btnConfirmOTP.Visible = false;
+            // Reveal Step 3
+            txtNewpasword.Visible = true;
+            lblEnterPassword.Visible = true;
+            btnSavePassword.Visible = true;
         }
 
+        // ============================================================
+        // STEP 3 — SAVE NEW PASSWORD
+        // ============================================================
         private void btnSavePassword_Click(object sender, EventArgs e)
         {
             string newPassword = txtNewpasword.Text.Trim();
@@ -121,7 +153,7 @@ namespace SASSA_Application.Designer_Forms
 
                 if (parts[4].ToLower() == targetEmail.ToLower())
                 {
-                    parts[6] = newPassword;   // password field
+                    parts[6] = newPassword;
                     lines[i] = string.Join("|", parts);
                     break;
                 }
@@ -133,22 +165,6 @@ namespace SASSA_Application.Designer_Forms
                             "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             this.Close();
-        }
-
-        private void ForgotPasswordForm_Load(object sender, EventArgs e)
-        {
-            txtEmail.Visible = true;
-            btnSentOTP.Visible = true;
-
-            // Step 2 hidden
-            txtOTP.Visible = false;
-            lblEnterOTP.Visible = false;
-            lblEnterPassword.Visible = false;
-            btnConfirmOTP.Visible = false;
-
-            // Step 3 hidden
-            txtNewpasword.Visible = false;
-            btnSavePassword.Visible = false;
         }
     }
 }

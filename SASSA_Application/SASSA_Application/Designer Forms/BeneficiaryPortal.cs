@@ -105,7 +105,9 @@ namespace SASSA_Application.Designer_Forms
             Booking latestBooking = null;
             foreach (Booking b in bookings)
             {
-                if (b.BeneficiaryId == currentBeneficiary.IdNumber)
+                if (b.BeneficiaryId == currentBeneficiary.IdNumber &&
+                    (b.Status == "Booked" || b.Status == "Checked In" ||
+                     b.Status == "Waiting" || b.Status == "Serving"))
                 {
                     if (latestBooking == null || string.Compare(b.Date, latestBooking.Date) > 0)
                     {
@@ -201,9 +203,9 @@ namespace SASSA_Application.Designer_Forms
             if (currentBeneficiary == null)
             {
                 lblQueueNumber.Text = "Q-000";
-                lblEstimatedWaitTitle.Text = "0 Minutes";
+                lblEstimatedWait.Text = "0 Minutes";
                 lblPeopleAhead.Text = "0";
-                lblQueueStatus.Text = "Waiting";
+                lblStatus.Text = "Waiting";
                 return;
             }
 
@@ -223,16 +225,16 @@ namespace SASSA_Application.Designer_Forms
             if (active != null)
             {
                 lblQueueNumber.Text = active.QueueNumber;
-                lblEstimatedWaitTitle.Text = "";
-                lblPeopleAhead.Text = "";
-                lblQueueStatus.Text = active.Status;
+                lblEstimatedWait.Text = "~15 Minutes";
+                lblPeopleAhead.Text = "-";
+                lblStatus.Text = active.Status;
             }
             else
             {
                 lblQueueNumber.Text = "Q-000";
-                lblEstimatedWaitTitle.Text = "0 Minutes";
+                lblEstimatedWait.Text = "0 Minutes";
                 lblPeopleAhead.Text = "0";
-                lblQueueStatus.Text = "Waiting";
+                lblStatus.Text = "No active queue";
             }
         }
 
@@ -248,7 +250,21 @@ namespace SASSA_Application.Designer_Forms
             txtIDNumber.Text = currentBeneficiary.IdNumber;
             txtPhoneNumber.Text = currentBeneficiary.Cell;
             txtEmailAddress.Text = currentBeneficiary.Email;
-            cmbPreferredServiceCentre.Text = currentBeneficiary.PreferredCentre;
+
+            cmbPreferredServiceCentre.Items.Clear();
+
+            if (File.Exists("Centres.txt"))
+            {
+                foreach (string line in File.ReadAllLines("Centres.txt"))
+                {
+                    if (string.IsNullOrWhiteSpace(line)) continue;
+                    string[] parts = line.Split('|');
+                    if (parts.Length < 3) continue;
+                    cmbPreferredServiceCentre.Items.Add(parts[0]);
+                }
+            }
+
+            cmbPreferredServiceCentre.SelectedItem = currentBeneficiary.PreferredCentre;
 
             SetProfileFieldsReadOnly(true);
         }
@@ -277,7 +293,9 @@ namespace SASSA_Application.Designer_Forms
             currentBeneficiary.Surname = txtLastName.Text.Trim();
             currentBeneficiary.Cell = txtPhoneNumber.Text.Trim();
             currentBeneficiary.Email = txtEmailAddress.Text.Trim();
-            currentBeneficiary.PreferredCentre = cmbPreferredServiceCentre.Text;
+            currentBeneficiary.PreferredCentre = cmbPreferredServiceCentre.SelectedItem != null
+                                     ? cmbPreferredServiceCentre.SelectedItem.ToString()
+                                     : "";
 
             List<Beneficiary> beneficiaries = FileManager.LoadBeneficiaries();
             int index = -1;
@@ -375,6 +393,7 @@ namespace SASSA_Application.Designer_Forms
             cmbTimeSlot.SelectedItem = null;
 
             // 8. Refresh views
+            RefreshDashboard();   
             LoadMyBookings();
             pnlMyBooking.BringToFront();
         }
@@ -487,7 +506,7 @@ namespace SASSA_Application.Designer_Forms
 
             LoadMyBookings();
             RefreshDashboard();
-            pnlNewBooking.BringToFront();
+            pnlMyBooking.BringToFront();
 
         }
 

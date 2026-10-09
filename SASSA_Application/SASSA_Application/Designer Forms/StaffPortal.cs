@@ -310,9 +310,11 @@ namespace SASSA_Application.Designer_Forms
         {
             string query = txtSearching.Text.Trim();
 
+            List<Booking> bookings = FileManager.LoadBookings();
+
+            // Clear both grids so results don't mix with old data
             dgvTotalBookings.Rows.Clear();
 
-            List<Booking> bookings = FileManager.LoadBookings();
             bool found = false;
 
             foreach (Booking b in bookings)
@@ -320,7 +322,9 @@ namespace SASSA_Application.Designer_Forms
                 bool match = string.IsNullOrEmpty(query)
                     || b.Reference.ToLower().Contains(query.ToLower())
                     || b.BeneficiaryName.ToLower().Contains(query.ToLower())
-                    || b.BeneficiaryId.Contains(query);
+                    || b.BeneficiaryId.Contains(query)
+                    || b.ServiceName.ToLower().Contains(query.ToLower())
+                    || b.Status.ToLower().Contains(query.ToLower());
 
                 if (match)
                 {
@@ -330,13 +334,14 @@ namespace SASSA_Application.Designer_Forms
                 }
             }
 
-            if (!found && !string.IsNullOrEmpty(query))
+            // Show the Bookings panel where the grid lives
+            pnlBookings.BringToFront();
+
+            if (!found)
             {
                 MessageBox.Show("No matching bookings found.", "Not Found",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            pnlBookings.BringToFront();
         }
 
         private void btnCheckIn_Click(object sender, EventArgs e)

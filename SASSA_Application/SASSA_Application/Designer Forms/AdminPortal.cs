@@ -35,6 +35,7 @@ namespace SASSA_Application.Designer_Forms
             LoadProvinces();
             LoadCentresGrid();
             LoadBookingsGrid();
+            LoadServicesGrid();
             RefreshAdminDashboardData();
         }
 
@@ -58,7 +59,7 @@ namespace SASSA_Application.Designer_Forms
 
         private void LoadProvinces()
         {
-            cmbProvinces.SelectedIndex = -1;
+            cmbProvinces.Items.Clear();
             cmbProvinces.AddRange(new object[]
             {
                 "Eastern Cape",
@@ -119,6 +120,24 @@ namespace SASSA_Application.Designer_Forms
             }
         }
 
+        private void LoadServicesGrid()
+        {
+            dgvServices.Rows.Clear();
+
+            if (!File.Exists("Services.txt")) return;
+
+            foreach (string line in File.ReadAllLines("Services.txt"))
+            {
+                if (string.IsNullOrWhiteSpace(line)) continue;
+
+                string[] parts = line.Split('|');
+                if (parts.Length < 4) continue;
+
+                // File format: ServiceId|ServiceName|Description|Status
+                dgvServices.Rows.Add(parts[1], parts[2], parts[3]);
+            }
+        }
+
         // ============================================================
         // SIDEBAR NAVIGATION
         // ============================================================
@@ -131,6 +150,7 @@ namespace SASSA_Application.Designer_Forms
         private void btnServices_Click(object sender, EventArgs e)
         {
             pnlServices.BringToFront();
+            LoadServicesGrid();
         }
 
         private void btnStaff_Click(object sender, EventArgs e)
@@ -159,6 +179,7 @@ namespace SASSA_Application.Designer_Forms
         private void roundedButton1_Click(object sender, EventArgs e)
         {
             pnlServices.BringToFront();
+            LoadServicesGrid();
         }
 
         // ============================================================
@@ -168,9 +189,14 @@ namespace SASSA_Application.Designer_Forms
         {
             string name = txtName.Text.Trim();
             string email = txtEmail.Text.Trim();
-            string centre = cmbCentre.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(centre))
+            string centre = cmbCentre.SelectedItem != null
+                            ? cmbCentre.SelectedItem.ToString()
+                            : "";
+
+            if (string.IsNullOrWhiteSpace(name) ||
+                string.IsNullOrWhiteSpace(email) ||
+                string.IsNullOrWhiteSpace(centre))
             {
                 MessageBox.Show("Please fill in all fields.", "Validation Error",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -209,7 +235,7 @@ namespace SASSA_Application.Designer_Forms
 
             txtName.Text = "";
             txtEmail.Text = "";
-            cmbCentre.SelectedIndex = -1;
+            cmbCentre.SelectedItem = null;
         }
 
         // ============================================================
@@ -218,10 +244,15 @@ namespace SASSA_Application.Designer_Forms
         private void btnSave_Click(object sender, EventArgs e)
         {
             string centreName = txtNameCentre.Text.Trim();
-            string province = cmbProvinces.Text.Trim();
             string address = txtAddress.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(centreName) || string.IsNullOrWhiteSpace(province) || string.IsNullOrWhiteSpace(address))
+            string province = cmbProvinces.SelectedItem != null
+                              ? cmbProvinces.SelectedItem.ToString()
+                              : "";
+
+            if (string.IsNullOrWhiteSpace(centreName) ||
+                string.IsNullOrWhiteSpace(province) ||
+                string.IsNullOrWhiteSpace(address))
             {
                 MessageBox.Show("Please fill in all fields.", "Validation Error",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -257,25 +288,99 @@ namespace SASSA_Application.Designer_Forms
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             txtNameCentre.Text = "";
-            cmbProvinces.SelectedIndex = -1;
+            cmbProvinces.SelectedItem = null;
             txtAddress.Text = "";
         }
 
         // ============================================================
-        // LOGOUT
+        // ADD SERVICE
         // ============================================================
-        private void btnLogout_Click(object sender, EventArgs e)
+        private void btnAddService_Click(object sender, EventArgs e)
         {
-            DialogResult answer = MessageBox.Show("Are you sure you want to log out?",
-                                                   "Logout", MessageBoxButtons.YesNo,
-                                                   MessageBoxIcon.Question);
-            if (answer == DialogResult.Yes)
+            string serviceName = txtService.Text.Trim();
+            string description = txtDescribe.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(serviceName) ||
+                string.IsNullOrWhiteSpace(description))
             {
-                frmWelcomePage welcome = new frmWelcomePage();
-                welcome.Show();
-                this.Close();
+                MessageBox.Show("Please fill in all fields.", "Validation Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Check for duplicate
+            if (File.Exists("Services.txt"))
+            {
+                foreach (string line in File.ReadAllLines("Services.txt"))
+                {
+                    if (string.IsNullOrWhiteSpace(line)) continue;
+                    string[] parts = line.Split('|');
+                    if (parts.Length >= 2 &&
+                        parts[1].Trim().Equals(serviceName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        MessageBox.Show("A service with this name already exists.",
+                                        "Duplicate Service",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+            }
+
+            // Save with full 4-field format: ServiceId|ServiceName|Description|Status
+            string serviceId = "S" + new Random().Next(1000, 9999);
+            string newLine = serviceId + "|" + serviceName + "|" + description + "|Active";
+            File.AppendAllText("Services.txt", newLine + Environment.NewLine);
+
+            // Update grid immediately
+            dgvServices.Rows.Add(serviceName, description, "Active");
+
+            MessageBox.Show("Service added successfully!", "Saved",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            txtService.Text = "";
+            txtDescribe.Text = "";
+        }
+
+        // ============================================================
+        // SEARCH BOOKINGS
+        // ============================================================
+        private void btnSearchB_Click(object sender, EventArgs e)
+        {
+            string query = txtSearching.Text.Trim();
+
+            dgvTotalBookings.Rows.Clear();
+
+            List<Booking> bookings = FileManager.LoadBookings();
+            bool found = false;
+
+            foreach (Booking b in bookings)
+            {
+                bool match = string.IsNullOrEmpty(query)
+                    || b.Reference.ToLower().Contains(query.ToLower())
+                    || b.BeneficiaryName.ToLower().Contains(query.ToLower())
+                    || b.BeneficiaryId.Contains(query)
+                    || b.ServiceName.ToLower().Contains(query.ToLower())
+                    || b.CentreName.ToLower().Contains(query.ToLower())
+                    || b.Status.ToLower().Contains(query.ToLower());
+
+                if (match)
+                {
+                    dgvTotalBookings.Rows.Add(b.Reference, b.BeneficiaryName, b.ServiceName,
+                                               b.CentreName, b.Date, b.Status);
+                    found = true;
+                }
+            }
+
+            if (!found && !string.IsNullOrEmpty(query))
+            {
+                MessageBox.Show("No matching bookings found.", "Not Found",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        // ============================================================
+        // DASHBOARD REFRESH
+        // ============================================================
         private void RefreshAdminDashboardData()
         {
             List<Booking> allBookings = FileManager.LoadBookings();
@@ -299,65 +404,28 @@ namespace SASSA_Application.Designer_Forms
                 b.Status.Equals("Cancelled", StringComparison.OrdinalIgnoreCase)
             ).ToString();
         }
+
+        // ============================================================
+        // LOGOUT
+        // ============================================================
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            DialogResult answer = MessageBox.Show("Are you sure you want to log out?",
+                                                   "Logout", MessageBoxButtons.YesNo,
+                                                   MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes)
+            {
+                frmWelcomePage welcome = new frmWelcomePage();
+                welcome.Show();
+                this.Close();
+            }
+        }
+
         // ============================================================
         // EMPTY STUBS (keep if wired in Designer)
         // ============================================================
         private void pnlReports_Paint(object sender, PaintEventArgs e) { }
         private void label17_Click(object sender, EventArgs e) { }
         private void cmbServiceCentre_Click(object sender, EventArgs e) { }
-
-        private void btnAddService_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string Service = txtService.Text.Trim();
-                string Description = txtDescribe.Text.Trim();
-
-                if (string.IsNullOrWhiteSpace(Service) || string.IsNullOrWhiteSpace(Description))
-                {
-                    MessageBox.Show("Please fill in all fields.", "Validation Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // Check for duplicate
-                if (File.Exists("Services.txt"))
-                {
-                    foreach (string line in File.ReadAllLines("Services.txt"))
-                    {
-                        if (string.IsNullOrWhiteSpace(line)) continue;
-                        string[] parts = line.Split('|');
-                        if (parts.Length >= 1 && parts[0].Trim().Equals(Service, StringComparison.OrdinalIgnoreCase))
-                        {
-                            MessageBox.Show("A centre with this name already exists.",
-                                            "Duplicate Centre",
-                                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                    }
-                }
-
-                // Save
-                string newLine = Service + "|" + Description;
-                File.AppendAllText("Services.txt", newLine + Environment.NewLine);
-
-                // Update grid + dropdown immediately
-                dgvServices.Rows.Add(Service, Description);
-                if( cmbServiceCentre !=null)
-                { 
-                cmbServiceCentre.Items.Add(Service);
-                    }
-                MessageBox.Show("Centre added successfully!", "Saved",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                txtService.Text = "";
-                //cmbProvinces.SelectedIndex = -1;
-                txtDescribe.Text = "";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saving service: {ex.Message}", "system error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
     }
 }

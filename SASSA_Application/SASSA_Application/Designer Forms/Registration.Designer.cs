@@ -282,6 +282,7 @@
             lblShowPassword.Size = new Size(66, 20);
             lblShowPassword.TabIndex = 29;
             lblShowPassword.Text = "👁️Show";
+            lblShowPassword.Click += lblShowPassword_Click;
             // 
             // errorProvider1
             // 
