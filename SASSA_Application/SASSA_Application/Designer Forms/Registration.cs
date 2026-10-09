@@ -21,8 +21,10 @@ namespace SASSA_Application.Designer_Forms
 
         private void Registration_Load(object sender, EventArgs e)
         {
-            //cmbServiceCentre.AddRange("Johannesburg Central", "Soweto", "Pretoria Marabastad", "Tembisa");
             cmbServiceCentre.Items.Clear();
+
+            bool loadedFromFile = false;
+
             if (File.Exists("Centres.txt"))
             {
                 foreach (string line in File.ReadAllLines("Centres.txt"))
@@ -30,9 +32,21 @@ namespace SASSA_Application.Designer_Forms
                     if (string.IsNullOrWhiteSpace(line)) continue;
                     string[] parts = line.Split('|');
                     if (parts.Length < 3) continue;
-                    cmbServiceCentre.Items.Add(parts[0]);
 
+                    cmbServiceCentre.Items.Add(parts[0]);
+                    loadedFromFile = true;
                 }
+            }
+
+            // If no centres in the file, use defaults so the dropdown is never empty
+            if (!loadedFromFile)
+            {
+                cmbServiceCentre.AddRange(
+                    "Johannesburg Central",
+                    "Soweto",
+                    "Pretoria Marabastad",
+                    "Tembisa"
+                );
             }
         }
 
@@ -211,22 +225,31 @@ namespace SASSA_Application.Designer_Forms
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             // ---- Clear the form ----
-            //txtFullName.Clear();
-            //txtLastName.Clear();
-            //txtIDNumber.Clear();
-            //txtPhoneNumber.Clear();
-            //txtEmail.Clear();
-            //cmbServiceCentre.SelectedIndex = -1;
-            //txtPassword.Clear();
-            //txtConfirmPassword.Clear();
+            txtFullName.Text = "";
+            txtLastName.Text = "";
+            txtIDNumber.Text = "";
+            txtPhoneNumber.Text = "";
+            txtEmail.Text = "";
+            cmbServiceCentre.SelectedItem = null;
+            txtPassword.Text = "";
+            txtConfirmPassword.Text = "";
 
             this.Close();
         }
 
         private void cmbServiceCentre_TextChanged(object sender, EventArgs e)
         {
-            cmbServiceCentre.AddRange("Johannesburg Central", "Soweto", "Pretoria Marabastad", "Tembisa");
+            //cmbServiceCentre.AddRange("Johannesburg Central", "Soweto", "Pretoria Marabastad", "Tembisa");
         }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+        
+            frmWelcomePage welcome = new frmWelcomePage();
+            welcome.Show();
+            this.Close();
+        
+    }
     }
 }
 

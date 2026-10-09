@@ -90,6 +90,8 @@ namespace SASSA_Application.Designer_Forms
             // Reveal step 3
             txtNewpasword.Visible = true;
             btnSavePassword.Visible = true;
+            lblEnterOTP.Visible = true;
+            lblEnterPassword.Visible = true;
 
             // Hide earlier steps
             txtEmail.Visible = false;
@@ -140,6 +142,8 @@ namespace SASSA_Application.Designer_Forms
 
             // Step 2 hidden
             txtOTP.Visible = false;
+            lblEnterOTP.Visible = false;
+            lblEnterPassword.Visible = false;
             btnConfirmOTP.Visible = false;
 
             // Step 3 hidden

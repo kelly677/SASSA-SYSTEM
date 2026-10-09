@@ -32,9 +32,9 @@
             label14 = new Label();
             btnSentOTP = new SASSA_Application.Classes.RoundedButton();
             txtEmail = new SASSA_Application.Classes.RoundedTextBox();
-            label1 = new Label();
+            lblEnterOTP = new Label();
             txtOTP = new SASSA_Application.Classes.RoundedTextBox();
-            lbl = new Label();
+            lblEnterPassword = new Label();
             txtNewpasword = new SASSA_Application.Classes.RoundedTextBox();
             btnConfirmOTP = new SASSA_Application.Classes.RoundedButton();
             btnSavePassword = new SASSA_Application.Classes.RoundedButton();
@@ -87,15 +87,15 @@
             txtEmail.Size = new Size(402, 44);
             txtEmail.TabIndex = 18;
             // 
-            // label1
+            // lblEnterOTP
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label1.Location = new Point(12, 249);
-            label1.Name = "label1";
-            label1.Size = new Size(142, 28);
-            label1.TabIndex = 22;
-            label1.Text = "Enter OTP Pin";
+            lblEnterOTP.AutoSize = true;
+            lblEnterOTP.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblEnterOTP.Location = new Point(12, 249);
+            lblEnterOTP.Name = "lblEnterOTP";
+            lblEnterOTP.Size = new Size(142, 28);
+            lblEnterOTP.TabIndex = 22;
+            lblEnterOTP.Text = "Enter OTP Pin";
             // 
             // txtOTP
             // 
@@ -107,15 +107,15 @@
             txtOTP.Size = new Size(402, 44);
             txtOTP.TabIndex = 21;
             // 
-            // lbl
+            // lblEnterPassword
             // 
-            lbl.AutoSize = true;
-            lbl.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lbl.Location = new Point(12, 422);
-            lbl.Name = "lbl";
-            lbl.Size = new Size(254, 28);
-            lbl.TabIndex = 24;
-            lbl.Text = "Enter Your New Password";
+            lblEnterPassword.AutoSize = true;
+            lblEnterPassword.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblEnterPassword.Location = new Point(12, 422);
+            lblEnterPassword.Name = "lblEnterPassword";
+            lblEnterPassword.Size = new Size(254, 28);
+            lblEnterPassword.TabIndex = 24;
+            lblEnterPassword.Text = "Enter Your New Password";
             // 
             // txtNewpasword
             // 
@@ -169,9 +169,9 @@
             ClientSize = new Size(731, 672);
             Controls.Add(btnSavePassword);
             Controls.Add(btnConfirmOTP);
-            Controls.Add(lbl);
+            Controls.Add(lblEnterPassword);
             Controls.Add(txtNewpasword);
-            Controls.Add(label1);
+            Controls.Add(lblEnterOTP);
             Controls.Add(txtOTP);
             Controls.Add(label14);
             Controls.Add(btnSentOTP);
@@ -190,9 +190,9 @@
         private Label label14;
         private Classes.RoundedButton btnSentOTP;
         private Classes.RoundedTextBox txtEmail;
-        private Label label1;
+        private Label lblEnterOTP;
         private Classes.RoundedTextBox txtOTP;
-        private Label lbl;
+        private Label lblEnterPassword;
         private Classes.RoundedTextBox txtNewpasword;
         private Classes.RoundedButton btnConfirmOTP;
         private Classes.RoundedButton btnSavePassword;
