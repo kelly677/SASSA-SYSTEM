@@ -35,6 +35,7 @@ namespace SASSA_Application.Designer_Forms
             LoadProvinces();
             LoadCentresGrid();
             LoadBookingsGrid();
+            RefreshAdminDashboardData();
         }
 
         // ============================================================
@@ -124,6 +125,7 @@ namespace SASSA_Application.Designer_Forms
         private void btnAdminDashboard_Click(object sender, EventArgs e)
         {
             pnlAdminDashboard.BringToFront();
+            RefreshAdminDashboardData();
         }
 
         private void btnServices_Click(object sender, EventArgs e)
@@ -254,7 +256,7 @@ namespace SASSA_Application.Designer_Forms
             MessageBox.Show("Centre added successfully!", "Saved",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            txtNameCentre.Text="";
+            txtNameCentre.Text = "";
             cmbProvinces.SelectedIndex = -1;
             txtAddress.Text = "";
         }
@@ -274,12 +276,88 @@ namespace SASSA_Application.Designer_Forms
                 this.Close();
             }
         }
+        private void RefreshAdminDashboardData()
+        {
+            List<Booking> allBookings = FileManager.LoadBookings();
 
+            lblBookedTotal.Text = allBookings.Count(b =>
+                b.Status.Equals("Booked", StringComparison.OrdinalIgnoreCase) ||
+                b.Status.Equals("Checked In", StringComparison.OrdinalIgnoreCase)
+            ).ToString();
+
+            lblOnQue.Text = allBookings.Count(b =>
+                b.Status.Equals("Waiting", StringComparison.OrdinalIgnoreCase) ||
+                b.Status.Equals("Serving", StringComparison.OrdinalIgnoreCase)
+            ).ToString();
+
+            lblCompleted.Text = allBookings.Count(b =>
+                b.Status.Equals("Completed", StringComparison.OrdinalIgnoreCase)
+            ).ToString();
+
+            lblNoshow.Text = allBookings.Count(b =>
+                b.Status.Equals("No-Show", StringComparison.OrdinalIgnoreCase) ||
+                b.Status.Equals("Cancelled", StringComparison.OrdinalIgnoreCase)
+            ).ToString();
+        }
         // ============================================================
         // EMPTY STUBS (keep if wired in Designer)
         // ============================================================
         private void pnlReports_Paint(object sender, PaintEventArgs e) { }
         private void label17_Click(object sender, EventArgs e) { }
         private void cmbServiceCentre_Click(object sender, EventArgs e) { }
+
+        private void btnAddService_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string Service = txtService.Text.Trim();
+                string Description = txtDescribe.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(Service) || string.IsNullOrWhiteSpace(Description))
+                {
+                    MessageBox.Show("Please fill in all fields.", "Validation Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Check for duplicate
+                if (File.Exists("Services.txt"))
+                {
+                    foreach (string line in File.ReadAllLines("Services.txt"))
+                    {
+                        if (string.IsNullOrWhiteSpace(line)) continue;
+                        string[] parts = line.Split('|');
+                        if (parts.Length >= 1 && parts[0].Trim().Equals(Service, StringComparison.OrdinalIgnoreCase))
+                        {
+                            MessageBox.Show("A centre with this name already exists.",
+                                            "Duplicate Centre",
+                                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+                }
+
+                // Save
+                string newLine = Service + "|" + Description;
+                File.AppendAllText("Services.txt", newLine + Environment.NewLine);
+
+                // Update grid + dropdown immediately
+                dgvServices.Rows.Add(Service, Description);
+                if( cmbServiceCentre !=null)
+                { 
+                cmbServiceCentre.Items.Add(Service);
+                    }
+                MessageBox.Show("Centre added successfully!", "Saved",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                txtService.Text = "";
+                //cmbProvinces.SelectedIndex = -1;
+                txtDescribe.Text = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving service: {ex.Message}", "system error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

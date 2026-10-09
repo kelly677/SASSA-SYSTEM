@@ -287,7 +287,6 @@ namespace SASSA_Application.Designer_Forms
             pnlStaffDash.Name = "pnlStaffDash";
             pnlStaffDash.Size = new Size(1199, 532);
             pnlStaffDash.TabIndex = 3;
-            //pnlStaffDash.Paint += pnlStaffDash_Paint;
             // 
             // curvedCornerPanel9
             // 
