@@ -166,5 +166,12 @@ namespace SASSA_Application.Designer_Forms
 
             this.Close();
         }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            frmWelcomePage welcome = new frmWelcomePage();
+            welcome.Show();
+            this.Close();
+        }
     }
 }

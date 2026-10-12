@@ -38,13 +38,14 @@
             txtNewpasword = new SASSA_Application.Classes.RoundedTextBox();
             btnConfirmOTP = new SASSA_Application.Classes.RoundedButton();
             btnSavePassword = new SASSA_Application.Classes.RoundedButton();
+            btnBack = new SASSA_Application.Classes.RoundedButton();
             SuspendLayout();
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
-            label5.Location = new Point(216, 23);
+            label5.Location = new Point(12, 9);
             label5.Name = "label5";
             label5.Size = new Size(288, 46);
             label5.TabIndex = 17;
@@ -161,12 +162,30 @@
             btnSavePassword.UseVisualStyleBackColor = false;
             btnSavePassword.Click += btnSavePassword_Click;
             // 
+            // btnBack
+            // 
+            btnBack.BackColor = SystemColors.GradientActiveCaption;
+            btnBack.FlatAppearance.BorderSize = 0;
+            btnBack.FlatStyle = FlatStyle.Flat;
+            btnBack.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnBack.ForeColor = Color.FromArgb(26, 70, 130);
+            btnBack.HoverColor = Color.Empty;
+            btnBack.Location = new Point(307, 618);
+            btnBack.Name = "btnBack";
+            btnBack.PressedColor = Color.Empty;
+            btnBack.Size = new Size(107, 51);
+            btnBack.TabIndex = 27;
+            btnBack.Text = "↩️ Back";
+            btnBack.UseVisualStyleBackColor = false;
+            btnBack.Click += btnBack_Click;
+            // 
             // ForgotPasswordForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientActiveCaption;
-            ClientSize = new Size(731, 672);
+            ClientSize = new Size(518, 672);
+            Controls.Add(btnBack);
             Controls.Add(btnSavePassword);
             Controls.Add(btnConfirmOTP);
             Controls.Add(lblEnterPassword);
@@ -197,5 +216,6 @@
         private Classes.RoundedTextBox txtNewpasword;
         private Classes.RoundedButton btnConfirmOTP;
         private Classes.RoundedButton btnSavePassword;
+        private Classes.RoundedButton btnBack;
     }
 }
