@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BeneficiaryPortal));
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             pnlTop = new Panel();
             lblUserName = new Label();
             lblBeneficiaryPortal = new Label();
@@ -77,6 +77,8 @@
             dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
             lblMyBooking = new Label();
             pnlMyBooking = new Panel();
+            btnReschedule = new SASSA_Application.Classes.RoundedButton();
+            btnCancel = new SASSA_Application.Classes.RoundedButton();
             pnlProfile = new Panel();
             btnSaveChanges = new SASSA_Application.Classes.RoundedButton();
             btnEditDetails = new SASSA_Application.Classes.RoundedButton();
@@ -105,8 +107,6 @@
             lblUpcomingBookingTitle = new Label();
             label5 = new Label();
             lblDashboard = new Label();
-            btnCancel = new SASSA_Application.Classes.RoundedButton();
-            btnReschedule = new SASSA_Application.Classes.RoundedButton();
             pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcLogo).BeginInit();
@@ -211,7 +211,7 @@
             // 
             // btnProfile
             // 
-            btnProfile.BackColor = Color.FromArgb(26, 70, 130);
+            btnProfile.BackColor = Color.Black;
             btnProfile.FlatAppearance.BorderSize = 0;
             btnProfile.FlatStyle = FlatStyle.Flat;
             btnProfile.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
@@ -245,7 +245,7 @@
             // 
             // btnMyBookings
             // 
-            btnMyBookings.BackColor = Color.FromArgb(26, 70, 130);
+            btnMyBookings.BackColor = Color.FromArgb(192, 0, 0);
             btnMyBookings.FlatAppearance.BorderSize = 0;
             btnMyBookings.FlatStyle = FlatStyle.Flat;
             btnMyBookings.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
@@ -262,7 +262,7 @@
             // 
             // btnQueueStatus
             // 
-            btnQueueStatus.BackColor = Color.FromArgb(26, 70, 130);
+            btnQueueStatus.BackColor = Color.DarkGreen;
             btnQueueStatus.FlatAppearance.BorderSize = 0;
             btnQueueStatus.FlatStyle = FlatStyle.Flat;
             btnQueueStatus.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
@@ -279,11 +279,11 @@
             // 
             // btnDashboard
             // 
-            btnDashboard.BackColor = Color.FromArgb(26, 70, 130);
+            btnDashboard.BackColor = Color.Gold;
             btnDashboard.FlatAppearance.BorderSize = 0;
             btnDashboard.FlatStyle = FlatStyle.Flat;
             btnDashboard.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            btnDashboard.ForeColor = Color.LightGray;
+            btnDashboard.ForeColor = Color.DimGray;
             btnDashboard.HoverColor = Color.Empty;
             btnDashboard.Location = new Point(11, 21);
             btnDashboard.Name = "btnDashboard";
@@ -349,7 +349,7 @@
             // 
             // btnConfirmBooking
             // 
-            btnConfirmBooking.BackColor = SystemColors.HotTrack;
+            btnConfirmBooking.BackColor = Color.FromArgb(0, 64, 0);
             btnConfirmBooking.FlatAppearance.BorderSize = 0;
             btnConfirmBooking.FlatStyle = FlatStyle.Flat;
             btnConfirmBooking.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
@@ -594,14 +594,14 @@
             dgvMyBookings.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvMyBookings.BackgroundColor = SystemColors.GradientActiveCaption;
             dgvMyBookings.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(26, 70, 130);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.Window;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ButtonShadow;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvMyBookings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(26, 70, 130);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = SystemColors.Window;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.ButtonShadow;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            dgvMyBookings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dgvMyBookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvMyBookings.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, C, Beneficiary, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4 });
             dgvMyBookings.Dock = DockStyle.Fill;
@@ -684,6 +684,42 @@
             pnlMyBooking.TabIndex = 2;
             pnlMyBooking.Paint += pnlMyBooking_Paint;
             // 
+            // btnReschedule
+            // 
+            btnReschedule.BackColor = Color.FromArgb(0, 64, 0);
+            btnReschedule.FlatAppearance.BorderSize = 0;
+            btnReschedule.FlatStyle = FlatStyle.Flat;
+            btnReschedule.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
+            btnReschedule.ForeColor = Color.LightGray;
+            btnReschedule.HoverColor = Color.Empty;
+            btnReschedule.Location = new Point(740, 546);
+            btnReschedule.Name = "btnReschedule";
+            btnReschedule.PressedColor = Color.Empty;
+            btnReschedule.Size = new Size(193, 51);
+            btnReschedule.TabIndex = 10;
+            btnReschedule.Text = "Reschedule";
+            btnReschedule.TextAlign = ContentAlignment.MiddleLeft;
+            btnReschedule.UseVisualStyleBackColor = false;
+            btnReschedule.Click += btnReschedule_Click;
+            // 
+            // btnCancel
+            // 
+            btnCancel.BackColor = Color.FromArgb(192, 0, 0);
+            btnCancel.FlatAppearance.BorderSize = 0;
+            btnCancel.FlatStyle = FlatStyle.Flat;
+            btnCancel.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
+            btnCancel.ForeColor = Color.LightGray;
+            btnCancel.HoverColor = Color.Empty;
+            btnCancel.Location = new Point(981, 546);
+            btnCancel.Name = "btnCancel";
+            btnCancel.PressedColor = Color.Empty;
+            btnCancel.Size = new Size(235, 51);
+            btnCancel.TabIndex = 9;
+            btnCancel.Text = "Cancel";
+            btnCancel.TextAlign = ContentAlignment.MiddleLeft;
+            btnCancel.UseVisualStyleBackColor = false;
+            btnCancel.Click += btnCancel_Click;
+            // 
             // pnlProfile
             // 
             pnlProfile.BackColor = SystemColors.GradientActiveCaption;
@@ -710,7 +746,7 @@
             // 
             // btnSaveChanges
             // 
-            btnSaveChanges.BackColor = Color.FromArgb(26, 70, 130);
+            btnSaveChanges.BackColor = Color.DarkGreen;
             btnSaveChanges.FlatAppearance.BorderSize = 0;
             btnSaveChanges.FlatStyle = FlatStyle.Flat;
             btnSaveChanges.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
@@ -896,7 +932,7 @@
             // 
             // btnDashNewBook
             // 
-            btnDashNewBook.BackColor = Color.FromArgb(26, 70, 130);
+            btnDashNewBook.BackColor = Color.DarkGreen;
             btnDashNewBook.FlatAppearance.BorderSize = 0;
             btnDashNewBook.FlatStyle = FlatStyle.Flat;
             btnDashNewBook.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
@@ -925,7 +961,7 @@
             // 
             // btnViewQueue
             // 
-            btnViewQueue.BackColor = Color.FromArgb(26, 70, 130);
+            btnViewQueue.BackColor = Color.DarkGoldenrod;
             btnViewQueue.FlatAppearance.BorderSize = 0;
             btnViewQueue.FlatStyle = FlatStyle.Flat;
             btnViewQueue.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
@@ -1025,42 +1061,6 @@
             lblDashboard.TabIndex = 9;
             lblDashboard.Text = "Dashboard";
             // 
-            // btnCancel
-            // 
-            btnCancel.BackColor = Color.FromArgb(26, 70, 130);
-            btnCancel.FlatAppearance.BorderSize = 0;
-            btnCancel.FlatStyle = FlatStyle.Flat;
-            btnCancel.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            btnCancel.ForeColor = Color.LightGray;
-            btnCancel.HoverColor = Color.Empty;
-            btnCancel.Location = new Point(981, 546);
-            btnCancel.Name = "btnCancel";
-            btnCancel.PressedColor = Color.Empty;
-            btnCancel.Size = new Size(235, 51);
-            btnCancel.TabIndex = 9;
-            btnCancel.Text = "Cancel";
-            btnCancel.TextAlign = ContentAlignment.MiddleLeft;
-            btnCancel.UseVisualStyleBackColor = false;
-            btnCancel.Click += btnCancel_Click;
-            // 
-            // btnReschedule
-            // 
-            btnReschedule.BackColor = Color.FromArgb(26, 70, 130);
-            btnReschedule.FlatAppearance.BorderSize = 0;
-            btnReschedule.FlatStyle = FlatStyle.Flat;
-            btnReschedule.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            btnReschedule.ForeColor = Color.LightGray;
-            btnReschedule.HoverColor = Color.Empty;
-            btnReschedule.Location = new Point(740, 546);
-            btnReschedule.Name = "btnReschedule";
-            btnReschedule.PressedColor = Color.Empty;
-            btnReschedule.Size = new Size(193, 51);
-            btnReschedule.TabIndex = 10;
-            btnReschedule.Text = "Reschedule";
-            btnReschedule.TextAlign = ContentAlignment.MiddleLeft;
-            btnReschedule.UseVisualStyleBackColor = false;
-            btnReschedule.Click += btnReschedule_Click;
-            // 
             // BeneficiaryPortal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -1068,11 +1068,11 @@
             ClientSize = new Size(1267, 723);
             Controls.Add(pnlSidePanel);
             Controls.Add(pnlTop);
-            Controls.Add(pnlMyBooking);
             Controls.Add(pnlNewBooking);
             Controls.Add(pnlQueueStatus);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlProfile);
+            Controls.Add(pnlMyBooking);
             Name = "BeneficiaryPortal";
             Text = "BeneficiaryPortal";
             Load += BeneficiaryPortal_Load;

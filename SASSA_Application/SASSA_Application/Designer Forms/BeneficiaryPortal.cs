@@ -463,6 +463,7 @@ namespace SASSA_Application.Designer_Forms
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            
 
             List<Booking> bookings = FileManager.LoadBookings();
             Booking target = null;
