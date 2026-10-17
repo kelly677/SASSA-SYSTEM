@@ -393,7 +393,7 @@ namespace SASSA_Application.Designer_Forms
             cmbTimeSlot.SelectedItem = null;
 
             // 8. Refresh views
-            RefreshDashboard();   
+            RefreshDashboard();
             LoadMyBookings();
             pnlMyBooking.BringToFront();
         }
@@ -463,7 +463,7 @@ namespace SASSA_Application.Designer_Forms
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            
+
 
             List<Booking> bookings = FileManager.LoadBookings();
             Booking target = null;
@@ -553,6 +553,11 @@ namespace SASSA_Application.Designer_Forms
 
             LoadMyBookings();
             RefreshDashboard();
+        }
+
+        private void lblUserName_Click(object sender, EventArgs e)
+        {
+            pnlProfile.BringToFront();
         }
     }
 }

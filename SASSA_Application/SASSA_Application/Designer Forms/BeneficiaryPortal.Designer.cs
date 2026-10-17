@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BeneficiaryPortal));
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             pnlTop = new Panel();
             lblUserName = new Label();
             lblBeneficiaryPortal = new Label();
@@ -77,6 +77,9 @@
             dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
             lblMyBooking = new Label();
             pnlMyBooking = new Panel();
+            panel1 = new Panel();
+            label2 = new Label();
+            pictureBox2 = new PictureBox();
             btnReschedule = new SASSA_Application.Classes.RoundedButton();
             btnCancel = new SASSA_Application.Classes.RoundedButton();
             pnlProfile = new Panel();
@@ -118,6 +121,8 @@
             curvedCornerPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvMyBookings).BeginInit();
             pnlMyBooking.SuspendLayout();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             pnlProfile.SuspendLayout();
             pnlDashboard.SuspendLayout();
             curvedCornerPanel5.SuspendLayout();
@@ -134,7 +139,7 @@
             pnlTop.Dock = DockStyle.Top;
             pnlTop.Location = new Point(0, 0);
             pnlTop.Name = "pnlTop";
-            pnlTop.Size = new Size(1267, 91);
+            pnlTop.Size = new Size(1553, 91);
             pnlTop.TabIndex = 0;
             // 
             // lblUserName
@@ -147,6 +152,7 @@
             lblUserName.Size = new Size(153, 28);
             lblUserName.TabIndex = 10;
             lblUserName.Text = " 👤(UserName)";
+            lblUserName.Click += lblUserName_Click;
             // 
             // lblBeneficiaryPortal
             // 
@@ -200,7 +206,7 @@
             btnLogout.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLogout.ForeColor = Color.Firebrick;
             btnLogout.HoverColor = Color.Empty;
-            btnLogout.Location = new Point(29, 541);
+            btnLogout.Location = new Point(29, 485);
             btnLogout.Name = "btnLogout";
             btnLogout.PressedColor = Color.Empty;
             btnLogout.Size = new Size(217, 52);
@@ -304,7 +310,7 @@
             pnlNewBooking.Dock = DockStyle.Fill;
             pnlNewBooking.Location = new Point(0, 0);
             pnlNewBooking.Name = "pnlNewBooking";
-            pnlNewBooking.Size = new Size(1267, 723);
+            pnlNewBooking.Size = new Size(1553, 723);
             pnlNewBooking.TabIndex = 2;
             // 
             // curvedCornerPanel1
@@ -453,7 +459,7 @@
             pnlQueueStatus.Dock = DockStyle.Fill;
             pnlQueueStatus.Location = new Point(0, 0);
             pnlQueueStatus.Name = "pnlQueueStatus";
-            pnlQueueStatus.Size = new Size(1267, 723);
+            pnlQueueStatus.Size = new Size(1553, 723);
             pnlQueueStatus.TabIndex = 8;
             // 
             // lblQueueStatus
@@ -594,14 +600,14 @@
             dgvMyBookings.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvMyBookings.BackgroundColor = SystemColors.GradientActiveCaption;
             dgvMyBookings.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(26, 70, 130);
-            dataGridViewCellStyle5.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle5.ForeColor = SystemColors.Window;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.ButtonShadow;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dgvMyBookings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(26, 70, 130);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.Window;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.ButtonShadow;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvMyBookings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvMyBookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvMyBookings.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, C, Beneficiary, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4 });
             dgvMyBookings.Dock = DockStyle.Fill;
@@ -672,6 +678,7 @@
             // pnlMyBooking
             // 
             pnlMyBooking.BackColor = SystemColors.GradientActiveCaption;
+            pnlMyBooking.Controls.Add(panel1);
             pnlMyBooking.Controls.Add(btnReschedule);
             pnlMyBooking.Controls.Add(btnCancel);
             pnlMyBooking.Controls.Add(lblMyBooking);
@@ -680,9 +687,41 @@
             pnlMyBooking.Dock = DockStyle.Fill;
             pnlMyBooking.Location = new Point(0, 0);
             pnlMyBooking.Name = "pnlMyBooking";
-            pnlMyBooking.Size = new Size(1267, 723);
+            pnlMyBooking.Size = new Size(1553, 723);
             pnlMyBooking.TabIndex = 2;
             pnlMyBooking.Paint += pnlMyBooking_Paint;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(26, 70, 130);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(pictureBox2);
+            panel1.Dock = DockStyle.Bottom;
+            panel1.Location = new Point(0, 651);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1553, 72);
+            panel1.TabIndex = 11;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label2.ForeColor = SystemColors.GradientActiveCaption;
+            label2.Location = new Point(1252, 28);
+            label2.Name = "label2";
+            label2.Size = new Size(170, 28);
+            label2.TabIndex = 11;
+            label2.Text = "Help And Support";
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(1164, 7);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(82, 65);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 12;
+            pictureBox2.TabStop = false;
             // 
             // btnReschedule
             // 
@@ -741,7 +780,7 @@
             pnlProfile.Dock = DockStyle.Fill;
             pnlProfile.Location = new Point(0, 0);
             pnlProfile.Name = "pnlProfile";
-            pnlProfile.Size = new Size(1267, 723);
+            pnlProfile.Size = new Size(1553, 723);
             pnlProfile.TabIndex = 9;
             // 
             // btnSaveChanges
@@ -927,7 +966,7 @@
             pnlDashboard.Dock = DockStyle.Fill;
             pnlDashboard.Location = new Point(0, 0);
             pnlDashboard.Name = "pnlDashboard";
-            pnlDashboard.Size = new Size(1267, 723);
+            pnlDashboard.Size = new Size(1553, 723);
             pnlDashboard.TabIndex = 10;
             // 
             // btnDashNewBook
@@ -1065,14 +1104,14 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1267, 723);
+            ClientSize = new Size(1553, 723);
             Controls.Add(pnlSidePanel);
             Controls.Add(pnlTop);
+            Controls.Add(pnlMyBooking);
             Controls.Add(pnlNewBooking);
             Controls.Add(pnlQueueStatus);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlProfile);
-            Controls.Add(pnlMyBooking);
             Name = "BeneficiaryPortal";
             Text = "BeneficiaryPortal";
             Load += BeneficiaryPortal_Load;
@@ -1093,6 +1132,9 @@
             ((System.ComponentModel.ISupportInitialize)dgvMyBookings).EndInit();
             pnlMyBooking.ResumeLayout(false);
             pnlMyBooking.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             pnlProfile.ResumeLayout(false);
             pnlProfile.PerformLayout();
             pnlDashboard.ResumeLayout(false);
@@ -1183,5 +1225,8 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private Classes.RoundedButton btnReschedule;
         private Classes.RoundedButton btnCancel;
+        private Panel panel1;
+        private PictureBox pictureBox2;
+        private Label label2;
     }
 }

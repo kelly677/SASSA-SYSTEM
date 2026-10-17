@@ -7,6 +7,8 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using System.Net;
+using System.Net.Mail;
 
 namespace SASSA_Application.Designer_Forms
 {
@@ -84,9 +86,17 @@ namespace SASSA_Application.Designer_Forms
             Random rnd = new Random();
             generatedOtp = rnd.Next(100000, 999999).ToString();
 
-            MessageBox.Show("SASSA OTP\n\nYour OTP is: " + generatedOtp +
-                            "\n\n(In a real system this would be sent via email/SMS)",
-                            "OTP Sent", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // Send the real email
+            bool emailSent = SendOtpEmail(targetEmail, generatedOtp);
+
+            if (!emailSent)
+            {
+                // If the email fails, stop here so they don't move to Step 2
+                return;
+            }
+
+            MessageBox.Show("An OTP has been sent to your email address.", "OTP Sent",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             // Reveal step 2 (field + caption + button)
             txtOTP.Visible = true;
@@ -172,6 +182,38 @@ namespace SASSA_Application.Designer_Forms
             frmWelcomePage welcome = new frmWelcomePage();
             welcome.Show();
             this.Close();
+        }
+        private bool SendOtpEmail(string recipientEmail, string otpCode)
+        {
+            try
+            {
+                string senderEmail = "sassaapplication642@gmail.com";       // 🔴 PUT YOUR GMAIL HERE
+                string appPassword = "nlxqkdlfveelxumu";           // 🔴 PUT YOUR 16-CHAR APP PASSWORD HERE
+
+                // Force modern security protocol
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress(senderEmail, "SASSA Queue Booking System");
+                mail.To.Add(recipientEmail);
+                mail.Subject = "Your SASSA Password Reset OTP";
+                mail.Body = $"Hello,\n\nYour OTP for resetting your password is: {otpCode}\n\n" +
+                            "If you did not request this, please ignore this email.";
+
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                smtp.Credentials = new NetworkCredential(senderEmail, appPassword);
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+
+                smtp.Send(mail);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to send email. Check your internet connection or App Password.\n\nError: " + ex.Message,
+                                "Email Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
     }
 }
