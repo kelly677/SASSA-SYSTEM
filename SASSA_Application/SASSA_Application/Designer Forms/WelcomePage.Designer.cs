@@ -57,7 +57,7 @@
             pnlLeft.Dock = DockStyle.Left;
             pnlLeft.Location = new Point(0, 0);
             pnlLeft.Name = "pnlLeft";
-            pnlLeft.Size = new Size(550, 653);
+            pnlLeft.Size = new Size(550, 692);
             pnlLeft.TabIndex = 0;
             // 
             // pictureBox2
@@ -95,7 +95,7 @@
             pnlRight.Dock = DockStyle.Fill;
             pnlRight.Location = new Point(550, 0);
             pnlRight.Name = "pnlRight";
-            pnlRight.Size = new Size(532, 653);
+            pnlRight.Size = new Size(532, 692);
             pnlRight.TabIndex = 1;
             // 
             // lblShowPassword
@@ -220,7 +220,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1082, 653);
+            ClientSize = new Size(1082, 692);
             Controls.Add(pnlRight);
             Controls.Add(pnlLeft);
             FormBorderStyle = FormBorderStyle.FixedSingle;

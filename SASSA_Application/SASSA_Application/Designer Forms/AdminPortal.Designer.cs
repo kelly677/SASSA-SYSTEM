@@ -56,8 +56,8 @@
             label11 = new Label();
             txtService = new SASSA_Application.Classes.RoundedTextBox();
             label9 = new Label();
-            label10 = new Label();
             btnAddService = new SASSA_Application.Classes.RoundedButton();
+            label10 = new Label();
             label6 = new Label();
             label5 = new Label();
             curvedCornerPanel2 = new SASSA_Application.Classes.CurvedCornerPanel();
@@ -220,11 +220,11 @@
             // 
             // btnBookings
             // 
-            btnBookings.BackColor = Color.FromArgb(26, 70, 130);
+            btnBookings.BackColor = Color.Gold;
             btnBookings.FlatAppearance.BorderSize = 0;
             btnBookings.FlatStyle = FlatStyle.Flat;
             btnBookings.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            btnBookings.ForeColor = Color.LightGray;
+            btnBookings.ForeColor = Color.DimGray;
             btnBookings.HoverColor = Color.Empty;
             btnBookings.Location = new Point(11, 341);
             btnBookings.Name = "btnBookings";
@@ -237,7 +237,7 @@
             // 
             // btnReports
             // 
-            btnReports.BackColor = Color.FromArgb(26, 70, 130);
+            btnReports.BackColor = Color.Black;
             btnReports.FlatAppearance.BorderSize = 0;
             btnReports.FlatStyle = FlatStyle.Flat;
             btnReports.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
@@ -288,7 +288,7 @@
             // 
             // btnStaff
             // 
-            btnStaff.BackColor = Color.FromArgb(26, 70, 130);
+            btnStaff.BackColor = Color.FromArgb(0, 64, 0);
             btnStaff.FlatAppearance.BorderSize = 0;
             btnStaff.FlatStyle = FlatStyle.Flat;
             btnStaff.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
@@ -305,7 +305,7 @@
             // 
             // btnCentres
             // 
-            btnCentres.BackColor = Color.FromArgb(26, 70, 130);
+            btnCentres.BackColor = Color.FromArgb(192, 0, 0);
             btnCentres.FlatAppearance.BorderSize = 0;
             btnCentres.FlatStyle = FlatStyle.Flat;
             btnCentres.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
@@ -322,11 +322,11 @@
             // 
             // btnAdminDashboard
             // 
-            btnAdminDashboard.BackColor = Color.FromArgb(26, 70, 130);
+            btnAdminDashboard.BackColor = Color.Gold;
             btnAdminDashboard.FlatAppearance.BorderSize = 0;
             btnAdminDashboard.FlatStyle = FlatStyle.Flat;
             btnAdminDashboard.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            btnAdminDashboard.ForeColor = Color.LightGray;
+            btnAdminDashboard.ForeColor = Color.DimGray;
             btnAdminDashboard.HoverColor = Color.Empty;
             btnAdminDashboard.Location = new Point(11, 21);
             btnAdminDashboard.Name = "btnAdminDashboard";
@@ -344,8 +344,8 @@
             pnlServices.Controls.Add(dgvServices);
             pnlServices.Controls.Add(curvedCornerPanel5);
             pnlServices.Controls.Add(label9);
-            pnlServices.Controls.Add(label10);
             pnlServices.Controls.Add(btnAddService);
+            pnlServices.Controls.Add(label10);
             pnlServices.Dock = DockStyle.Fill;
             pnlServices.Location = new Point(0, 0);
             pnlServices.Name = "pnlServices";
@@ -456,17 +456,6 @@
             label9.TabIndex = 17;
             label9.Text = "Service Management";
             // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 12.3F);
-            label10.ForeColor = SystemColors.GrayText;
-            label10.Location = new Point(320, 133);
-            label10.Name = "label10";
-            label10.Size = new Size(676, 30);
-            label10.TabIndex = 16;
-            label10.Text = "The SASSA services beneficiaries can book. Inactive services are hidden.";
-            // 
             // btnAddService
             // 
             btnAddService.BackColor = Color.FromArgb(26, 70, 130);
@@ -484,11 +473,23 @@
             btnAddService.UseVisualStyleBackColor = false;
             btnAddService.Click += btnAddService_Click;
             // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 12.3F);
+            label10.ForeColor = SystemColors.GrayText;
+            label10.Location = new Point(320, 133);
+            label10.Name = "label10";
+            label10.Size = new Size(676, 30);
+            label10.TabIndex = 16;
+            label10.Text = "The SASSA services beneficiaries can book. Inactive services are hidden.";
+            // 
             // label6
             // 
             label6.AutoSize = true;
+            label6.BackColor = Color.Transparent;
             label6.Font = new Font("Segoe UI", 12.3F);
-            label6.ForeColor = SystemColors.GrayText;
+            label6.ForeColor = SystemColors.ControlText;
             label6.Location = new Point(384, 163);
             label6.Name = "label6";
             label6.Size = new Size(598, 30);
@@ -498,6 +499,7 @@
             // label5
             // 
             label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
             label5.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
             label5.Location = new Point(376, 117);
             label5.Name = "label5";
@@ -633,6 +635,7 @@
             // lblManage
             // 
             lblManage.AutoSize = true;
+            lblManage.BackColor = Color.Transparent;
             lblManage.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblManage.Location = new Point(384, 367);
             lblManage.Name = "lblManage";
@@ -729,6 +732,8 @@
             // pnlAdminDashboard
             // 
             pnlAdminDashboard.BackColor = SystemColors.GradientActiveCaption;
+            pnlAdminDashboard.BackgroundImage = (Image)resources.GetObject("pnlAdminDashboard.BackgroundImage");
+            pnlAdminDashboard.BackgroundImageLayout = ImageLayout.Stretch;
             pnlAdminDashboard.Controls.Add(label7);
             pnlAdminDashboard.Controls.Add(btnPnlReports);
             pnlAdminDashboard.Controls.Add(label3);
@@ -748,6 +753,7 @@
             pnlAdminDashboard.Padding = new Padding(317, 240, 21, 20);
             pnlAdminDashboard.Size = new Size(1370, 709);
             pnlAdminDashboard.TabIndex = 6;
+            pnlAdminDashboard.Paint += pnlAdminDashboard_Paint;
             // 
             // pnlStaff
             // 
@@ -934,6 +940,8 @@
             // pnlCentres
             // 
             pnlCentres.BackColor = SystemColors.GradientActiveCaption;
+            pnlCentres.BackgroundImage = (Image)resources.GetObject("pnlCentres.BackgroundImage");
+            pnlCentres.BackgroundImageLayout = ImageLayout.Stretch;
             pnlCentres.Controls.Add(dgvCentres);
             pnlCentres.Controls.Add(btnSave);
             pnlCentres.Controls.Add(txtAddress);
@@ -1029,6 +1037,7 @@
             // label25
             // 
             label25.AutoSize = true;
+            label25.BackColor = Color.Transparent;
             label25.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
             label25.Location = new Point(323, 399);
             label25.Name = "label25";
@@ -1059,6 +1068,7 @@
             // label24
             // 
             label24.AutoSize = true;
+            label24.BackColor = Color.Transparent;
             label24.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
             label24.Location = new Point(323, 300);
             label24.Name = "label24";
@@ -1069,6 +1079,7 @@
             // lblCentre
             // 
             lblCentre.AutoSize = true;
+            lblCentre.BackColor = Color.Transparent;
             lblCentre.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
             lblCentre.Location = new Point(323, 193);
             lblCentre.Name = "lblCentre";
@@ -1090,6 +1101,7 @@
             // Centres
             // 
             Centres.AutoSize = true;
+            Centres.BackColor = Color.Transparent;
             Centres.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
             Centres.Location = new Point(313, 97);
             Centres.Name = "Centres";
@@ -1099,7 +1111,10 @@
             // 
             // pnlBookings
             // 
+            pnlBookings.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             pnlBookings.BackColor = SystemColors.GradientActiveCaption;
+            pnlBookings.BackgroundImage = (Image)resources.GetObject("pnlBookings.BackgroundImage");
+            pnlBookings.BackgroundImageLayout = ImageLayout.Stretch;
             pnlBookings.Controls.Add(dgvTotalBookings);
             pnlBookings.Controls.Add(curvedCornerPanel7);
             pnlBookings.Controls.Add(label21);
@@ -1182,7 +1197,7 @@
             // 
             // curvedCornerPanel7
             // 
-            curvedCornerPanel7.BackColor = SystemColors.InactiveCaption;
+            curvedCornerPanel7.BackColor = Color.DarkGray;
             curvedCornerPanel7.Controls.Add(btnSearchB);
             curvedCornerPanel7.Controls.Add(txtSearching);
             curvedCornerPanel7.Location = new Point(320, 221);
@@ -1220,6 +1235,7 @@
             // label21
             // 
             label21.AutoSize = true;
+            label21.BackColor = Color.Transparent;
             label21.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
             label21.Location = new Point(315, 117);
             label21.Name = "label21";
@@ -1230,8 +1246,9 @@
             // label22
             // 
             label22.AutoSize = true;
+            label22.BackColor = Color.Transparent;
             label22.Font = new Font("Segoe UI", 12.3F);
-            label22.ForeColor = SystemColors.GrayText;
+            label22.ForeColor = SystemColors.ControlText;
             label22.Location = new Point(315, 163);
             label22.Name = "label22";
             label22.Size = new Size(344, 30);
@@ -1278,12 +1295,12 @@
             ClientSize = new Size(1370, 709);
             Controls.Add(pnlSidePanel);
             Controls.Add(pnlTop);
+            Controls.Add(pnlBookings);
             Controls.Add(pnlCentres);
             Controls.Add(pnlStaff);
             Controls.Add(pnlServices);
             Controls.Add(pnlAdminDashboard);
             Controls.Add(pnlReports);
-            Controls.Add(pnlBookings);
             Name = "AdminPortal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AdminPortal";

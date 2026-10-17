@@ -77,12 +77,17 @@
             dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
             lblMyBooking = new Label();
             pnlMyBooking = new Panel();
-            panel1 = new Panel();
-            label2 = new Label();
-            pictureBox2 = new PictureBox();
             btnReschedule = new SASSA_Application.Classes.RoundedButton();
             btnCancel = new SASSA_Application.Classes.RoundedButton();
+            pnlBottom = new Panel();
+            label4 = new Label();
+            label3 = new Label();
+            btnChatWithAssistant = new SASSA_Application.Classes.RoundedButton();
+            label2 = new Label();
+            pictureBox2 = new PictureBox();
             pnlProfile = new Panel();
+            btnUploadPhoto = new SASSA_Application.Classes.RoundedButton();
+            picProfile = new PictureBox();
             btnSaveChanges = new SASSA_Application.Classes.RoundedButton();
             btnEditDetails = new SASSA_Application.Classes.RoundedButton();
             cmbPreferredServiceCentre = new SASSA_Application.Classes.RoundedComboBox();
@@ -110,6 +115,7 @@
             lblUpcomingBookingTitle = new Label();
             label5 = new Label();
             lblDashboard = new Label();
+            openFileDialog1 = new OpenFileDialog();
             pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcLogo).BeginInit();
@@ -121,9 +127,10 @@
             curvedCornerPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvMyBookings).BeginInit();
             pnlMyBooking.SuspendLayout();
-            panel1.SuspendLayout();
+            pnlBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             pnlProfile.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picProfile).BeginInit();
             pnlDashboard.SuspendLayout();
             curvedCornerPanel5.SuspendLayout();
             curvedCornerPanel4.SuspendLayout();
@@ -139,7 +146,7 @@
             pnlTop.Dock = DockStyle.Top;
             pnlTop.Location = new Point(0, 0);
             pnlTop.Name = "pnlTop";
-            pnlTop.Size = new Size(1553, 91);
+            pnlTop.Size = new Size(1745, 91);
             pnlTop.TabIndex = 0;
             // 
             // lblUserName
@@ -310,7 +317,7 @@
             pnlNewBooking.Dock = DockStyle.Fill;
             pnlNewBooking.Location = new Point(0, 0);
             pnlNewBooking.Name = "pnlNewBooking";
-            pnlNewBooking.Size = new Size(1553, 723);
+            pnlNewBooking.Size = new Size(1745, 723);
             pnlNewBooking.TabIndex = 2;
             // 
             // curvedCornerPanel1
@@ -459,7 +466,7 @@
             pnlQueueStatus.Dock = DockStyle.Fill;
             pnlQueueStatus.Location = new Point(0, 0);
             pnlQueueStatus.Name = "pnlQueueStatus";
-            pnlQueueStatus.Size = new Size(1553, 723);
+            pnlQueueStatus.Size = new Size(1745, 723);
             pnlQueueStatus.TabIndex = 8;
             // 
             // lblQueueStatus
@@ -677,8 +684,7 @@
             // 
             // pnlMyBooking
             // 
-            pnlMyBooking.BackColor = SystemColors.GradientActiveCaption;
-            pnlMyBooking.Controls.Add(panel1);
+            pnlMyBooking.BackColor = SystemColors.ControlLightLight;
             pnlMyBooking.Controls.Add(btnReschedule);
             pnlMyBooking.Controls.Add(btnCancel);
             pnlMyBooking.Controls.Add(lblMyBooking);
@@ -687,41 +693,9 @@
             pnlMyBooking.Dock = DockStyle.Fill;
             pnlMyBooking.Location = new Point(0, 0);
             pnlMyBooking.Name = "pnlMyBooking";
-            pnlMyBooking.Size = new Size(1553, 723);
+            pnlMyBooking.Size = new Size(1745, 723);
             pnlMyBooking.TabIndex = 2;
             pnlMyBooking.Paint += pnlMyBooking_Paint;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.FromArgb(26, 70, 130);
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(pictureBox2);
-            panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 651);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1553, 72);
-            panel1.TabIndex = 11;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label2.ForeColor = SystemColors.GradientActiveCaption;
-            label2.Location = new Point(1252, 28);
-            label2.Name = "label2";
-            label2.Size = new Size(170, 28);
-            label2.TabIndex = 11;
-            label2.Text = "Help And Support";
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(1164, 7);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(82, 65);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 12;
-            pictureBox2.TabStop = false;
             // 
             // btnReschedule
             // 
@@ -759,9 +733,85 @@
             btnCancel.UseVisualStyleBackColor = false;
             btnCancel.Click += btnCancel_Click;
             // 
+            // pnlBottom
+            // 
+            pnlBottom.BackColor = Color.FromArgb(26, 70, 130);
+            pnlBottom.Controls.Add(label4);
+            pnlBottom.Controls.Add(label3);
+            pnlBottom.Controls.Add(btnChatWithAssistant);
+            pnlBottom.Controls.Add(label2);
+            pnlBottom.Controls.Add(pictureBox2);
+            pnlBottom.Dock = DockStyle.Bottom;
+            pnlBottom.Location = new Point(297, 645);
+            pnlBottom.Name = "pnlBottom";
+            pnlBottom.Size = new Size(1448, 78);
+            pnlBottom.TabIndex = 11;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label4.ForeColor = SystemColors.GradientActiveCaption;
+            label4.Location = new Point(899, 22);
+            label4.Name = "label4";
+            label4.Size = new Size(195, 28);
+            label4.TabIndex = 38;
+            label4.Text = "🕗 Operating Hours";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label3.ForeColor = SystemColors.GradientActiveCaption;
+            label3.Location = new Point(509, 22);
+            label3.Name = "label3";
+            label3.Size = new Size(96, 28);
+            label3.TabIndex = 13;
+            label3.Text = "✉ Email";
+            // 
+            // btnChatWithAssistant
+            // 
+            btnChatWithAssistant.BackColor = Color.FromArgb(26, 70, 130);
+            btnChatWithAssistant.FlatAppearance.BorderSize = 2;
+            btnChatWithAssistant.FlatStyle = FlatStyle.Flat;
+            btnChatWithAssistant.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
+            btnChatWithAssistant.ForeColor = Color.LightGray;
+            btnChatWithAssistant.HoverColor = Color.Empty;
+            btnChatWithAssistant.Location = new Point(1263, 9);
+            btnChatWithAssistant.Name = "btnChatWithAssistant";
+            btnChatWithAssistant.PressedColor = Color.Empty;
+            btnChatWithAssistant.Size = new Size(265, 51);
+            btnChatWithAssistant.TabIndex = 12;
+            btnChatWithAssistant.Text = "💬 Chat With Assistant";
+            btnChatWithAssistant.UseVisualStyleBackColor = false;
+            btnChatWithAssistant.Click += btnChatWithAssistant_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label2.ForeColor = SystemColors.GradientActiveCaption;
+            label2.Location = new Point(13, 22);
+            label2.Name = "label2";
+            label2.Size = new Size(130, 28);
+            label2.TabIndex = 11;
+            label2.Text = "📞 HelpLine ";
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(1175, 4);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(82, 65);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 12;
+            pictureBox2.TabStop = false;
+            // 
             // pnlProfile
             // 
             pnlProfile.BackColor = SystemColors.GradientActiveCaption;
+            pnlProfile.Controls.Add(btnUploadPhoto);
+            pnlProfile.Controls.Add(picProfile);
             pnlProfile.Controls.Add(btnSaveChanges);
             pnlProfile.Controls.Add(btnEditDetails);
             pnlProfile.Controls.Add(cmbPreferredServiceCentre);
@@ -780,8 +830,35 @@
             pnlProfile.Dock = DockStyle.Fill;
             pnlProfile.Location = new Point(0, 0);
             pnlProfile.Name = "pnlProfile";
-            pnlProfile.Size = new Size(1553, 723);
+            pnlProfile.Size = new Size(1745, 723);
             pnlProfile.TabIndex = 9;
+            // 
+            // btnUploadPhoto
+            // 
+            btnUploadPhoto.BackColor = Color.FromArgb(26, 70, 130);
+            btnUploadPhoto.FlatAppearance.BorderSize = 0;
+            btnUploadPhoto.FlatStyle = FlatStyle.Flat;
+            btnUploadPhoto.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnUploadPhoto.ForeColor = SystemColors.GradientActiveCaption;
+            btnUploadPhoto.HoverColor = Color.Empty;
+            btnUploadPhoto.Location = new Point(1142, 325);
+            btnUploadPhoto.Name = "btnUploadPhoto";
+            btnUploadPhoto.PressedColor = Color.Empty;
+            btnUploadPhoto.Size = new Size(214, 39);
+            btnUploadPhoto.TabIndex = 39;
+            btnUploadPhoto.Text = "Upload Photo";
+            btnUploadPhoto.UseVisualStyleBackColor = false;
+            btnUploadPhoto.Click += btnUploadPhoto_Click;
+            // 
+            // picProfile
+            // 
+            picProfile.BorderStyle = BorderStyle.FixedSingle;
+            picProfile.Location = new Point(1142, 140);
+            picProfile.Name = "picProfile";
+            picProfile.Size = new Size(214, 155);
+            picProfile.SizeMode = PictureBoxSizeMode.Zoom;
+            picProfile.TabIndex = 38;
+            picProfile.TabStop = false;
             // 
             // btnSaveChanges
             // 
@@ -808,7 +885,7 @@
             btnEditDetails.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnEditDetails.ForeColor = SystemColors.GradientActiveCaption;
             btnEditDetails.HoverColor = Color.Empty;
-            btnEditDetails.Location = new Point(949, 124);
+            btnEditDetails.Location = new Point(343, 679);
             btnEditDetails.Name = "btnEditDetails";
             btnEditDetails.PressedColor = Color.Empty;
             btnEditDetails.Size = new Size(153, 39);
@@ -966,7 +1043,7 @@
             pnlDashboard.Dock = DockStyle.Fill;
             pnlDashboard.Location = new Point(0, 0);
             pnlDashboard.Name = "pnlDashboard";
-            pnlDashboard.Size = new Size(1553, 723);
+            pnlDashboard.Size = new Size(1745, 723);
             pnlDashboard.TabIndex = 10;
             // 
             // btnDashNewBook
@@ -1100,18 +1177,23 @@
             lblDashboard.TabIndex = 9;
             lblDashboard.Text = "Dashboard";
             // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
+            // 
             // BeneficiaryPortal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1553, 723);
+            ClientSize = new Size(1745, 723);
+            Controls.Add(pnlBottom);
             Controls.Add(pnlSidePanel);
             Controls.Add(pnlTop);
+            Controls.Add(pnlProfile);
             Controls.Add(pnlMyBooking);
             Controls.Add(pnlNewBooking);
             Controls.Add(pnlQueueStatus);
             Controls.Add(pnlDashboard);
-            Controls.Add(pnlProfile);
             Name = "BeneficiaryPortal";
             Text = "BeneficiaryPortal";
             Load += BeneficiaryPortal_Load;
@@ -1132,11 +1214,12 @@
             ((System.ComponentModel.ISupportInitialize)dgvMyBookings).EndInit();
             pnlMyBooking.ResumeLayout(false);
             pnlMyBooking.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            pnlBottom.ResumeLayout(false);
+            pnlBottom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             pnlProfile.ResumeLayout(false);
             pnlProfile.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picProfile).EndInit();
             pnlDashboard.ResumeLayout(false);
             pnlDashboard.PerformLayout();
             curvedCornerPanel5.ResumeLayout(false);
@@ -1225,8 +1308,14 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private Classes.RoundedButton btnReschedule;
         private Classes.RoundedButton btnCancel;
-        private Panel panel1;
+        private Panel pnlBottom;
         private PictureBox pictureBox2;
         private Label label2;
+        private Classes.RoundedButton btnChatWithAssistant;
+        private Label label4;
+        private Label label3;
+        private PictureBox picProfile;
+        private Classes.RoundedButton btnUploadPhoto;
+        private OpenFileDialog openFileDialog1;
     }
 }

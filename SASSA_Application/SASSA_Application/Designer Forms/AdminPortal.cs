@@ -427,5 +427,10 @@ namespace SASSA_Application.Designer_Forms
         private void pnlReports_Paint(object sender, PaintEventArgs e) { }
         private void label17_Click(object sender, EventArgs e) { }
         private void cmbServiceCentre_Click(object sender, EventArgs e) { }
+
+        private void pnlAdminDashboard_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

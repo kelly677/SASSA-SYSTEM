@@ -3,12 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace SASSA_Application.Designer_Forms
 {
     public partial class BeneficiaryPortal : Form
     {
         private Beneficiary currentBeneficiary;
+        private string currentProfilePicPath = "";
 
         public BeneficiaryPortal(Beneficiary beneficiary)
         {
@@ -252,7 +254,6 @@ namespace SASSA_Application.Designer_Forms
             txtEmailAddress.Text = currentBeneficiary.Email;
 
             cmbPreferredServiceCentre.Items.Clear();
-
             if (File.Exists("Centres.txt"))
             {
                 foreach (string line in File.ReadAllLines("Centres.txt"))
@@ -263,8 +264,25 @@ namespace SASSA_Application.Designer_Forms
                     cmbPreferredServiceCentre.Items.Add(parts[0]);
                 }
             }
-
             cmbPreferredServiceCentre.SelectedItem = currentBeneficiary.PreferredCentre;
+
+            // --- FIX: Load image safely without locking the file ---
+            string folderPath = Path.Combine(Application.StartupPath, "ProfilePictures");
+            string expectedPath = Path.Combine(folderPath, currentBeneficiary.IdNumber + ".jpg");
+
+            if (picProfile.Image != null)
+            {
+                picProfile.Image.Dispose();
+                picProfile.Image = null;
+            }
+
+            if (File.Exists(expectedPath))
+            {
+                using (FileStream fs = new FileStream(expectedPath, FileMode.Open, FileAccess.Read))
+                {
+                    picProfile.Image = Image.FromStream(fs);
+                }
+            }
 
             SetProfileFieldsReadOnly(true);
         }
@@ -558,6 +576,72 @@ namespace SASSA_Application.Designer_Forms
         private void lblUserName_Click(object sender, EventArgs e)
         {
             pnlProfile.BringToFront();
+        }
+
+        private void btnChatWithAssistant_Click(object sender, EventArgs e)
+        {
+            ChatBotForm chat = new ChatBotForm();
+            chat.Show();
+        }
+
+        private void btnUploadPhoto_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Button clicked! Opening dialog now...");
+            if (currentBeneficiary == null) return;
+
+            openFileDialog1.Title = "Select a Profile Picture";
+            openFileDialog1.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+            openFileDialog1.Multiselect = false;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string sourcePath = openFileDialog1.FileName;
+                    string folderPath = Path.Combine(Application.StartupPath, "ProfilePictures");
+
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
+
+                    string destinationPath = Path.Combine(folderPath, currentBeneficiary.IdNumber + ".jpg");
+
+                    // Dispose the current image to unlock the file
+                    if (picProfile.Image != null)
+                    {
+                        picProfile.Image.Dispose();
+                        picProfile.Image = null;
+                    }
+
+                    // Ensure the file is fully deleted before copying
+                    if (File.Exists(destinationPath))
+                    {
+                        File.Delete(destinationPath);
+                    }
+
+                    // Load the new image, save it as JPG, and release it
+                    using (Image newImage = Image.FromFile(sourcePath))
+                    {
+                        // This converts PNG/BMP to JPG automatically and saves it
+                        newImage.Save(destinationPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    }
+
+                    // Load it safely into the PictureBox
+                    using (FileStream fs = new FileStream(destinationPath, FileMode.Open, FileAccess.Read))
+                    {
+                        picProfile.Image = Image.FromStream(fs);
+                    }
+
+                    MessageBox.Show("Profile picture updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error uploading image: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        
+
         }
     }
 }
