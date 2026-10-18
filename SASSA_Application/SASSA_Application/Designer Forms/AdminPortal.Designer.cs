@@ -97,10 +97,12 @@
             label12 = new Label();
             label13 = new Label();
             pnlCentres = new Panel();
+            dtpDate = new DateTimePicker();
+            lblCapacity = new Label();
+            cmbCapacity = new SASSA_Application.Classes.RoundedComboBox();
+            cmbSlotCentre = new SASSA_Application.Classes.RoundedComboBox();
+            lblSlots = new Label();
             dgvCentres = new DataGridView();
-            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
-            Required = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
             btnSave = new SASSA_Application.Classes.RoundedButton();
             txtAddress = new SASSA_Application.Classes.RoundedTextBox();
             label25 = new Label();
@@ -126,6 +128,12 @@
             pnlReports = new Panel();
             label19 = new Label();
             label20 = new Label();
+            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            Required = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+            Slots = new DataGridViewTextBoxColumn();
+            Capacity = new DataGridViewTextBoxColumn();
+            DateChosen = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcLogo).BeginInit();
             pnlTop.SuspendLayout();
@@ -152,9 +160,10 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(133, 0);
+            pictureBox1.Location = new Point(116, 0);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(187, 84);
+            pictureBox1.Size = new Size(164, 63);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
@@ -162,9 +171,10 @@
             // pcLogo
             // 
             pcLogo.Image = (Image)resources.GetObject("pcLogo.Image");
-            pcLogo.Location = new Point(11, 3);
+            pcLogo.Location = new Point(10, 2);
+            pcLogo.Margin = new Padding(3, 2, 3, 2);
             pcLogo.Name = "pcLogo";
-            pcLogo.Size = new Size(115, 81);
+            pcLogo.Size = new Size(101, 61);
             pcLogo.SizeMode = PictureBoxSizeMode.Zoom;
             pcLogo.TabIndex = 0;
             pcLogo.TabStop = false;
@@ -178,8 +188,9 @@
             pnlTop.Controls.Add(pcLogo);
             pnlTop.Dock = DockStyle.Top;
             pnlTop.Location = new Point(0, 0);
+            pnlTop.Margin = new Padding(3, 2, 3, 2);
             pnlTop.Name = "pnlTop";
-            pnlTop.Size = new Size(1370, 91);
+            pnlTop.Size = new Size(1199, 68);
             pnlTop.TabIndex = 2;
             // 
             // lblUserName
@@ -187,9 +198,9 @@
             lblUserName.AutoSize = true;
             lblUserName.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             lblUserName.ForeColor = SystemColors.GradientActiveCaption;
-            lblUserName.Location = new Point(1261, 35);
+            lblUserName.Location = new Point(1103, 26);
             lblUserName.Name = "lblUserName";
-            lblUserName.Size = new Size(153, 28);
+            lblUserName.Size = new Size(122, 21);
             lblUserName.TabIndex = 10;
             lblUserName.Text = " 👤(UserName)";
             // 
@@ -197,9 +208,9 @@
             // 
             label15.AutoSize = true;
             label15.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label15.Location = new Point(1239, 63);
+            label15.Location = new Point(1084, 47);
             label15.Name = "label15";
-            label15.Size = new Size(207, 28);
+            label15.Size = new Size(166, 21);
             label15.TabIndex = 9;
             label15.Text = "Administrator Portal";
             // 
@@ -213,9 +224,10 @@
             pnlSidePanel.Controls.Add(btnCentres);
             pnlSidePanel.Controls.Add(btnAdminDashboard);
             pnlSidePanel.Dock = DockStyle.Left;
-            pnlSidePanel.Location = new Point(0, 91);
+            pnlSidePanel.Location = new Point(0, 68);
+            pnlSidePanel.Margin = new Padding(3, 2, 3, 2);
             pnlSidePanel.Name = "pnlSidePanel";
-            pnlSidePanel.Size = new Size(297, 618);
+            pnlSidePanel.Size = new Size(260, 464);
             pnlSidePanel.TabIndex = 3;
             // 
             // btnBookings
@@ -226,10 +238,11 @@
             btnBookings.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             btnBookings.ForeColor = Color.DimGray;
             btnBookings.HoverColor = Color.Empty;
-            btnBookings.Location = new Point(11, 341);
+            btnBookings.Location = new Point(10, 256);
+            btnBookings.Margin = new Padding(3, 2, 3, 2);
             btnBookings.Name = "btnBookings";
             btnBookings.PressedColor = Color.Empty;
-            btnBookings.Size = new Size(265, 51);
+            btnBookings.Size = new Size(232, 38);
             btnBookings.TabIndex = 7;
             btnBookings.Text = "Bookings";
             btnBookings.UseVisualStyleBackColor = false;
@@ -243,10 +256,11 @@
             btnReports.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             btnReports.ForeColor = Color.LightGray;
             btnReports.HoverColor = Color.Empty;
-            btnReports.Location = new Point(11, 421);
+            btnReports.Location = new Point(10, 316);
+            btnReports.Margin = new Padding(3, 2, 3, 2);
             btnReports.Name = "btnReports";
             btnReports.PressedColor = Color.Empty;
-            btnReports.Size = new Size(265, 51);
+            btnReports.Size = new Size(232, 38);
             btnReports.TabIndex = 6;
             btnReports.Text = "Reports";
             btnReports.UseVisualStyleBackColor = false;
@@ -260,10 +274,11 @@
             btnLogout.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLogout.ForeColor = Color.Firebrick;
             btnLogout.HoverColor = Color.Empty;
-            btnLogout.Location = new Point(29, 541);
+            btnLogout.Location = new Point(25, 406);
+            btnLogout.Margin = new Padding(3, 2, 3, 2);
             btnLogout.Name = "btnLogout";
             btnLogout.PressedColor = Color.Empty;
-            btnLogout.Size = new Size(217, 52);
+            btnLogout.Size = new Size(190, 39);
             btnLogout.TabIndex = 5;
             btnLogout.Text = " \u23fb Logout";
             btnLogout.UseVisualStyleBackColor = false;
@@ -277,10 +292,11 @@
             btnServices.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             btnServices.ForeColor = Color.LightGray;
             btnServices.HoverColor = Color.Empty;
-            btnServices.Location = new Point(11, 101);
+            btnServices.Location = new Point(10, 76);
+            btnServices.Margin = new Padding(3, 2, 3, 2);
             btnServices.Name = "btnServices";
             btnServices.PressedColor = Color.Empty;
-            btnServices.Size = new Size(265, 51);
+            btnServices.Size = new Size(232, 38);
             btnServices.TabIndex = 3;
             btnServices.Text = "Services";
             btnServices.UseVisualStyleBackColor = false;
@@ -294,10 +310,11 @@
             btnStaff.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             btnStaff.ForeColor = Color.LightGray;
             btnStaff.HoverColor = Color.Empty;
-            btnStaff.Location = new Point(11, 181);
+            btnStaff.Location = new Point(10, 136);
+            btnStaff.Margin = new Padding(3, 2, 3, 2);
             btnStaff.Name = "btnStaff";
             btnStaff.PressedColor = Color.Empty;
-            btnStaff.Size = new Size(265, 51);
+            btnStaff.Size = new Size(232, 38);
             btnStaff.TabIndex = 2;
             btnStaff.Text = "Staff";
             btnStaff.UseVisualStyleBackColor = false;
@@ -311,10 +328,11 @@
             btnCentres.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             btnCentres.ForeColor = Color.LightGray;
             btnCentres.HoverColor = Color.Empty;
-            btnCentres.Location = new Point(11, 261);
+            btnCentres.Location = new Point(10, 196);
+            btnCentres.Margin = new Padding(3, 2, 3, 2);
             btnCentres.Name = "btnCentres";
             btnCentres.PressedColor = Color.Empty;
-            btnCentres.Size = new Size(265, 51);
+            btnCentres.Size = new Size(232, 38);
             btnCentres.TabIndex = 1;
             btnCentres.Text = "Centres and Slots";
             btnCentres.UseVisualStyleBackColor = false;
@@ -328,10 +346,11 @@
             btnAdminDashboard.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             btnAdminDashboard.ForeColor = Color.DimGray;
             btnAdminDashboard.HoverColor = Color.Empty;
-            btnAdminDashboard.Location = new Point(11, 21);
+            btnAdminDashboard.Location = new Point(10, 16);
+            btnAdminDashboard.Margin = new Padding(3, 2, 3, 2);
             btnAdminDashboard.Name = "btnAdminDashboard";
             btnAdminDashboard.PressedColor = Color.Empty;
-            btnAdminDashboard.Size = new Size(265, 51);
+            btnAdminDashboard.Size = new Size(232, 38);
             btnAdminDashboard.TabIndex = 0;
             btnAdminDashboard.Text = "Dashboard";
             btnAdminDashboard.TextAlign = ContentAlignment.MiddleLeft;
@@ -348,8 +367,9 @@
             pnlServices.Controls.Add(label10);
             pnlServices.Dock = DockStyle.Fill;
             pnlServices.Location = new Point(0, 0);
+            pnlServices.Margin = new Padding(3, 2, 3, 2);
             pnlServices.Name = "pnlServices";
-            pnlServices.Size = new Size(1370, 709);
+            pnlServices.Size = new Size(1199, 532);
             pnlServices.TabIndex = 4;
             // 
             // dgvServices
@@ -370,13 +390,14 @@
             dgvServices.Columns.AddRange(new DataGridViewColumn[] { Service, Description });
             dgvServices.EnableHeadersVisualStyles = false;
             dgvServices.GridColor = SystemColors.InactiveCaption;
-            dgvServices.Location = new Point(352, 396);
+            dgvServices.Location = new Point(308, 297);
+            dgvServices.Margin = new Padding(3, 2, 3, 2);
             dgvServices.Name = "dgvServices";
             dgvServices.ReadOnly = true;
             dgvServices.RowHeadersVisible = false;
             dgvServices.RowHeadersWidth = 51;
             dgvServices.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvServices.Size = new Size(927, 172);
+            dgvServices.Size = new Size(811, 129);
             dgvServices.TabIndex = 40;
             // 
             // Service
@@ -401,18 +422,19 @@
             curvedCornerPanel5.Controls.Add(txtDescribe);
             curvedCornerPanel5.Controls.Add(label11);
             curvedCornerPanel5.Controls.Add(txtService);
-            curvedCornerPanel5.Location = new Point(306, 189);
+            curvedCornerPanel5.Location = new Point(268, 142);
+            curvedCornerPanel5.Margin = new Padding(3, 2, 3, 2);
             curvedCornerPanel5.Name = "curvedCornerPanel5";
-            curvedCornerPanel5.Size = new Size(1062, 125);
+            curvedCornerPanel5.Size = new Size(929, 94);
             curvedCornerPanel5.TabIndex = 18;
             // 
             // lbl
             // 
             lbl.AutoSize = true;
             lbl.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lbl.Location = new Point(520, 7);
+            lbl.Location = new Point(455, 5);
             lbl.Name = "lbl";
-            lbl.Size = new Size(121, 28);
+            lbl.Size = new Size(98, 21);
             lbl.TabIndex = 12;
             lbl.Text = "Description";
             // 
@@ -420,19 +442,20 @@
             // 
             txtDescribe.BackColor = Color.White;
             txtDescribe.Font = new Font("Segoe UI", 10F);
-            txtDescribe.Location = new Point(520, 45);
+            txtDescribe.Location = new Point(455, 34);
+            txtDescribe.Margin = new Padding(3, 2, 3, 2);
             txtDescribe.Name = "txtDescribe";
             txtDescribe.PlaceholderText = "Describe the service";
-            txtDescribe.Size = new Size(534, 45);
+            txtDescribe.Size = new Size(467, 34);
             txtDescribe.TabIndex = 11;
             // 
             // label11
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label11.Location = new Point(27, 7);
+            label11.Location = new Point(24, 5);
             label11.Name = "label11";
-            label11.Size = new Size(143, 28);
+            label11.Size = new Size(116, 21);
             label11.TabIndex = 10;
             label11.Text = "Service Name";
             // 
@@ -440,19 +463,20 @@
             // 
             txtService.BackColor = Color.White;
             txtService.Font = new Font("Segoe UI", 10F);
-            txtService.Location = new Point(27, 45);
+            txtService.Location = new Point(24, 34);
+            txtService.Margin = new Padding(3, 2, 3, 2);
             txtService.Name = "txtService";
             txtService.PlaceholderText = "Enter new service";
-            txtService.Size = new Size(390, 45);
+            txtService.Size = new Size(341, 34);
             txtService.TabIndex = 0;
             // 
             // label9
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
-            label9.Location = new Point(320, 87);
+            label9.Location = new Point(280, 65);
             label9.Name = "label9";
-            label9.Size = new Size(355, 46);
+            label9.Size = new Size(288, 37);
             label9.TabIndex = 17;
             label9.Text = "Service Management";
             // 
@@ -464,10 +488,11 @@
             btnAddService.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnAddService.ForeColor = Color.White;
             btnAddService.HoverColor = Color.Empty;
-            btnAddService.Location = new Point(320, 335);
+            btnAddService.Location = new Point(280, 251);
+            btnAddService.Margin = new Padding(3, 2, 3, 2);
             btnAddService.Name = "btnAddService";
             btnAddService.PressedColor = Color.Empty;
-            btnAddService.Size = new Size(187, 37);
+            btnAddService.Size = new Size(164, 28);
             btnAddService.TabIndex = 1;
             btnAddService.Text = "Add Service";
             btnAddService.UseVisualStyleBackColor = false;
@@ -478,9 +503,9 @@
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 12.3F);
             label10.ForeColor = SystemColors.GrayText;
-            label10.Location = new Point(320, 133);
+            label10.Location = new Point(280, 100);
             label10.Name = "label10";
-            label10.Size = new Size(676, 30);
+            label10.Size = new Size(551, 23);
             label10.TabIndex = 16;
             label10.Text = "The SASSA services beneficiaries can book. Inactive services are hidden.";
             // 
@@ -490,9 +515,9 @@
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Segoe UI", 12.3F);
             label6.ForeColor = SystemColors.ControlText;
-            label6.Location = new Point(384, 163);
+            label6.Location = new Point(336, 122);
             label6.Name = "label6";
-            label6.Size = new Size(598, 30);
+            label6.Size = new Size(490, 23);
             label6.TabIndex = 15;
             label6.Text = "Monitor centres, keep services current, and watch today's floor.";
             // 
@@ -501,20 +526,22 @@
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
-            label5.Location = new Point(376, 117);
+            label5.Location = new Point(329, 88);
             label5.Name = "label5";
-            label5.Size = new Size(423, 46);
+            label5.Size = new Size(342, 37);
             label5.TabIndex = 16;
             label5.Text = "Administrator dashboard";
             // 
             // curvedCornerPanel2
             // 
             curvedCornerPanel2.BackColor = SystemColors.InactiveCaption;
+            curvedCornerPanel2.BorderStyle = BorderStyle.FixedSingle;
             curvedCornerPanel2.Controls.Add(lblBookedTotal);
             curvedCornerPanel2.Controls.Add(label17);
-            curvedCornerPanel2.Location = new Point(373, 216);
+            curvedCornerPanel2.Location = new Point(326, 162);
+            curvedCornerPanel2.Margin = new Padding(3, 2, 3, 2);
             curvedCornerPanel2.Name = "curvedCornerPanel2";
-            curvedCornerPanel2.Size = new Size(167, 113);
+            curvedCornerPanel2.Size = new Size(146, 85);
             curvedCornerPanel2.TabIndex = 18;
             // 
             // lblBookedTotal
@@ -522,9 +549,9 @@
             lblBookedTotal.AutoSize = true;
             lblBookedTotal.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblBookedTotal.ForeColor = Color.FromArgb(26, 70, 130);
-            lblBookedTotal.Location = new Point(53, 51);
+            lblBookedTotal.Location = new Point(46, 38);
             lblBookedTotal.Name = "lblBookedTotal";
-            lblBookedTotal.Size = new Size(57, 54);
+            lblBookedTotal.Size = new Size(47, 45);
             lblBookedTotal.TabIndex = 12;
             lblBookedTotal.Text = "0 ";
             // 
@@ -532,9 +559,9 @@
             // 
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label17.Location = new Point(3, 8);
+            label17.Location = new Point(3, 6);
             label17.Name = "label17";
-            label17.Size = new Size(136, 28);
+            label17.Size = new Size(110, 21);
             label17.TabIndex = 13;
             label17.Text = "Total Booked";
             label17.Click += label17_Click;
@@ -544,9 +571,10 @@
             curvedCornerPanel1.BackColor = SystemColors.InactiveCaption;
             curvedCornerPanel1.Controls.Add(lblOnQue);
             curvedCornerPanel1.Controls.Add(label2);
-            curvedCornerPanel1.Location = new Point(635, 216);
+            curvedCornerPanel1.Location = new Point(556, 162);
+            curvedCornerPanel1.Margin = new Padding(3, 2, 3, 2);
             curvedCornerPanel1.Name = "curvedCornerPanel1";
-            curvedCornerPanel1.Size = new Size(167, 113);
+            curvedCornerPanel1.Size = new Size(146, 85);
             curvedCornerPanel1.TabIndex = 18;
             // 
             // lblOnQue
@@ -554,9 +582,9 @@
             lblOnQue.AutoSize = true;
             lblOnQue.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblOnQue.ForeColor = Color.FromArgb(26, 70, 130);
-            lblOnQue.Location = new Point(53, 51);
+            lblOnQue.Location = new Point(46, 38);
             lblOnQue.Name = "lblOnQue";
-            lblOnQue.Size = new Size(57, 54);
+            lblOnQue.Size = new Size(47, 45);
             lblOnQue.TabIndex = 12;
             lblOnQue.Text = "0 ";
             // 
@@ -564,9 +592,9 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label2.Location = new Point(3, 8);
+            label2.Location = new Point(3, 6);
             label2.Name = "label2";
-            label2.Size = new Size(147, 28);
+            label2.Size = new Size(119, 21);
             label2.TabIndex = 13;
             label2.Text = "In Queue Now";
             // 
@@ -575,9 +603,10 @@
             curvedCornerPanel3.BackColor = SystemColors.InactiveCaption;
             curvedCornerPanel3.Controls.Add(lblCompleted);
             curvedCornerPanel3.Controls.Add(label4);
-            curvedCornerPanel3.Location = new Point(917, 216);
+            curvedCornerPanel3.Location = new Point(802, 162);
+            curvedCornerPanel3.Margin = new Padding(3, 2, 3, 2);
             curvedCornerPanel3.Name = "curvedCornerPanel3";
-            curvedCornerPanel3.Size = new Size(167, 113);
+            curvedCornerPanel3.Size = new Size(146, 85);
             curvedCornerPanel3.TabIndex = 19;
             // 
             // lblCompleted
@@ -585,9 +614,9 @@
             lblCompleted.AutoSize = true;
             lblCompleted.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblCompleted.ForeColor = Color.FromArgb(26, 70, 130);
-            lblCompleted.Location = new Point(53, 51);
+            lblCompleted.Location = new Point(46, 38);
             lblCompleted.Name = "lblCompleted";
-            lblCompleted.Size = new Size(57, 54);
+            lblCompleted.Size = new Size(47, 45);
             lblCompleted.TabIndex = 12;
             lblCompleted.Text = "0 ";
             // 
@@ -595,9 +624,9 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label4.Location = new Point(3, 8);
+            label4.Location = new Point(3, 6);
             label4.Name = "label4";
-            label4.Size = new Size(114, 28);
+            label4.Size = new Size(94, 21);
             label4.TabIndex = 13;
             label4.Text = "Completed";
             // 
@@ -606,9 +635,10 @@
             curvedCornerPanel4.BackColor = SystemColors.InactiveCaption;
             curvedCornerPanel4.Controls.Add(lblNoshow);
             curvedCornerPanel4.Controls.Add(label8);
-            curvedCornerPanel4.Location = new Point(1195, 216);
+            curvedCornerPanel4.Location = new Point(1046, 162);
+            curvedCornerPanel4.Margin = new Padding(3, 2, 3, 2);
             curvedCornerPanel4.Name = "curvedCornerPanel4";
-            curvedCornerPanel4.Size = new Size(167, 113);
+            curvedCornerPanel4.Size = new Size(146, 85);
             curvedCornerPanel4.TabIndex = 20;
             // 
             // lblNoshow
@@ -616,9 +646,9 @@
             lblNoshow.AutoSize = true;
             lblNoshow.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblNoshow.ForeColor = Color.FromArgb(26, 70, 130);
-            lblNoshow.Location = new Point(53, 51);
+            lblNoshow.Location = new Point(46, 38);
             lblNoshow.Name = "lblNoshow";
-            lblNoshow.Size = new Size(57, 54);
+            lblNoshow.Size = new Size(47, 45);
             lblNoshow.TabIndex = 12;
             lblNoshow.Text = "0 ";
             // 
@@ -626,9 +656,9 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label8.Location = new Point(3, 8);
+            label8.Location = new Point(3, 6);
             label8.Name = "label8";
-            label8.Size = new Size(99, 28);
+            label8.Size = new Size(81, 21);
             label8.TabIndex = 13;
             label8.Text = "No-Show";
             // 
@@ -637,9 +667,9 @@
             lblManage.AutoSize = true;
             lblManage.BackColor = Color.Transparent;
             lblManage.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblManage.Location = new Point(384, 367);
+            lblManage.Location = new Point(336, 275);
             lblManage.Name = "lblManage";
-            lblManage.Size = new Size(94, 28);
+            lblManage.Size = new Size(76, 21);
             lblManage.TabIndex = 21;
             lblManage.Text = " Manage";
             // 
@@ -651,10 +681,11 @@
             btnPnlServices.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             btnPnlServices.ForeColor = Color.LightGray;
             btnPnlServices.HoverColor = Color.Empty;
-            btnPnlServices.Location = new Point(376, 413);
+            btnPnlServices.Location = new Point(329, 310);
+            btnPnlServices.Margin = new Padding(3, 2, 3, 2);
             btnPnlServices.Name = "btnPnlServices";
             btnPnlServices.PressedColor = Color.Empty;
-            btnPnlServices.Size = new Size(321, 93);
+            btnPnlServices.Size = new Size(281, 70);
             btnPnlServices.TabIndex = 22;
             btnPnlServices.Text = "Services";
             btnPnlServices.TextAlign = ContentAlignment.MiddleLeft;
@@ -666,9 +697,9 @@
             label1.AutoSize = true;
             label1.BackColor = Color.FromArgb(26, 70, 130);
             label1.ForeColor = SystemColors.ActiveCaption;
-            label1.Location = new Point(400, 473);
+            label1.Location = new Point(350, 355);
             label1.Name = "label1";
-            label1.Size = new Size(252, 20);
+            label1.Size = new Size(197, 15);
             label1.TabIndex = 23;
             label1.Text = "Add,Edit and disable SASSA Services";
             // 
@@ -680,10 +711,11 @@
             btnPnlCentres.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             btnPnlCentres.ForeColor = Color.LightGray;
             btnPnlCentres.HoverColor = Color.Empty;
-            btnPnlCentres.Location = new Point(728, 413);
+            btnPnlCentres.Location = new Point(637, 310);
+            btnPnlCentres.Margin = new Padding(3, 2, 3, 2);
             btnPnlCentres.Name = "btnPnlCentres";
             btnPnlCentres.PressedColor = Color.Empty;
-            btnPnlCentres.Size = new Size(313, 93);
+            btnPnlCentres.Size = new Size(274, 70);
             btnPnlCentres.TabIndex = 24;
             btnPnlCentres.Text = "Centres and Slots";
             btnPnlCentres.TextAlign = ContentAlignment.MiddleLeft;
@@ -695,9 +727,9 @@
             label3.AutoSize = true;
             label3.BackColor = Color.FromArgb(26, 70, 130);
             label3.ForeColor = SystemColors.ActiveCaption;
-            label3.Location = new Point(787, 473);
+            label3.Location = new Point(689, 355);
             label3.Name = "label3";
-            label3.Size = new Size(209, 20);
+            label3.Size = new Size(166, 15);
             label3.TabIndex = 25;
             label3.Text = "Capacity and Remaining Seats";
             // 
@@ -709,10 +741,11 @@
             btnPnlReports.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             btnPnlReports.ForeColor = Color.LightGray;
             btnPnlReports.HoverColor = Color.Empty;
-            btnPnlReports.Location = new Point(1061, 413);
+            btnPnlReports.Location = new Point(928, 310);
+            btnPnlReports.Margin = new Padding(3, 2, 3, 2);
             btnPnlReports.Name = "btnPnlReports";
             btnPnlReports.PressedColor = Color.Empty;
-            btnPnlReports.Size = new Size(325, 93);
+            btnPnlReports.Size = new Size(284, 70);
             btnPnlReports.TabIndex = 26;
             btnPnlReports.Text = "Reports";
             btnPnlReports.UseVisualStyleBackColor = false;
@@ -723,9 +756,9 @@
             label7.AutoSize = true;
             label7.BackColor = Color.FromArgb(26, 70, 130);
             label7.ForeColor = SystemColors.ActiveCaption;
-            label7.Location = new Point(1113, 473);
+            label7.Location = new Point(974, 355);
             label7.Name = "label7";
-            label7.Size = new Size(232, 20);
+            label7.Size = new Size(184, 15);
             label7.TabIndex = 27;
             label7.Text = "Demand by Service and No-Show";
             // 
@@ -749,9 +782,10 @@
             pnlAdminDashboard.Controls.Add(label6);
             pnlAdminDashboard.Dock = DockStyle.Fill;
             pnlAdminDashboard.Location = new Point(0, 0);
+            pnlAdminDashboard.Margin = new Padding(3, 2, 3, 2);
             pnlAdminDashboard.Name = "pnlAdminDashboard";
-            pnlAdminDashboard.Padding = new Padding(317, 240, 21, 20);
-            pnlAdminDashboard.Size = new Size(1370, 709);
+            pnlAdminDashboard.Padding = new Padding(277, 180, 18, 15);
+            pnlAdminDashboard.Size = new Size(1199, 532);
             pnlAdminDashboard.TabIndex = 6;
             pnlAdminDashboard.Paint += pnlAdminDashboard_Paint;
             // 
@@ -764,8 +798,9 @@
             pnlStaff.Controls.Add(label13);
             pnlStaff.Dock = DockStyle.Fill;
             pnlStaff.Location = new Point(0, 0);
+            pnlStaff.Margin = new Padding(3, 2, 3, 2);
             pnlStaff.Name = "pnlStaff";
-            pnlStaff.Size = new Size(1370, 709);
+            pnlStaff.Size = new Size(1199, 532);
             pnlStaff.TabIndex = 5;
             // 
             // curvedCornerPanel6
@@ -778,9 +813,10 @@
             curvedCornerPanel6.Controls.Add(label14);
             curvedCornerPanel6.Controls.Add(btnAddStaff);
             curvedCornerPanel6.Controls.Add(txtName);
-            curvedCornerPanel6.Location = new Point(333, 216);
+            curvedCornerPanel6.Location = new Point(291, 162);
+            curvedCornerPanel6.Margin = new Padding(3, 2, 3, 2);
             curvedCornerPanel6.Name = "curvedCornerPanel6";
-            curvedCornerPanel6.Size = new Size(1102, 203);
+            curvedCornerPanel6.Size = new Size(964, 152);
             curvedCornerPanel6.TabIndex = 18;
             // 
             // cmbCentre
@@ -788,19 +824,20 @@
             cmbCentre.BackColor = Color.White;
             cmbCentre.Font = new Font("Segoe UI", 10F);
             cmbCentre.ForeColor = Color.FromArgb(30, 30, 30);
-            cmbCentre.Location = new Point(815, 69);
+            cmbCentre.Location = new Point(713, 52);
+            cmbCentre.Margin = new Padding(3, 2, 3, 2);
             cmbCentre.Name = "cmbCentre";
             cmbCentre.PlaceholderText = "Select a centre";
-            cmbCentre.Size = new Size(279, 45);
+            cmbCentre.Size = new Size(244, 34);
             cmbCentre.TabIndex = 16;
             // 
             // label18
             // 
             label18.AutoSize = true;
             label18.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label18.Location = new Point(837, 39);
+            label18.Location = new Point(732, 29);
             label18.Name = "label18";
-            label18.Size = new Size(149, 28);
+            label18.Size = new Size(120, 21);
             label18.TabIndex = 15;
             label18.Text = "Service Centre";
             // 
@@ -808,9 +845,9 @@
             // 
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label16.Location = new Point(461, 39);
+            label16.Location = new Point(403, 29);
             label16.Name = "label16";
-            label16.Size = new Size(145, 28);
+            label16.Size = new Size(117, 21);
             label16.TabIndex = 13;
             label16.Text = "Email Address";
             // 
@@ -818,19 +855,20 @@
             // 
             txtEmail.BackColor = Color.White;
             txtEmail.Font = new Font("Segoe UI", 10F);
-            txtEmail.Location = new Point(454, 69);
+            txtEmail.Location = new Point(397, 52);
+            txtEmail.Margin = new Padding(3, 2, 3, 2);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderText = "Search for a booking";
-            txtEmail.Size = new Size(331, 44);
+            txtEmail.Size = new Size(290, 33);
             txtEmail.TabIndex = 12;
             // 
             // label14
             // 
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label14.Location = new Point(19, 39);
+            label14.Location = new Point(17, 29);
             label14.Name = "label14";
-            label14.Size = new Size(108, 28);
+            label14.Size = new Size(88, 21);
             label14.TabIndex = 11;
             label14.Text = "Full Name";
             // 
@@ -842,10 +880,11 @@
             btnAddStaff.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnAddStaff.ForeColor = Color.White;
             btnAddStaff.HoverColor = Color.Empty;
-            btnAddStaff.Location = new Point(19, 137);
+            btnAddStaff.Location = new Point(17, 103);
+            btnAddStaff.Margin = new Padding(3, 2, 3, 2);
             btnAddStaff.Name = "btnAddStaff";
             btnAddStaff.PressedColor = Color.Empty;
-            btnAddStaff.Size = new Size(187, 37);
+            btnAddStaff.Size = new Size(164, 28);
             btnAddStaff.TabIndex = 1;
             btnAddStaff.Text = "Add Staff Member";
             btnAddStaff.UseVisualStyleBackColor = false;
@@ -855,10 +894,11 @@
             // 
             txtName.BackColor = Color.White;
             txtName.Font = new Font("Segoe UI", 10F);
-            txtName.Location = new Point(19, 69);
+            txtName.Location = new Point(17, 52);
+            txtName.Margin = new Padding(3, 2, 3, 2);
             txtName.Name = "txtName";
             txtName.PlaceholderText = "Search for a booking";
-            txtName.Size = new Size(402, 44);
+            txtName.Size = new Size(352, 33);
             txtName.TabIndex = 0;
             // 
             // dgvStaffMembers
@@ -879,13 +919,14 @@
             dgvStaffMembers.Columns.AddRange(new DataGridViewColumn[] { colName, dataGridViewTextBoxColumn1, Centre, Date });
             dgvStaffMembers.EnableHeadersVisualStyles = false;
             dgvStaffMembers.GridColor = SystemColors.InactiveCaption;
-            dgvStaffMembers.Location = new Point(333, 433);
+            dgvStaffMembers.Location = new Point(291, 325);
+            dgvStaffMembers.Margin = new Padding(3, 2, 3, 2);
             dgvStaffMembers.Name = "dgvStaffMembers";
             dgvStaffMembers.ReadOnly = true;
             dgvStaffMembers.RowHeadersVisible = false;
             dgvStaffMembers.RowHeadersWidth = 51;
             dgvStaffMembers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvStaffMembers.Size = new Size(1090, 269);
+            dgvStaffMembers.Size = new Size(954, 202);
             dgvStaffMembers.TabIndex = 17;
             // 
             // colName
@@ -920,9 +961,9 @@
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
-            label12.Location = new Point(320, 109);
+            label12.Location = new Point(280, 82);
             label12.Name = "label12";
-            label12.Size = new Size(254, 46);
+            label12.Size = new Size(205, 37);
             label12.TabIndex = 16;
             label12.Text = "Staff Members";
             // 
@@ -931,9 +972,9 @@
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI", 12.3F);
             label13.ForeColor = SystemColors.GrayText;
-            label13.Location = new Point(320, 156);
+            label13.Location = new Point(280, 117);
             label13.Name = "label13";
-            label13.Size = new Size(484, 30);
+            label13.Size = new Size(398, 23);
             label13.TabIndex = 15;
             label13.Text = "Service-centre employees who run the queue desk.";
             // 
@@ -942,6 +983,11 @@
             pnlCentres.BackColor = SystemColors.GradientActiveCaption;
             pnlCentres.BackgroundImage = (Image)resources.GetObject("pnlCentres.BackgroundImage");
             pnlCentres.BackgroundImageLayout = ImageLayout.Stretch;
+            pnlCentres.Controls.Add(dtpDate);
+            pnlCentres.Controls.Add(lblCapacity);
+            pnlCentres.Controls.Add(cmbCapacity);
+            pnlCentres.Controls.Add(cmbSlotCentre);
+            pnlCentres.Controls.Add(lblSlots);
             pnlCentres.Controls.Add(dgvCentres);
             pnlCentres.Controls.Add(btnSave);
             pnlCentres.Controls.Add(txtAddress);
@@ -954,9 +1000,61 @@
             pnlCentres.Controls.Add(Centres);
             pnlCentres.Dock = DockStyle.Fill;
             pnlCentres.Location = new Point(0, 0);
+            pnlCentres.Margin = new Padding(3, 2, 3, 2);
             pnlCentres.Name = "pnlCentres";
-            pnlCentres.Size = new Size(1370, 709);
+            pnlCentres.Size = new Size(1199, 532);
             pnlCentres.TabIndex = 5;
+            // 
+            // dtpDate
+            // 
+            dtpDate.Location = new Point(610, 299);
+            dtpDate.Name = "dtpDate";
+            dtpDate.Size = new Size(211, 23);
+            dtpDate.TabIndex = 44;
+            // 
+            // lblCapacity
+            // 
+            lblCapacity.AutoSize = true;
+            lblCapacity.BackColor = Color.Transparent;
+            lblCapacity.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
+            lblCapacity.Location = new Point(591, 227);
+            lblCapacity.Name = "lblCapacity";
+            lblCapacity.Size = new Size(67, 19);
+            lblCapacity.TabIndex = 43;
+            lblCapacity.Text = "Capacity";
+            // 
+            // cmbCapacity
+            // 
+            cmbCapacity.BackColor = Color.White;
+            cmbCapacity.Font = new Font("Segoe UI", 10F);
+            cmbCapacity.ForeColor = Color.FromArgb(30, 30, 30);
+            cmbCapacity.Location = new Point(591, 248);
+            cmbCapacity.Margin = new Padding(3, 2, 3, 2);
+            cmbCapacity.Name = "cmbCapacity";
+            cmbCapacity.Size = new Size(240, 34);
+            cmbCapacity.TabIndex = 42;
+            // 
+            // cmbSlotCentre
+            // 
+            cmbSlotCentre.BackColor = Color.White;
+            cmbSlotCentre.Font = new Font("Segoe UI", 10F);
+            cmbSlotCentre.ForeColor = Color.FromArgb(30, 30, 30);
+            cmbSlotCentre.Location = new Point(586, 173);
+            cmbSlotCentre.Margin = new Padding(3, 2, 3, 2);
+            cmbSlotCentre.Name = "cmbSlotCentre";
+            cmbSlotCentre.Size = new Size(240, 34);
+            cmbSlotCentre.TabIndex = 41;
+            // 
+            // lblSlots
+            // 
+            lblSlots.AutoSize = true;
+            lblSlots.BackColor = Color.Transparent;
+            lblSlots.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
+            lblSlots.Location = new Point(602, 149);
+            lblSlots.Name = "lblSlots";
+            lblSlots.Size = new Size(41, 19);
+            lblSlots.TabIndex = 40;
+            lblSlots.Text = "Slots";
             // 
             // dgvCentres
             // 
@@ -973,39 +1071,18 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             dgvCentres.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvCentres.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCentres.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn4, Required, dataGridViewTextBoxColumn5 });
+            dgvCentres.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn4, Required, dataGridViewTextBoxColumn5, Slots, Capacity, DateChosen });
             dgvCentres.EnableHeadersVisualStyles = false;
             dgvCentres.GridColor = SystemColors.InactiveCaption;
-            dgvCentres.Location = new Point(315, 513);
+            dgvCentres.Location = new Point(276, 385);
+            dgvCentres.Margin = new Padding(3, 2, 3, 2);
             dgvCentres.Name = "dgvCentres";
             dgvCentres.ReadOnly = true;
             dgvCentres.RowHeadersVisible = false;
             dgvCentres.RowHeadersWidth = 51;
             dgvCentres.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvCentres.Size = new Size(927, 172);
+            dgvCentres.Size = new Size(811, 129);
             dgvCentres.TabIndex = 39;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewTextBoxColumn4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewTextBoxColumn4.HeaderText = "Name of Centre";
-            dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // Required
-            // 
-            Required.HeaderText = "Province";
-            Required.MinimumWidth = 6;
-            Required.Name = "Required";
-            Required.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            dataGridViewTextBoxColumn5.HeaderText = "Address";
-            dataGridViewTextBoxColumn5.MinimumWidth = 6;
-            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            dataGridViewTextBoxColumn5.ReadOnly = true;
             // 
             // btnSave
             // 
@@ -1015,10 +1092,11 @@
             btnSave.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnSave.ForeColor = SystemColors.GradientActiveCaption;
             btnSave.HoverColor = Color.Empty;
-            btnSave.Location = new Point(981, 440);
+            btnSave.Location = new Point(858, 330);
+            btnSave.Margin = new Padding(3, 2, 3, 2);
             btnSave.Name = "btnSave";
             btnSave.PressedColor = Color.Empty;
-            btnSave.Size = new Size(178, 41);
+            btnSave.Size = new Size(156, 31);
             btnSave.TabIndex = 38;
             btnSave.Text = "💾Save";
             btnSave.UseVisualStyleBackColor = false;
@@ -1028,10 +1106,11 @@
             // 
             txtAddress.BackColor = Color.White;
             txtAddress.Font = new Font("Segoe UI", 10F);
-            txtAddress.Location = new Point(329, 437);
+            txtAddress.Location = new Point(288, 328);
+            txtAddress.Margin = new Padding(3, 2, 3, 2);
             txtAddress.Name = "txtAddress";
             txtAddress.PlaceholderText = "Enter Adress";
-            txtAddress.Size = new Size(618, 45);
+            txtAddress.Size = new Size(541, 34);
             txtAddress.TabIndex = 33;
             // 
             // label25
@@ -1039,9 +1118,9 @@
             label25.AutoSize = true;
             label25.BackColor = Color.Transparent;
             label25.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
-            label25.Location = new Point(323, 399);
+            label25.Location = new Point(283, 299);
             label25.Name = "label25";
-            label25.Size = new Size(80, 25);
+            label25.Size = new Size(63, 19);
             label25.TabIndex = 32;
             label25.Text = "Address";
             // 
@@ -1050,19 +1129,21 @@
             cmbProvinces.BackColor = Color.White;
             cmbProvinces.Font = new Font("Segoe UI", 10F);
             cmbProvinces.ForeColor = Color.FromArgb(30, 30, 30);
-            cmbProvinces.Location = new Point(329, 337);
+            cmbProvinces.Location = new Point(288, 253);
+            cmbProvinces.Margin = new Padding(3, 2, 3, 2);
             cmbProvinces.Name = "cmbProvinces";
-            cmbProvinces.Size = new Size(618, 45);
+            cmbProvinces.Size = new Size(271, 34);
             cmbProvinces.TabIndex = 31;
             // 
             // txtNameCentre
             // 
             txtNameCentre.BackColor = Color.White;
             txtNameCentre.Font = new Font("Segoe UI", 10F);
-            txtNameCentre.Location = new Point(329, 231);
+            txtNameCentre.Location = new Point(288, 173);
+            txtNameCentre.Margin = new Padding(3, 2, 3, 2);
             txtNameCentre.Name = "txtNameCentre";
             txtNameCentre.PlaceholderText = "Enter The new Centre Name";
-            txtNameCentre.Size = new Size(618, 45);
+            txtNameCentre.Size = new Size(271, 34);
             txtNameCentre.TabIndex = 30;
             // 
             // label24
@@ -1070,9 +1151,9 @@
             label24.AutoSize = true;
             label24.BackColor = Color.Transparent;
             label24.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
-            label24.Location = new Point(323, 300);
+            label24.Location = new Point(283, 225);
             label24.Name = "label24";
-            label24.Size = new Size(94, 25);
+            label24.Size = new Size(74, 19);
             label24.TabIndex = 28;
             label24.Text = "Provinces";
             // 
@@ -1081,9 +1162,9 @@
             lblCentre.AutoSize = true;
             lblCentre.BackColor = Color.Transparent;
             lblCentre.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
-            lblCentre.Location = new Point(323, 193);
+            lblCentre.Location = new Point(283, 145);
             lblCentre.Name = "lblCentre";
-            lblCentre.Size = new Size(146, 25);
+            lblCentre.Size = new Size(115, 19);
             lblCentre.TabIndex = 26;
             lblCentre.Text = "Name of Centre";
             // 
@@ -1092,9 +1173,9 @@
             label23.AutoSize = true;
             label23.Font = new Font("Segoe UI", 12.3F);
             label23.ForeColor = SystemColors.GrayText;
-            label23.Location = new Point(320, 144);
+            label23.Location = new Point(280, 108);
             label23.Name = "label23";
-            label23.Size = new Size(253, 30);
+            label23.Size = new Size(207, 23);
             label23.TabIndex = 12;
             label23.Text = "Add And Edit new centres";
             // 
@@ -1103,9 +1184,9 @@
             Centres.AutoSize = true;
             Centres.BackColor = Color.Transparent;
             Centres.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
-            Centres.Location = new Point(313, 97);
+            Centres.Location = new Point(274, 73);
             Centres.Name = "Centres";
-            Centres.Size = new Size(140, 46);
+            Centres.Size = new Size(114, 37);
             Centres.TabIndex = 11;
             Centres.Text = "Centres";
             // 
@@ -1121,8 +1202,9 @@
             pnlBookings.Controls.Add(label22);
             pnlBookings.Dock = DockStyle.Fill;
             pnlBookings.Location = new Point(0, 0);
+            pnlBookings.Margin = new Padding(3, 2, 3, 2);
             pnlBookings.Name = "pnlBookings";
-            pnlBookings.Size = new Size(1370, 709);
+            pnlBookings.Size = new Size(1199, 532);
             pnlBookings.TabIndex = 5;
             // 
             // dgvTotalBookings
@@ -1143,13 +1225,14 @@
             dgvTotalBookings.Columns.AddRange(new DataGridViewColumn[] { Reference, Beneficiary, dataGridViewTextBoxColumn2, C, Time, dataGridViewTextBoxColumn3 });
             dgvTotalBookings.EnableHeadersVisualStyles = false;
             dgvTotalBookings.GridColor = SystemColors.GradientActiveCaption;
-            dgvTotalBookings.Location = new Point(315, 367);
+            dgvTotalBookings.Location = new Point(276, 275);
+            dgvTotalBookings.Margin = new Padding(3, 2, 3, 2);
             dgvTotalBookings.Name = "dgvTotalBookings";
             dgvTotalBookings.ReadOnly = true;
             dgvTotalBookings.RowHeadersVisible = false;
             dgvTotalBookings.RowHeadersWidth = 51;
             dgvTotalBookings.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvTotalBookings.Size = new Size(1080, 292);
+            dgvTotalBookings.Size = new Size(945, 219);
             dgvTotalBookings.TabIndex = 22;
             // 
             // Reference
@@ -1200,9 +1283,10 @@
             curvedCornerPanel7.BackColor = Color.DarkGray;
             curvedCornerPanel7.Controls.Add(btnSearchB);
             curvedCornerPanel7.Controls.Add(txtSearching);
-            curvedCornerPanel7.Location = new Point(320, 221);
+            curvedCornerPanel7.Location = new Point(280, 166);
+            curvedCornerPanel7.Margin = new Padding(3, 2, 3, 2);
             curvedCornerPanel7.Name = "curvedCornerPanel7";
-            curvedCornerPanel7.Size = new Size(1075, 125);
+            curvedCornerPanel7.Size = new Size(941, 94);
             curvedCornerPanel7.TabIndex = 21;
             // 
             // btnSearchB
@@ -1213,10 +1297,11 @@
             btnSearchB.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnSearchB.ForeColor = Color.White;
             btnSearchB.HoverColor = Color.Empty;
-            btnSearchB.Location = new Point(859, 45);
+            btnSearchB.Location = new Point(752, 34);
+            btnSearchB.Margin = new Padding(3, 2, 3, 2);
             btnSearchB.Name = "btnSearchB";
             btnSearchB.PressedColor = Color.Empty;
-            btnSearchB.Size = new Size(187, 37);
+            btnSearchB.Size = new Size(164, 28);
             btnSearchB.TabIndex = 1;
             btnSearchB.Text = "Search";
             btnSearchB.UseVisualStyleBackColor = false;
@@ -1226,10 +1311,11 @@
             // 
             txtSearching.BackColor = Color.White;
             txtSearching.Font = new Font("Segoe UI", 10F);
-            txtSearching.Location = new Point(27, 45);
+            txtSearching.Location = new Point(24, 34);
+            txtSearching.Margin = new Padding(3, 2, 3, 2);
             txtSearching.Name = "txtSearching";
             txtSearching.PlaceholderText = "Search for a booking";
-            txtSearching.Size = new Size(827, 45);
+            txtSearching.Size = new Size(724, 34);
             txtSearching.TabIndex = 0;
             // 
             // label21
@@ -1237,9 +1323,9 @@
             label21.AutoSize = true;
             label21.BackColor = Color.Transparent;
             label21.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
-            label21.Location = new Point(315, 117);
+            label21.Location = new Point(276, 88);
             label21.Name = "label21";
-            label21.Size = new Size(374, 46);
+            label21.Size = new Size(301, 37);
             label21.TabIndex = 20;
             label21.Text = "Booking management";
             // 
@@ -1249,9 +1335,9 @@
             label22.BackColor = Color.Transparent;
             label22.Font = new Font("Segoe UI", 12.3F);
             label22.ForeColor = SystemColors.ControlText;
-            label22.Location = new Point(315, 163);
+            label22.Location = new Point(276, 122);
             label22.Name = "label22";
-            label22.Size = new Size(344, 30);
+            label22.Size = new Size(283, 23);
             label22.TabIndex = 19;
             label22.Text = "Search and filter every appointment";
             // 
@@ -1262,8 +1348,9 @@
             pnlReports.Controls.Add(label20);
             pnlReports.Dock = DockStyle.Fill;
             pnlReports.Location = new Point(0, 0);
+            pnlReports.Margin = new Padding(3, 2, 3, 2);
             pnlReports.Name = "pnlReports";
-            pnlReports.Size = new Size(1370, 709);
+            pnlReports.Size = new Size(1199, 532);
             pnlReports.TabIndex = 5;
             pnlReports.Paint += pnlReports_Paint;
             // 
@@ -1271,9 +1358,9 @@
             // 
             label19.AutoSize = true;
             label19.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
-            label19.Location = new Point(315, 99);
+            label19.Location = new Point(276, 74);
             label19.Name = "label19";
-            label19.Size = new Size(144, 46);
+            label19.Size = new Size(118, 37);
             label19.TabIndex = 18;
             label19.Text = "Reports";
             // 
@@ -1282,25 +1369,66 @@
             label20.AutoSize = true;
             label20.Font = new Font("Segoe UI", 12.3F);
             label20.ForeColor = SystemColors.GrayText;
-            label20.Location = new Point(315, 144);
+            label20.Location = new Point(276, 108);
             label20.Name = "label20";
-            label20.Size = new Size(618, 30);
+            label20.Size = new Size(506, 23);
             label20.TabIndex = 17;
             label20.Text = "Daily volume, completed visits, no-shows and demand by service.";
             // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewTextBoxColumn4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewTextBoxColumn4.HeaderText = "Name of Centre";
+            dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // Required
+            // 
+            Required.HeaderText = "Province";
+            Required.MinimumWidth = 6;
+            Required.Name = "Required";
+            Required.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            dataGridViewTextBoxColumn5.HeaderText = "Address";
+            dataGridViewTextBoxColumn5.MinimumWidth = 6;
+            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // Slots
+            // 
+            Slots.HeaderText = "Slots";
+            Slots.Name = "Slots";
+            Slots.ReadOnly = true;
+            // 
+            // Capacity
+            // 
+            Capacity.HeaderText = "Capacity";
+            Capacity.Name = "Capacity";
+            Capacity.ReadOnly = true;
+            // 
+            // DateChosen
+            // 
+            DateChosen.HeaderText = "Date";
+            DateChosen.Name = "DateChosen";
+            DateChosen.ReadOnly = true;
+            // 
             // AdminPortal
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1370, 709);
+            ClientSize = new Size(1199, 532);
             Controls.Add(pnlSidePanel);
             Controls.Add(pnlTop);
-            Controls.Add(pnlBookings);
             Controls.Add(pnlCentres);
             Controls.Add(pnlStaff);
             Controls.Add(pnlServices);
             Controls.Add(pnlAdminDashboard);
             Controls.Add(pnlReports);
+            Controls.Add(pnlBookings);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "AdminPortal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AdminPortal";
@@ -1432,11 +1560,19 @@
         private Classes.RoundedComboBox cmbProvinces;
         private Classes.RoundedButton btnSave;
         private DataGridView dgvCentres;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private DataGridViewTextBoxColumn Required;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private DataGridView dgvServices;
         private DataGridViewTextBoxColumn Service;
         private DataGridViewTextBoxColumn Description;
+        private Classes.RoundedComboBox cmbSlotCentre;
+        private Label lblSlots;
+        private DateTimePicker dtpDate;
+        private Label lblCapacity;
+        private Classes.RoundedComboBox cmbCapacity;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private DataGridViewTextBoxColumn Required;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private DataGridViewTextBoxColumn Slots;
+        private DataGridViewTextBoxColumn Capacity;
+        private DataGridViewTextBoxColumn DateChosen;
     }
 }

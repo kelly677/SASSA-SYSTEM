@@ -36,6 +36,9 @@ namespace SASSA_Application.Designer_Forms
             LoadCentresGrid();
             LoadBookingsGrid();
             LoadServicesGrid();
+            ApplySidebarStyle();
+            LoadCentresForSlotsDropdown();
+            LoadSlotsGrid();
             RefreshAdminDashboardData();
         }
 
@@ -89,7 +92,49 @@ namespace SASSA_Application.Designer_Forms
                 dgvCentres.Rows.Add(parts[0], parts[1], parts[2]);
             }
         }
+        private void LoadSlotsGrid()
+        {
+            dgvCentres.Rows.Clear();
+            if (!File.Exists("Slots.txt")) return;
 
+            foreach (string line in File.ReadAllLines("Slots.txt"))
+            {
+                if (string.IsNullOrWhiteSpace(line)) continue;
+                string[] parts = line.Split('|');
+                if (parts.Length >= 6) continue;
+                {
+                    dgvCentres.Rows.Add(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5]);
+                }
+            }
+        }
+ 
+        private void LoadCentresForSlotsDropdown()
+        {
+            cmbSlotCentre.Items.Clear();
+            cmbSlotCentre.Items.Add("Morning (08:00 - 12:00)");
+            cmbSlotCentre.Items.Add("Afternoon (13:00 - 16:00)");
+            cmbSlotCentre.Items.Add("Full Day");
+
+            cmbCapacity.Items.Clear();
+            cmbCapacity.Items.Add("50");
+            cmbCapacity.Items.Add("100");
+            cmbCapacity.Items.Add("150");
+            cmbCapacity.Items.Add("200");
+            cmbCapacity.Items.Add("500");
+          
+
+            //if (!File.Exists("Centres.txt")) return;
+
+            //foreach  (string line in File.ReadAllLines("Centres.txt") )
+            //{
+            //    if (string.IsNullOrWhiteSpace(line)) continue;
+            //    string[] parts = line.Split('|');
+            //    if(parts.Length >= 1)
+            //    {
+            //        cmbSlotCentre.Items.Add(parts[0].Trim());
+            //    }
+            //}
+        }
         private void LoadBookingsGrid()
         {
             dgvTotalBookings.Rows.Clear();
@@ -102,7 +147,7 @@ namespace SASSA_Application.Designer_Forms
                                            b.CentreName, b.Date, b.Status);
             }
         }
-
+        
         private void LoadStaff()
         {
             dgvStaffMembers.Rows.Clear();
@@ -163,6 +208,8 @@ namespace SASSA_Application.Designer_Forms
         {
             pnlCentres.BringToFront();
             LoadCentresGrid();
+            LoadCentresForSlotsDropdown();
+            
         }
 
         private void btnBookings_Click(object sender, EventArgs e)
@@ -243,55 +290,95 @@ namespace SASSA_Application.Designer_Forms
         // ============================================================
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string centreName = txtNameCentre.Text.Trim();
-            string address = txtAddress.Text.Trim();
-
-            string province = cmbProvinces.SelectedItem != null
-                              ? cmbProvinces.SelectedItem.ToString()
-                              : "";
-
-            if (string.IsNullOrWhiteSpace(centreName) ||
-                string.IsNullOrWhiteSpace(province) ||
-                string.IsNullOrWhiteSpace(address))
+            if (!string.IsNullOrWhiteSpace(txtNameCentre.Text))
             {
-                MessageBox.Show("Please fill in all fields.", "Validation Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                string centreName = txtNameCentre.Text.Trim();
+                string address = txtAddress.Text.Trim();
 
-            // Check for duplicate
-            if (File.Exists("Centres.txt"))
-            {
-                foreach (string line in File.ReadAllLines("Centres.txt"))
+                string province = cmbProvinces.SelectedItem != null
+                        ? cmbProvinces.SelectedItem.ToString()
+                                  : "";
+
+                if (string.IsNullOrWhiteSpace(centreName) ||
+                    string.IsNullOrWhiteSpace(province) ||
+                    string.IsNullOrWhiteSpace(address))
                 {
-                    if (string.IsNullOrWhiteSpace(line)) continue;
-                    string[] parts = line.Split('|');
-                    if (parts.Length >= 1 && parts[0] == centreName)
+                    MessageBox.Show("Please fill in all fields.", "Validation Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Check for duplicate
+                if (File.Exists("Centres.txt"))
+                {
+                    foreach (string line in File.ReadAllLines("Centres.txt"))
                     {
-                        MessageBox.Show("A centre with this name already exists.",
-                                        "Duplicate Centre",
-                                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
+                        if (string.IsNullOrWhiteSpace(line)) continue;
+                        string[] parts = line.Split('|');
+                        if (parts.Length >= 1 && parts[0].Equals(centreName, StringComparison.OrdinalIgnoreCase))
+                        {
+                            MessageBox.Show("A centre with this name already exists.",
+                                            "Duplicate Centre",
+                                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
                     }
                 }
+
+                // Save
+                string newLine = centreName + "|" + province + "|" + address;
+                File.AppendAllText("Centres.txt", newLine + Environment.NewLine);
+
+                // Update grid + dropdown immediately
+                dgvCentres.Rows.Add(centreName, province, address, "-", "-", "-");
+                cmbCentre.Items.Add(centreName);
+
+                MessageBox.Show("Centre added successfully!", "Saved",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                txtNameCentre.Text = "";
+                cmbProvinces.SelectedItem = null;
+                txtAddress.Text = "";
             }
+            if (cmbCentre.SelectedItem != null)
+            {
+                string centre =  cmbCentre.SelectedItem.ToString();
+                string capacityStr = cmbCapacity.SelectedItem != null ? cmbCapacity.SelectedItem.ToString() : "";
+                string slotdate = dtpDate.Value.ToString("dd/MM/yyyy");
+                string slot = cmbSlotCentre.SelectedItem != null ? cmbSlotCentre.SelectedItem.ToString() : "";
 
-            // Save
-            string newLine = centreName + "|" + province + "|" + address;
-            File.AppendAllText("Centres.txt", newLine + Environment.NewLine);
+                if (string.IsNullOrWhiteSpace(centre) || string.IsNullOrWhiteSpace(slot) || string.IsNullOrWhiteSpace(capacityStr))
+                {
+                    MessageBox.Show("Please select a centre, slot and capacity from the dropdown.", "Validation Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                int capacity = int.Parse(capacityStr);
+                string slotSelected = slot;
+                int booked = 0;
+                int available = capacity;
 
-            // Update grid + dropdown immediately
-            dgvCentres.Rows.Add(centreName, province, address);
-            cmbCentre.Items.Add(centreName);
+                string slotLine = centre + "|" + slotSelected + "|" + capacity + "|" + slotdate + "|" + booked + "|" + available;
+                File.AppendAllText("Slots.txt", slotLine + Environment.NewLine);
 
-            MessageBox.Show("Centre added successfully!", "Saved",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dgvCentres.Rows.Add(centre, "-", "-", slotSelected, capacity, slotdate);
 
-            txtNameCentre.Text = "";
-            cmbProvinces.SelectedItem = null;
-            txtAddress.Text = "";
+                MessageBox.Show("Slot added successfully!", "Saved",
+                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                cmbCentre.SelectedItem = null;
+                cmbSlotCentre.SelectedItem = null;
+                cmbCapacity.SelectedItem = null;
+                dtpDate.Value = DateTime.Now;
+                return;
+
+                MessageBox.Show("Please fill in centre details or slots before saving", "Selection Required",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+
+
+            }
         }
-
         // ============================================================
         // ADD SERVICE
         // ============================================================
@@ -424,7 +511,106 @@ namespace SASSA_Application.Designer_Forms
         // ============================================================
         // EMPTY STUBS (keep if wired in Designer)
         // ============================================================
-        private void pnlReports_Paint(object sender, PaintEventArgs e) { }
+        private void pnlReports_Paint(object sender, PaintEventArgs e) 
+        {
+            Graphics g = e.Graphics;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            List<Booking> bookings = FileManager.LoadBookings();
+            int total = bookings.Count;
+            int completed = bookings.Count(b => b.Status.Equals("Completed", StringComparison.OrdinalIgnoreCase));
+            int waiting = bookings.Count(b => b.Status.Equals("Waiting", StringComparison.OrdinalIgnoreCase) ||
+                                        b.Status.Equals("In Queue", StringComparison.OrdinalIgnoreCase));
+            int noShow = bookings.Count(b => b.Status.Equals("No-Show", StringComparison.OrdinalIgnoreCase));
+
+            int barX = 220, barY = 50, barWidth = 35, maxHeight = 100;
+
+            //int grantApps = bookings.Count(b => b.ServiceName != null  && 
+            //b.ServiceName.IndexOf("Grant", StringComparison.OrdinalIgnoreCase) >=0);
+            //int enquiries = bookings.Count(b => b.ServiceName != null &&
+            //b.ServiceName.IndexOf("Enquiry", StringComparison.OrdinalIgnoreCase) >= 0);
+
+            int grantApps = bookings.Count(b => b.ServiceName != null &&
+                  b.ServiceName.IndexOf("Grant", StringComparison.OrdinalIgnoreCase) >= 0);
+            int enquiries = bookings.Count(b => b.ServiceName != null &&
+            b.ServiceName.IndexOf("Enquiry", StringComparison.OrdinalIgnoreCase) >= 0);
+            int maxVal = Math.Max(1, Math.Max(grantApps, enquiries));
+            DrawChartBar(g, "Grant Apps", grantApps, maxVal, barX, barY, barWidth, maxHeight,
+                         Color.FromArgb(0, 122, 255));
+            DrawChartBar(g, "Enquiries", enquiries, maxVal, barX + 50, barY, barWidth, maxHeight,
+                         Color.FromArgb(52, 199, 89));
+
+            // Draw Doughnut Chart (Bookings Overview)
+            int pieX = 220, pieY = 60, pieSize = 140, holeSize = 70;
+            int safeTotal = Math.Max(1, total);
+            float angleCompleted = (completed / (float)safeTotal) * 360f;
+            float angleWaiting = (waiting / (float)safeTotal) * 360f;
+
+            using (Brush b1 = new SolidBrush(Color.FromArgb(0, 122, 255)))
+                g.FillPie(b1, pieX, pieY, pieSize, pieSize, 0, angleCompleted);
+            using (Brush b2 = new SolidBrush(Color.FromArgb(255, 149, 0)))
+                g.FillPie(b2, pieX, pieY, pieSize, pieSize, angleCompleted, angleWaiting);
+
+            using (Brush centerBrush = new SolidBrush(Color.White))
+                g.FillEllipse(centerBrush,
+                    pieX + (pieSize - holeSize) / 2,
+                    pieY + (pieSize - holeSize) / 2,
+                    holeSize, holeSize);
+
+        }
+        private void DrawChartBar(Graphics g, string label, int value, int maxValue, int x, int y,
+            int width, int maxHeight, Color color)
+        {
+            int barHeight = maxValue > 0? (int)((float)value / maxValue * maxHeight) :0;
+            //int barHeight = (int)((float)value / Math.Max(1, maxValue) * maxHeight);
+            //using (Brush brush = new SolidBrush(color))
+            if (barHeight > 0)
+            {
+                using (Brush brush = new SolidBrush(color))
+                {
+                    g.FillRectangle(brush, x, y + (maxHeight - barHeight), width, barHeight);
+                }
+                using (Font font = new Font("SegoE UI", 9))
+                using (Brush textBrush = new SolidBrush(Color.Black))
+                {
+
+                    g.DrawString(value.ToString(), font, textBrush, x + 8, y + (maxHeight - barHeight) - 15);
+                    g.DrawString(label, font, textBrush, x - 5, y + maxHeight + 5);
+                }
+            }
+        }
+        private void ApplySidebarStyle()
+        {
+            btnAdminDashboard.Text = "       🏠     Dashboard";
+            btnServices.Text = "       ⚙️    Services";
+            btnStaff.Text = "       👥     Staff";
+            btnCentres.Text = "       📍     Centres and Slots";
+            btnBookings.Text = "       📅     Bookings";
+            btnReports.Text = "       📊     Reports";
+            btnLogout.Text = "       🚪     Logout";
+
+            Button[] navButtons =
+            {
+        btnAdminDashboard, btnServices, btnStaff, btnCentres,
+        btnBookings, btnReports, btnLogout
+    };
+            btnAdminDashboard.BackColor = Color.FromArgb(255, 193, 7);
+            btnServices.BackColor = Color.FromArgb(40, 167, 69);
+            btnStaff.BackColor = Color.FromArgb(0, 123, 255);
+            btnCentres.BackColor = Color.FromArgb(23, 162, 184);
+            btnBookings.BackColor = Color.FromArgb(255, 193, 7);
+            btnReports.BackColor = Color.FromArgb(40, 167, 69);
+            btnLogout.BackColor = Color.FromArgb(0, 123, 255);
+
+            //foreach (Button btn in navButtons)
+            //{
+            //    btn.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            //    btn.ForeColor = Color.White;
+            //    btn.BackColor = Color.FromArgb(0, 51, 102);
+            //    btn.FlatStyle = FlatStyle.Flat;
+            //    btn.FlatAppearance.BorderSize = 0;
+            //}
+        }
         private void label17_Click(object sender, EventArgs e) { }
         private void cmbServiceCentre_Click(object sender, EventArgs e) { }
 

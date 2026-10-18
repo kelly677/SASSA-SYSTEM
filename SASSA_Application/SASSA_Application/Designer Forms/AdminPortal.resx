@@ -2716,7 +2716,7 @@
   <data name="pnlAdminDashboard.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAABQAAAALQCAIAAABAH0oBAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAA/7JJREFUeF7s3Yd2I0eWqGu9yD3n3Jl2MuU9vbdwBGEIgt577w08Et57gJ5VpZ77
+        vAAADrwBlbxySQAA/7JJREFUeF7s3Yd2I0eWqGu9yD3n3Jl2MuU9vbdwBGEIgt577w08Et57gJ5VpZ77
         lHdFbiAYiJ2ZAClK3TNHWP/CsJJZKErdPUufdmTEDx0tjR0tjZ2tTbSutuautubu9ha2no7WSu203s4O
         Wl9XJ62/u4s20NMNDfb20FR9vTR1fx+btr+fphsYoA0NDtL0KhVtWK2mGTQamlGrpZl0Ojbz0BBtRK/n
         sgwPW4aHRw2GcqZhmtVsYBsbMdLGLaZyI8bxEeOExcQ2OWqeHDVPWUdo02MWyWbGR3GzE1auuckxtvmp
@@ -17154,7 +17154,7 @@
   <data name="pnlCentres.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAABkAAAAOECAIAAAB2L2r1AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wgAADsIBFShKgAAA/7JJREFUeF7s3fdXWlv++P/5+fuZexN7L+nN2EV6kS6ggkjv9dB77+0Amnn/zd+1
+        vAAADrwBlbxySQAA/7JJREFUeF7s3fdXWlv++P/5+fuZexN7L+nN2EV6kS6ggkjv9dB77+0Amnn/zd+1
         zwY8shHRmNx7Z8x6rqwbRECiZHjM3q/9rx+/+NfNTZcU+PXjGnTTvb7udPvdwLrt6x/49U2re9PqXjc7
         143rQZ3GdbvexWsdUPUa1qp0W5UbWLN8DauVbmqlm0rpmuimUropF6/LxesSrNQFEf9dLHSJboqFm3wR
         lMv/gGVzN7BM9npQKtslukllbxL94pnrWBYUzXSJrqOZ60i6O1S4100odT0omOz6U8P5kte+5DX2iH54
@@ -48392,10 +48392,19 @@
   <metadata name="dataGridViewTextBoxColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="Slots.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Capacity.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="DateChosen.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="pnlBookings.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAuAAAALQCAIAAABexlLzAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAA/7JJREFUeF7s/Wd3G0m64PvW9zp39sze7crJi94b0IEEDWhAeA+k9wYJD5KSqrp7
+        vAAADrwBlbxySQAA/7JJREFUeF7s/Wd3G0m64PvW9zp39sze7crJi94b0IEEDWhAeA+k9wYJD5KSqrp7
         nznz4tx397PdFRlgMBBPZhKkVKarpfVfaApMJqnqauWvIyIjv/mv//i//us//q8//c//D+nP/+t//Pl/
         /Y+//Od/0P31v/7nff9J+tuf/ov07Z//RPruL38mff/Xv+B++NtfST9++zfSi+++pXv13Xek199/T3rz
         ww+ktz/+SHr34gXp/cuXpJlXr0izr1/Tzb15Q5p/+5Zp4d27hXfvFt+/Hzf7jrQ0955ueX6GtLIwO25+
