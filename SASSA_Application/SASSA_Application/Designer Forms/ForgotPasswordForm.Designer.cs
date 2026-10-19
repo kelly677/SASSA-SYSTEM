@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ForgotPasswordForm));
             label5 = new Label();
             label14 = new Label();
             btnSentOTP = new SASSA_Application.Classes.RoundedButton();
@@ -44,6 +45,7 @@
             // label5
             // 
             label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
             label5.Font = new Font("Segoe UI", 19.9F, FontStyle.Bold);
             label5.Location = new Point(12, 9);
             label5.Name = "label5";
@@ -54,6 +56,7 @@
             // label14
             // 
             label14.AutoSize = true;
+            label14.BackColor = Color.Transparent;
             label14.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label14.Location = new Point(12, 73);
             label14.Name = "label14";
@@ -91,6 +94,7 @@
             // lblEnterOTP
             // 
             lblEnterOTP.AutoSize = true;
+            lblEnterOTP.BackColor = Color.Transparent;
             lblEnterOTP.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblEnterOTP.Location = new Point(12, 249);
             lblEnterOTP.Name = "lblEnterOTP";
@@ -111,6 +115,7 @@
             // lblEnterPassword
             // 
             lblEnterPassword.AutoSize = true;
+            lblEnterPassword.BackColor = Color.Transparent;
             lblEnterPassword.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblEnterPassword.Location = new Point(12, 422);
             lblEnterPassword.Name = "lblEnterPassword";
@@ -164,7 +169,7 @@
             // 
             // btnBack
             // 
-            btnBack.BackColor = SystemColors.GradientActiveCaption;
+            btnBack.BackColor = Color.Transparent;
             btnBack.FlatAppearance.BorderSize = 0;
             btnBack.FlatStyle = FlatStyle.Flat;
             btnBack.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
@@ -184,6 +189,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientActiveCaption;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(518, 672);
             Controls.Add(btnBack);
             Controls.Add(btnSavePassword);
@@ -196,6 +202,7 @@
             Controls.Add(btnSentOTP);
             Controls.Add(txtEmail);
             Controls.Add(label5);
+            DoubleBuffered = true;
             Name = "ForgotPasswordForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ForgotPasswordForm";

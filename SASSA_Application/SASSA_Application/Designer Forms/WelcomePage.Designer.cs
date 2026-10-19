@@ -82,6 +82,7 @@
             // 
             // pnlRight
             // 
+            pnlRight.BackgroundImage = (Image)resources.GetObject("pnlRight.BackgroundImage");
             pnlRight.Controls.Add(lblShowPassword);
             pnlRight.Controls.Add(lblForgotPassword);
             pnlRight.Controls.Add(lblPassword);
@@ -95,14 +96,14 @@
             pnlRight.Dock = DockStyle.Fill;
             pnlRight.Location = new Point(550, 0);
             pnlRight.Name = "pnlRight";
-            pnlRight.Size = new Size(532, 692);
+            pnlRight.Size = new Size(663, 692);
             pnlRight.TabIndex = 1;
             // 
             // lblShowPassword
             // 
             lblShowPassword.AutoSize = true;
             lblShowPassword.ForeColor = Color.FromArgb(26, 70, 130);
-            lblShowPassword.Location = new Point(407, 324);
+            lblShowPassword.Location = new Point(517, 324);
             lblShowPassword.Name = "lblShowPassword";
             lblShowPassword.Size = new Size(66, 20);
             lblShowPassword.TabIndex = 30;
@@ -148,7 +149,7 @@
             txtPassword.Location = new Point(89, 298);
             txtPassword.Name = "txtPassword";
             txtPassword.PlaceholderText = "Enter Password";
-            txtPassword.Size = new Size(312, 46);
+            txtPassword.Size = new Size(422, 46);
             txtPassword.TabIndex = 5;
             // 
             // txtUserName
@@ -158,23 +159,25 @@
             txtUserName.Location = new Point(89, 208);
             txtUserName.Name = "txtUserName";
             txtUserName.PlaceholderText = "Enter your ID Number";
-            txtUserName.Size = new Size(312, 46);
+            txtUserName.Size = new Size(422, 46);
             txtUserName.TabIndex = 4;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ControlDarkDark;
-            label1.Location = new Point(67, 110);
+            label1.Location = new Point(89, 110);
             label1.Name = "label1";
-            label1.Size = new Size(392, 28);
+            label1.Size = new Size(389, 28);
             label1.TabIndex = 3;
             label1.Text = "Access your SASSA Queue Booking account";
             // 
             // lblWelcome
             // 
             lblWelcome.AutoSize = true;
+            lblWelcome.BackColor = Color.Transparent;
             lblWelcome.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblWelcome.Location = new Point(106, 29);
             lblWelcome.Name = "lblWelcome";
@@ -190,10 +193,10 @@
             btnCreateAccount.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnCreateAccount.ForeColor = Color.White;
             btnCreateAccount.HoverColor = Color.Empty;
-            btnCreateAccount.Location = new Point(67, 440);
+            btnCreateAccount.Location = new Point(89, 440);
             btnCreateAccount.Name = "btnCreateAccount";
             btnCreateAccount.PressedColor = Color.Empty;
-            btnCreateAccount.Size = new Size(443, 50);
+            btnCreateAccount.Size = new Size(422, 46);
             btnCreateAccount.TabIndex = 1;
             btnCreateAccount.Text = "Create a New Account";
             btnCreateAccount.UseVisualStyleBackColor = false;
@@ -207,10 +210,10 @@
             btnLogin.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnLogin.ForeColor = Color.White;
             btnLogin.HoverColor = Color.Empty;
-            btnLogin.Location = new Point(67, 361);
+            btnLogin.Location = new Point(89, 361);
             btnLogin.Name = "btnLogin";
             btnLogin.PressedColor = Color.Empty;
-            btnLogin.Size = new Size(443, 50);
+            btnLogin.Size = new Size(422, 46);
             btnLogin.TabIndex = 0;
             btnLogin.Text = "Login to My Account";
             btnLogin.UseVisualStyleBackColor = false;
@@ -220,7 +223,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1082, 692);
+            ClientSize = new Size(1213, 692);
             Controls.Add(pnlRight);
             Controls.Add(pnlLeft);
             FormBorderStyle = FormBorderStyle.FixedSingle;

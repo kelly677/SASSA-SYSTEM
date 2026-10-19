@@ -368,22 +368,38 @@ namespace SASSA_Application.Designer_Forms
                                         "Invalid Action", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
+
+                    // --- NEW QUEUE NUMBER LOGIC ---
+                    // 1. Count how many people are already in the active queue for this centre today
+                    int queueCount = 0;
+                    foreach (Booking b in bookings)
+                    {
+                        if (b.CentreName == bookings[i].CentreName &&
+                            b.Date == bookings[i].Date &&
+                            (b.Status == "Checked In" || b.Status == "Waiting" || b.Status == "Serving"))
+                        {
+                            queueCount++;
+                        }
+                    }
+
+                    // 2. Assign the next number in line (formatted as Q-001, Q-002, etc.)
+                    bookings[i].QueueNumber = "Q-" + (queueCount + 1).ToString("D3");
+
+                    // 3. Update status
                     bookings[i].Status = "Checked In";
                     updated = true;
                     break;
                 }
             }
-
             if (updated)
             {
                 FileManager.SaveAllBookings(bookings);
-                MessageBox.Show("Beneficiary checked in.", "Success",
+                MessageBox.Show("Beneficiary checked in successfully.\nQueue number assigned.", "Success",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LoadActiveQueue();
                 RefreshStaffDashboardData();
             }
         }
-
         private void btnCallNext_Click(object sender, EventArgs e)
         {
             List<Booking> bookings = FileManager.LoadBookings();

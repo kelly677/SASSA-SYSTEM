@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Registration));
             lblHeading = new Label();
             label1 = new Label();
             lblServiceCentre = new Label();
@@ -180,6 +181,7 @@
             // label6
             // 
             label6.AutoSize = true;
+            label6.BackColor = Color.Transparent;
             label6.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
             label6.Location = new Point(58, 435);
             label6.Name = "label6";
@@ -246,6 +248,7 @@
             // label7
             // 
             label7.AutoSize = true;
+            label7.BackColor = Color.Transparent;
             label7.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
             label7.Location = new Point(177, 493);
             label7.Name = "label7";
@@ -293,6 +296,8 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientActiveCaption;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(753, 709);
             Controls.Add(lblShowPassword);
             Controls.Add(txtConfirmPassword);
@@ -315,6 +320,7 @@
             Controls.Add(lblHeading);
             Controls.Add(label1);
             Controls.Add(lblServiceCentre);
+            DoubleBuffered = true;
             Name = "Registration";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Registration";

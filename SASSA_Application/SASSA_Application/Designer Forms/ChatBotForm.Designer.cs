@@ -117,11 +117,10 @@
         }
 
         #endregion
-
-        private RichTextBox rtbChat;
         private Classes.RoundedTextBox txtInput;
         private Classes.RoundedButton btnSend;
         private Panel panel1;
         private Label label1;
+        internal RichTextBox rtbChat;
     }
 }
