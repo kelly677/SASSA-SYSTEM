@@ -105,7 +105,7 @@ namespace SASSA_Application.Designer_Forms
             if (selectedDay == DayOfWeek.Saturday || selectedDay == DayOfWeek.Sunday) return;
 
             string selectedCentre = cmbServiceCentre.SelectedItem.ToString();
-            string selectedDate = dtpDate.Value.ToString("yyyy-MM-dd"); // Matches the Admin format
+            string selectedDate = dtpDate.Value.ToString("yyyy-MM-dd");
 
             if (!File.Exists("Slots.txt")) return;
 
@@ -114,17 +114,19 @@ namespace SASSA_Application.Designer_Forms
                 if (string.IsNullOrWhiteSpace(line)) continue;
                 string[] parts = line.Split('|');
 
-                // parts: 0=Centre, 1=Slot, 2=Capacity, 3=Date, 4=Booked, 5=Available
-                if (parts.Length >= 6)
+                // NEW FORMAT: 0=Centre, 1=Date, 2=Slot, 3=Capacity, 4=Booked
+                if (parts.Length >= 5)
                 {
                     string centre = parts[0];
-                    string slot = parts[1];
-                    string date = parts[3];
-                    int available = int.Parse(parts[5]);
+                    string date = parts[1];
+                    string slot = parts[2];
+                    int capacity = int.Parse(parts[3]);
+                    int booked = int.Parse(parts[4]);
+                    int available = capacity - booked;
 
                     if (centre == selectedCentre && date == selectedDate && available > 0)
                     {
-                        cmbTimeSlot.Items.Add(slot);
+                        cmbTimeSlot.Items.Add(slot + " (" + available + " spots left)");
                     }
                 }
             }
@@ -156,7 +158,7 @@ namespace SASSA_Application.Designer_Forms
 
             string selectedCentre = cmbServiceCentre.SelectedItem.ToString();
             string selectedService = cmbServiceRequired.SelectedItem.ToString();
-            string selectedTime = cmbTimeSlot.SelectedItem.ToString();
+            string selectedTime = cmbTimeSlot.SelectedItem.ToString().Split('(')[0].Trim();
             string selectedDate = dtpDate.Value.ToString("yyyy-MM-dd");
 
             // Block double-booking on the same day
@@ -171,13 +173,12 @@ namespace SASSA_Application.Designer_Forms
             for (int i = 0; i < slotLines.Length; i++)
             {
                 string[] parts = slotLines[i].Split('|');
-                if (parts.Length >= 6 && parts[0] == selectedCentre && parts[1] == selectedTime && parts[3] == selectedDate)
+
+                // NEW FORMAT: 0=Centre, 1=Date, 2=Slot, 3=Capacity, 4=Booked
+                if (parts.Length >= 5 && parts[0] == selectedCentre && parts[1] == selectedDate && parts[2] == selectedTime)
                 {
-                    int capacity = int.Parse(parts[2]);
-                    int booked = int.Parse(parts[4]) + 1;
-                    int available = capacity - booked;
-                    // parts: 0=Centre, 1=Slot, 2=Capacity, 3=Date, 4=Booked, 5=Available
-                    slotLines[i] = parts[0] + "|" + parts[1] + "|" + capacity + "|" + parts[3] + "|" + booked + "|" + available;
+                    int newBooked = int.Parse(parts[4]) + 1;
+                    slotLines[i] = parts[0] + "|" + parts[1] + "|" + parts[2] + "|" + parts[3] + "|" + newBooked;
                     break;
                 }
             }

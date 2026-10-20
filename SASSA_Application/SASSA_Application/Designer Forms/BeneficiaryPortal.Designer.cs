@@ -207,7 +207,7 @@
             pnlSidePanel.Dock = DockStyle.Left;
             pnlSidePanel.Location = new Point(0, 91);
             pnlSidePanel.Name = "pnlSidePanel";
-            pnlSidePanel.Size = new Size(297, 632);
+            pnlSidePanel.Size = new Size(297, 708);
             pnlSidePanel.TabIndex = 1;
             // 
             // btnLogout
@@ -315,15 +315,16 @@
             // 
             // pnlNewBooking
             // 
-            pnlNewBooking.BackColor = SystemColors.GradientActiveCaption;
+            pnlNewBooking.BackColor = Color.WhiteSmoke;
             pnlNewBooking.BackgroundImage = (Image)resources.GetObject("pnlNewBooking.BackgroundImage");
+            pnlNewBooking.BackgroundImageLayout = ImageLayout.Center;
             pnlNewBooking.Controls.Add(curvedCornerPanel1);
             pnlNewBooking.Controls.Add(lblHeading);
             pnlNewBooking.Controls.Add(label1);
             pnlNewBooking.Dock = DockStyle.Fill;
             pnlNewBooking.Location = new Point(0, 0);
             pnlNewBooking.Name = "pnlNewBooking";
-            pnlNewBooking.Size = new Size(1708, 723);
+            pnlNewBooking.Size = new Size(1708, 799);
             pnlNewBooking.TabIndex = 2;
             // 
             // curvedCornerPanel1
@@ -469,7 +470,7 @@
             // 
             // pnlQueueStatus
             // 
-            pnlQueueStatus.BackColor = SystemColors.GradientActiveCaption;
+            pnlQueueStatus.BackColor = Color.WhiteSmoke;
             pnlQueueStatus.BackgroundImage = (Image)resources.GetObject("pnlQueueStatus.BackgroundImage");
             pnlQueueStatus.Controls.Add(lblQueueStatus);
             pnlQueueStatus.Controls.Add(lblUpdatesWhenStaffCallsTheNextPerson);
@@ -477,7 +478,7 @@
             pnlQueueStatus.Dock = DockStyle.Fill;
             pnlQueueStatus.Location = new Point(0, 0);
             pnlQueueStatus.Name = "pnlQueueStatus";
-            pnlQueueStatus.Size = new Size(1708, 723);
+            pnlQueueStatus.Size = new Size(1708, 799);
             pnlQueueStatus.TabIndex = 8;
             // 
             // lblQueueStatus
@@ -706,7 +707,7 @@
             pnlMyBooking.Dock = DockStyle.Fill;
             pnlMyBooking.Location = new Point(0, 0);
             pnlMyBooking.Name = "pnlMyBooking";
-            pnlMyBooking.Size = new Size(1708, 723);
+            pnlMyBooking.Size = new Size(1708, 799);
             pnlMyBooking.TabIndex = 2;
             pnlMyBooking.Paint += pnlMyBooking_Paint;
             // 
@@ -759,7 +760,7 @@
             pnlBottom.Controls.Add(label2);
             pnlBottom.Controls.Add(pictureBox2);
             pnlBottom.Dock = DockStyle.Bottom;
-            pnlBottom.Location = new Point(297, 646);
+            pnlBottom.Location = new Point(297, 722);
             pnlBottom.Name = "pnlBottom";
             pnlBottom.Size = new Size(1411, 77);
             pnlBottom.TabIndex = 11;
@@ -882,7 +883,7 @@
             pnlProfile.Dock = DockStyle.Fill;
             pnlProfile.Location = new Point(0, 0);
             pnlProfile.Name = "pnlProfile";
-            pnlProfile.Size = new Size(1708, 723);
+            pnlProfile.Size = new Size(1708, 799);
             pnlProfile.TabIndex = 9;
             // 
             // btnUploadPhoto
@@ -1096,7 +1097,7 @@
             pnlDashboard.Dock = DockStyle.Fill;
             pnlDashboard.Location = new Point(0, 0);
             pnlDashboard.Name = "pnlDashboard";
-            pnlDashboard.Size = new Size(1708, 723);
+            pnlDashboard.Size = new Size(1708, 799);
             pnlDashboard.TabIndex = 10;
             // 
             // btnDashNewBook
@@ -1240,7 +1241,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1708, 723);
+            ClientSize = new Size(1708, 799);
             Controls.Add(pnlBottom);
             Controls.Add(pnlSidePanel);
             Controls.Add(pnlTop);

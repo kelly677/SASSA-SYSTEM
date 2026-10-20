@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Net;
+using System.Net.Mail;
 
 namespace SASSA_Application.Designer_Forms
 {
@@ -441,6 +443,7 @@ namespace SASSA_Application.Designer_Forms
             RefreshStaffDashboardData();
             LoadActiveQueue();
         }
+
 
         //private void pnlStaffDash_Paint(object sender, PaintEventArgs e)
         //{

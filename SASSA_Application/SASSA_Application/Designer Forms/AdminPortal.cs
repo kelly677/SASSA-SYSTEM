@@ -11,6 +11,8 @@ namespace SASSA_Application.Designer_Forms
     {
         private string loggedInName;
         private bool isEditing = false;
+        private bool isEditingCentre = false;
+        private bool isEditingSlot = false;
 
         public AdminPortal(string name)
         {
@@ -39,6 +41,7 @@ namespace SASSA_Application.Designer_Forms
             LoadBookingsGrid();
             LoadServicesGrid();
             LoadCentresForSlotsDropdown();
+            LoadSlotsGrid();
 
             RefreshAdminDashboardData();
         }
@@ -137,9 +140,35 @@ namespace SASSA_Application.Designer_Forms
             {
                 if (string.IsNullOrWhiteSpace(line)) continue;
                 string[] parts = line.Split('|');
-                if (parts.Length < 3) continue;
 
-                dgvCentres.Rows.Add(parts[0], parts[1], parts[2], "-", "-", "-");
+                // Format: Name|Province|Address
+                if (parts.Length >= 3)
+                {
+                    dgvCentres.Rows.Add(parts[0], parts[1], parts[2]);
+                }
+            }
+        }
+        private void LoadSlotsGrid()
+        {
+            dgvSlots.Rows.Clear();
+            if (!File.Exists("Slots.txt")) return;
+
+            foreach (string line in File.ReadAllLines("Slots.txt"))
+            {
+                if (string.IsNullOrWhiteSpace(line)) continue;
+                string[] parts = line.Split('|');
+
+                // Format: Centre|Date|TimeSlot|Capacity|Booked
+                if (parts.Length >= 5)
+                {
+                    // Convert yyyy-MM-dd to dd/MM/yyyy for display
+                    DateTime parsedDate;
+                    string gridDate = DateTime.TryParseExact(parts[1], "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out parsedDate)
+                                      ? parsedDate.ToString("dd/MM/yyyy")
+                                      : parts[1];
+
+                    dgvSlots.Rows.Add(parts[0], gridDate, parts[2], parts[3]);
+                }
             }
         }
 
@@ -281,166 +310,99 @@ namespace SASSA_Application.Designer_Forms
         // ============================================================
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (isEditing)
+            if (isEditingCentre)
             {
-                string newName = txtNameCentre.Text.Trim();
-                string newAddress = txtAddress.Text.Trim();
-                string newProvince = cmbProvinces.SelectedItem != null ? cmbProvinces.SelectedItem.ToString() : "";
-                string newGridDate = dtpDate.Value.ToString("dd/MM/yyyy");
-                string newFileDate = dtpDate.Value.ToString("yyyy-MM-dd");
-                string newSlot = cmbTimeSlot.SelectedItem != null ? cmbTimeSlot.SelectedItem.ToString() : "-";
-                string newCapacity = cmbCapacity.SelectedItem != null ? cmbCapacity.SelectedItem.ToString() : "-";
-
-                if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrWhiteSpace(newProvince) || string.IsNullOrWhiteSpace(newAddress))
-                {
-                    MessageBox.Show("Please fill in all text fields to update.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
                 string oldName = dgvCentres.SelectedRows[0].Cells[0].Value.ToString();
+                string newName = txtNameCentre.Text.Trim();
+                string newProv = cmbProvinces.SelectedItem.ToString();
+                string newAddr = txtAddress.Text.Trim();
 
-                dgvCentres.SelectedRows[0].Cells[0].Value = newName;
-                dgvCentres.SelectedRows[0].Cells[1].Value = newProvince;
-                dgvCentres.SelectedRows[0].Cells[2].Value = newAddress;
-                dgvCentres.SelectedRows[0].Cells[3].Value = newGridDate;
-                dgvCentres.SelectedRows[0].Cells[4].Value = newSlot;
-                dgvCentres.SelectedRows[0].Cells[5].Value = newCapacity;
-
-                if (File.Exists("Centres.txt"))
+                // 1. Update Centres.txt
+                string[] lines = File.ReadAllLines("Centres.txt");
+                for (int i = 0; i < lines.Length; i++)
                 {
-                    string[] lines = File.ReadAllLines("Centres.txt");
-                    for (int i = 0; i < lines.Length; i++)
+                    string[] parts = lines[i].Split('|');
+                    if (parts[0] == oldName)
                     {
-                        string[] parts = lines[i].Split('|');
-                        if (parts.Length >= 1 && parts[0] == oldName)
-                        {
-                            lines[i] = newName + "|" + newProvince + "|" + newAddress;
-                            break;
-                        }
+                        lines[i] = newName + "|" + newProv + "|" + newAddr;
+                        break;
                     }
-                    File.WriteAllLines("Centres.txt", lines);
                 }
+                File.WriteAllLines("Centres.txt", lines);
 
-                if (File.Exists("Slots.txt") && newSlot != "-")
+                // 2. If the name changed, update Slots.txt too
+                if (oldName != newName && File.Exists("Slots.txt"))
                 {
                     string[] slotLines = File.ReadAllLines("Slots.txt");
-                    bool slotUpdated = false;
-
                     for (int i = 0; i < slotLines.Length; i++)
                     {
                         string[] parts = slotLines[i].Split('|');
-                        if (parts.Length >= 6 && parts[0] == oldName)
+                        if (parts[0] == oldName)
                         {
-                            int capacityInt = int.Parse(newCapacity);
-                            int booked = int.Parse(parts[4]);
-                            parts[0] = newName; parts[1] = newSlot; parts[2] = newCapacity; parts[3] = newFileDate;
-                            parts[5] = (capacityInt - booked).ToString();
+                            parts[0] = newName;
                             slotLines[i] = string.Join("|", parts);
-                            slotUpdated = true;
-                            break;
                         }
                     }
-
-                    if (!slotUpdated)
-                    {
-                        int capacityInt = int.Parse(newCapacity);
-                        File.AppendAllText("Slots.txt", newName + "|" + newSlot + "|" + newCapacity + "|" + newFileDate + "|0|" + capacityInt + Environment.NewLine);
-                    }
-                    else { File.WriteAllLines("Slots.txt", slotLines); }
+                    File.WriteAllLines("Slots.txt", slotLines);
                 }
 
-                if (oldName != newName)
-                {
-                    int index = cmbCentre.Items.IndexOf(oldName);
-                    if (index != -1) cmbCentre.Items[index] = newName;
-                    if (cmbCentreName.Items.IndexOf(oldName) != -1) cmbCentreName.Items[cmbCentreName.Items.IndexOf(oldName)] = newName;
-                }
+                // 3. Update the Grid and UI
+                dgvCentres.SelectedRows[0].Cells[0].Value = newName;
+                dgvCentres.SelectedRows[0].Cells[1].Value = newProv;
+                dgvCentres.SelectedRows[0].Cells[2].Value = newAddr;
 
-                MessageBox.Show("Centre updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                btnSave.Text = "💾 Save";
-                isEditing = false;
+                btnSave.Text = "💾 Save Centre";
+                isEditingCentre = false;
                 txtNameCentre.Text = ""; cmbProvinces.SelectedItem = null; txtAddress.Text = "";
-                cmbTimeSlot.SelectedItem = null; cmbCapacity.SelectedItem = null;
-                dtpDate.Value = DateTime.Now;
+
+                MessageBox.Show("Centre updated!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return; // Stop here so it doesn't create a new one
+            }
+            // ... the rest of your normal Save Centre code ...
+            string name = txtNameCentre.Text.Trim();
+            string province = cmbProvinces.SelectedItem?.ToString() ?? "";
+            string address = txtAddress.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(province) || string.IsNullOrWhiteSpace(address))
+            {
+                MessageBox.Show("Please fill in all Centre details.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (!string.IsNullOrWhiteSpace(txtNameCentre.Text))
+            // Check for duplicate centre
+            if (File.Exists("Centres.txt"))
             {
-                string centreName = txtNameCentre.Text.Trim();
-                string address = txtAddress.Text.Trim();
-                string province = cmbProvinces.SelectedItem != null ? cmbProvinces.SelectedItem.ToString() : "";
-                string gridDate = dtpDate.Value.ToString("dd/MM/yyyy");
-                string slot = cmbTimeSlot.SelectedItem != null ? cmbTimeSlot.SelectedItem.ToString() : "-";
-                string capacity = cmbCapacity.SelectedItem != null ? cmbCapacity.SelectedItem.ToString() : "-";
-
-                if (string.IsNullOrWhiteSpace(centreName) || string.IsNullOrWhiteSpace(province) || string.IsNullOrWhiteSpace(address))
+                foreach (string line in File.ReadAllLines("Centres.txt"))
                 {
-                    MessageBox.Show("Please fill in all fields to create a centre.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (File.Exists("Centres.txt"))
-                {
-                    foreach (string line in File.ReadAllLines("Centres.txt"))
+                    string[] parts = line.Split('|');
+                    if (parts.Length >= 1 && parts[0].Equals(name, StringComparison.OrdinalIgnoreCase))
                     {
-                        if (string.IsNullOrWhiteSpace(line)) continue;
-                        string[] parts = line.Split('|');
-                        if (parts.Length >= 1 && parts[0].Equals(centreName, StringComparison.OrdinalIgnoreCase))
-                        {
-                            MessageBox.Show("A centre with this name already exists.", "Duplicate Centre", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
+                        MessageBox.Show("This centre already exists.", "Duplicate", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
                     }
                 }
-
-                File.AppendAllText("Centres.txt", centreName + "|" + province + "|" + address + Environment.NewLine);
-
-                dgvCentres.Rows.Add(centreName, province, address, gridDate, slot, capacity);
-
-                cmbCentre.Items.Add(centreName);
-                if (cmbCentreName != null) cmbCentreName.Items.Add(centreName);
-                cmbServiceCentre.Items.Add(centreName);
-
-                MessageBox.Show("Centre added successfully!", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                txtNameCentre.Text = ""; cmbProvinces.SelectedItem = null; txtAddress.Text = "";
-                return;
             }
 
-            if (cmbCentre.SelectedItem != null)
-            {
-                if (dtpDate.Value.DayOfWeek == DayOfWeek.Saturday || dtpDate.Value.DayOfWeek == DayOfWeek.Sunday)
-                {
-                    MessageBox.Show("You cannot create slots for weekends.", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+            // Save to text file
+            File.AppendAllText("Centres.txt", name + "|" + province + "|" + address + Environment.NewLine);
 
-                string centre = cmbCentre.SelectedItem.ToString();
-                string slot = cmbTimeSlot.SelectedItem != null ? cmbTimeSlot.SelectedItem.ToString() : "";
-                string capacityStr = cmbCapacity.SelectedItem != null ? cmbCapacity.SelectedItem.ToString() : "";
-                string fileDate = dtpDate.Value.ToString("yyyy-MM-dd");
-                string gridDate = dtpDate.Value.ToString("dd/MM/yyyy");
+            // Update Left Grid
+            dgvCentres.Rows.Add(name, province, address);
 
-                if (string.IsNullOrWhiteSpace(centre) || string.IsNullOrWhiteSpace(slot) || string.IsNullOrWhiteSpace(capacityStr))
-                {
-                    MessageBox.Show("Please select a centre, time slot and capacity.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+            // Update Dropdowns (Only add if it's not there)
+            if (!cmbCentre.Items.Contains(name)) cmbCentre.Items.Add(name);
+            if (cmbCentreName != null && !cmbCentreName.Items.Contains(name)) cmbCentreName.Items.Add(name);
+            if (!cmbServiceCentre.Items.Contains(name)) cmbServiceCentre.Items.Add(name);
 
-                int capacity = int.Parse(capacityStr);
-                File.AppendAllText("Slots.txt", centre + "|" + slot + "|" + capacity + "|" + fileDate + "|0|" + capacity + Environment.NewLine);
+            MessageBox.Show("Centre saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                dgvCentres.Rows.Add(centre, "-", "-", gridDate, slot, capacity);
+            // Clear fields
+            txtNameCentre.Text = "";
+            cmbProvinces.SelectedItem = null;
+            txtAddress.Text = "";
 
-                MessageBox.Show("Slot added successfully!", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                cmbCentre.SelectedItem = null; cmbTimeSlot.SelectedItem = null; cmbCapacity.SelectedItem = null;
-                return;
-            }
 
-            MessageBox.Show("Please enter a new centre name OR select an existing centre to add a slot.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         // ============================================================
@@ -478,92 +440,142 @@ namespace SASSA_Application.Designer_Forms
         // ============================================================
         private void btnEditSlots_Click(object sender, EventArgs e)
         {
-            if (dgvCentres.SelectedRows.Count == 0)
+
+            // --- EDIT A CENTRE ---
+            if (dgvCentres.SelectedRows.Count > 0)
             {
-                MessageBox.Show("Please select a centre from the grid to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                // Load the data from the left grid into the left textboxes
+                txtNameCentre.Text = dgvCentres.SelectedRows[0].Cells[0].Value.ToString();
+                cmbProvinces.SelectedItem = dgvCentres.SelectedRows[0].Cells[1].Value.ToString();
+                txtAddress.Text = dgvCentres.SelectedRows[0].Cells[2].Value.ToString();
+
+                btnSave.Text = "Update Centre";
+                isEditingCentre = true;
+                isEditingSlot = false;
             }
-
-            string centreName = dgvCentres.SelectedRows[0].Cells[0].Value?.ToString();
-            string province = dgvCentres.SelectedRows[0].Cells[1].Value?.ToString();
-            string address = dgvCentres.SelectedRows[0].Cells[2].Value?.ToString();
-            string gridDate = dgvCentres.SelectedRows[0].Cells[3].Value?.ToString();
-            string slot = dgvCentres.SelectedRows[0].Cells[4].Value?.ToString();
-            string capacity = dgvCentres.SelectedRows[0].Cells[5].Value?.ToString();
-
-            txtNameCentre.Text = centreName;
-            txtAddress.Text = address;
-
-            if (province != "-") cmbProvinces.SelectedItem = province;
-
-            if (gridDate != "-")
+            // --- EDIT A SLOT ---
+            else if (dgvSlots.SelectedRows.Count > 0)
             {
+                // Load the data from the right grid into the right dropdowns
+                cmbTimeSlot.SelectedItem = dgvSlots.SelectedRows[0].Cells[2].Value.ToString();
+                cmbCapacity.SelectedItem = dgvSlots.SelectedRows[0].Cells[3].Value.ToString();
+
+                // Load the date
                 DateTime parsedDate;
-                if (DateTime.TryParseExact(gridDate, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out parsedDate))
+                if (DateTime.TryParse(dgvSlots.SelectedRows[0].Cells[1].Value.ToString(), out parsedDate))
+                {
                     dtpDate.Value = parsedDate;
+                }
+
+                btnAddSlot.Text = "Update Slot";
+                isEditingSlot = true;
+                isEditingCentre = false;
+            }
+            else
+            {
+                MessageBox.Show("Please select a Centre or a Slot from the grids to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            if (slot != "-") cmbTimeSlot.SelectedItem = slot;
-            if (capacity != "-") cmbCapacity.SelectedItem = capacity;
-
-            btnSave.Text = "💾 Update";
-            isEditing = true;
-
-            MessageBox.Show("You can now edit the details in the boxes above and click 'Update' to save.", "Edit Mode", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvCentres.SelectedRows.Count == 0)
+
+            // ============================================================
+            // 1. DELETE A CENTRE (From the Left Grid)
+            // ============================================================
+            if (dgvCentres.SelectedRows.Count > 0)
             {
-                MessageBox.Show("Please select a centre from the grid to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                string centreToDelete = dgvCentres.SelectedRows[0].Cells[0].Value.ToString();
+
+                DialogResult confirm = MessageBox.Show($"Are you sure you want to delete the Centre '{centreToDelete}'?\n\nThis will also delete ALL its time slots.",
+                                                        "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (confirm == DialogResult.Yes)
+                {
+                    // Remove from Centres.txt
+                    if (File.Exists("Centres.txt"))
+                    {
+                        List<string> lines = new List<string>();
+                        foreach (string line in File.ReadAllLines("Centres.txt"))
+                        {
+                            if (string.IsNullOrWhiteSpace(line)) continue;
+                            if (line.Split('|')[0] != centreToDelete) lines.Add(line);
+                        }
+                        File.WriteAllLines("Centres.txt", lines);
+                    }
+
+                    // Remove from Slots.txt (Clean up orphaned slots)
+                    if (File.Exists("Slots.txt"))
+                    {
+                        List<string> slotLines = new List<string>();
+                        foreach (string line in File.ReadAllLines("Slots.txt"))
+                        {
+                            if (string.IsNullOrWhiteSpace(line)) continue;
+                            if (line.Split('|')[0] != centreToDelete) slotLines.Add(line);
+                        }
+                        File.WriteAllLines("Slots.txt", slotLines);
+                    }
+
+                    // Remove from both grids
+                    dgvCentres.Rows.Remove(dgvCentres.SelectedRows[0]);
+                    for (int i = dgvSlots.Rows.Count - 1; i >= 0; i--)
+                    {
+                        if (dgvSlots.Rows[i].Cells[0].Value.ToString() == centreToDelete)
+                            dgvSlots.Rows.RemoveAt(i);
+                    }
+
+                    MessageBox.Show("Centre and its slots deleted successfully.", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            // ============================================================
+            // 2. DELETE A SLOT (From the Right Grid)
+            // ============================================================
+            else if (dgvSlots.SelectedRows.Count > 0)
+            {
+                string centre = dgvSlots.SelectedRows[0].Cells[0].Value.ToString();
+                string gridDate = dgvSlots.SelectedRows[0].Cells[1].Value.ToString();
+                string slotToDelete = dgvSlots.SelectedRows[0].Cells[2].Value.ToString();
+
+                DialogResult confirm = MessageBox.Show($"Delete the {slotToDelete} slot for {centre}?",
+                                                        "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (confirm == DialogResult.Yes)
+                {
+                    // Remove from Slots.txt
+                    if (File.Exists("Slots.txt"))
+                    {
+                        List<string> lines = new List<string>();
+                        foreach (string line in File.ReadAllLines("Slots.txt"))
+                        {
+                            if (string.IsNullOrWhiteSpace(line)) continue;
+                            string[] parts = line.Split('|');
+                            // We match by Centre and TimeSlot to avoid date format mismatch issues
+                            if (!(parts[0] == centre && parts[2] == slotToDelete))
+                            {
+                                lines.Add(line);
+                            }
+                        }
+                        File.WriteAllLines("Slots.txt", lines);
+                    }
+
+                    // Remove from Grid
+                    dgvSlots.Rows.Remove(dgvSlots.SelectedRows[0]);
+
+                    MessageBox.Show("Slot deleted successfully.", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            // ============================================================
+            // 3. NOTHING SELECTED
+            // ============================================================
+            else
+            {
+                MessageBox.Show("Please click on a row in either grid to select what you want to delete.", "No Selection",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            string centreToDelete = dgvCentres.SelectedRows[0].Cells[0].Value.ToString();
-
-            if (MessageBox.Show("Are you sure you want to delete '" + centreToDelete + "'?\n\nThis will also remove all its time slots from the system.", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                if (File.Exists("Centres.txt"))
-                {
-                    List<string> centreLines = new List<string>();
-                    foreach (string line in File.ReadAllLines("Centres.txt"))
-                    {
-                        if (string.IsNullOrWhiteSpace(line)) continue;
-                        if (line.Split('|')[0] != centreToDelete) centreLines.Add(line);
-                    }
-                    File.WriteAllLines("Centres.txt", centreLines);
-                }
-
-                if (File.Exists("Slots.txt"))
-                {
-                    List<string> slotLines = new List<string>();
-                    foreach (string line in File.ReadAllLines("Slots.txt"))
-                    {
-                        if (string.IsNullOrWhiteSpace(line)) continue;
-                        if (line.Split('|')[0] != centreToDelete) slotLines.Add(line);
-                    }
-                    File.WriteAllLines("Slots.txt", slotLines);
-                }
-
-                dgvCentres.Rows.Remove(dgvCentres.SelectedRows[0]);
-                cmbCentre.Items.Remove(centreToDelete);
-                if (cmbCentreName != null) cmbCentreName.Items.Remove(centreToDelete);
-                if (cmbServiceCentre != null) cmbServiceCentre.Items.Remove(centreToDelete);
-
-                MessageBox.Show("Centre and its slots deleted successfully!", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                if (isEditing)
-                {
-                    isEditing = false; btnSave.Text = "💾 Save";
-                    txtNameCentre.Text = ""; cmbProvinces.SelectedItem = null; txtAddress.Text = "";
-                    cmbTimeSlot.SelectedItem = null; cmbCapacity.SelectedItem = null;
-                }
-            }
         }
 
         // ============================================================
-        // ADD & DELETE SERVICE
+        // ADD  SERVICE
         // ============================================================
         private void btnAddService_Click(object sender, EventArgs e)
         {
@@ -733,5 +745,155 @@ namespace SASSA_Application.Designer_Forms
             // Update the chart (New code)
             LoadDemandChart();
         }
+
+        private void btnAddSlot_Click(object sender, EventArgs e)
+        {
+
+            if (isEditingSlot)
+            {
+                // Renamed variables to avoid conflict with the rest of the method
+                string editCentre = dgvSlots.SelectedRows[0].Cells[0].Value.ToString();
+                string editOldDate = dgvSlots.SelectedRows[0].Cells[1].Value.ToString();
+                string editOldSlot = dgvSlots.SelectedRows[0].Cells[2].Value.ToString();
+
+                string editNewDate = dtpDate.Value.ToString("yyyy-MM-dd");
+                string editNewGridDate = dtpDate.Value.ToString("dd/MM/yyyy");
+                string editNewSlot = cmbTimeSlot.SelectedItem.ToString();
+                string editNewCap = cmbCapacity.SelectedItem.ToString();
+
+                // 1. Update Slots.txt
+                string[] editLines = File.ReadAllLines("Slots.txt");
+                for (int i = 0; i < editLines.Length; i++)
+                {
+                    string[] parts = editLines[i].Split('|');
+
+                    // We have to match the old Date as dd/MM/yyyy to the file's yyyy-MM-dd format
+                    // To keep it simple, let's just match the Centre and the Old Slot name
+                    if (parts[0] == editCentre && parts[2] == editOldSlot)
+                    {
+                        // Keep the existing booked count (parts[4])
+                        editLines[i] = editCentre + "|" + editNewDate + "|" + editNewSlot + "|" + editNewCap + "|" + parts[4];
+                        break;
+                    }
+                }
+                File.WriteAllLines("Slots.txt", editLines);
+
+                // 2. Update the Grid and UI
+                dgvSlots.SelectedRows[0].Cells[1].Value = editNewGridDate;
+                dgvSlots.SelectedRows[0].Cells[2].Value = editNewSlot;
+                dgvSlots.SelectedRows[0].Cells[3].Value = editNewCap;
+
+                btnAddSlot.Text = "➕ Add Slot";
+                isEditingSlot = false;
+                cmbTimeSlot.SelectedItem = null;
+                cmbCapacity.SelectedItem = null;
+
+                MessageBox.Show("Slot updated!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return; // Stop here so it doesn't create a duplicate
+            }
+            // 1. Check if a Centre is selected in the left grid
+            if (dgvCentres.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please click on a Centre in the left grid first to select it.", "No Centre Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 2. Validate Date, Time, and Capacity
+            if (cmbTimeSlot.SelectedItem == null || cmbCapacity.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a Time Slot and Capacity.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 3. Block weekends
+            if (dtpDate.Value.DayOfWeek == DayOfWeek.Saturday || dtpDate.Value.DayOfWeek == DayOfWeek.Sunday)
+            {
+                MessageBox.Show("You cannot create slots for weekends.", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 4. Get the Centre Name from the selected row in the grid
+            string centre = dgvCentres.SelectedRows[0].Cells[0].Value.ToString();
+
+            string timeSlot = cmbTimeSlot.SelectedItem.ToString();
+            string capacity = cmbCapacity.SelectedItem.ToString();
+            string fileDate = dtpDate.Value.ToString("yyyy-MM-dd");
+            string gridDate = dtpDate.Value.ToString("dd/MM/yyyy");
+
+            // 5. Check for duplicates in Slots.txt
+            if (File.Exists("Slots.txt"))
+            {
+                foreach (string line in File.ReadAllLines("Slots.txt"))
+                {
+                    string[] parts = line.Split('|');
+                    if (parts.Length >= 4 && parts[0] == centre && parts[1] == fileDate && parts[2] == timeSlot)
+                    {
+                        MessageBox.Show("This exact slot already exists for this centre.", "Duplicate Slot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+            }
+
+            // 6. Save to Slots.txt (Format: Centre|Date|TimeSlot|Capacity|Booked)
+            File.AppendAllText("Slots.txt", centre + "|" + fileDate + "|" + timeSlot + "|" + capacity + "|0" + Environment.NewLine);
+
+            // 7. Update Right Grid
+            dgvSlots.Rows.Add(centre, gridDate, timeSlot, capacity);
+
+            MessageBox.Show("Slot added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // 8. Clear only time and capacity (keep the row selected so you can add the next slot quickly!)
+            cmbTimeSlot.SelectedItem = null;
+            cmbCapacity.SelectedItem = null;
+        }
+
+        private void brnDeleteStaff_Click(object sender, EventArgs e)
+        {
+        
+            // 1. Make sure a row is selected
+            if (dgvStaffMembers.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a staff member from the grid to delete.", "No Selection",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 2. Get the Staff Number and Name from the selected row
+            // (Assuming Column 0 is Name and Column 1 is Staff Number based on your screenshot)
+            string staffName = dgvStaffMembers.SelectedRows[0].Cells[0].Value.ToString();
+            string staffNumber = dgvStaffMembers.SelectedRows[0].Cells[1].Value.ToString();
+
+            // 3. Ask for confirmation
+            DialogResult answer = MessageBox.Show($"Are you sure you want to delete the account for {staffName}?",
+                                                   "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (answer == DialogResult.Yes)
+            {
+                // 4. Remove from Staff.txt
+                if (File.Exists("Staff.txt"))
+                {
+                    List<string> newLines = new List<string>();
+                    foreach (string line in File.ReadAllLines("Staff.txt"))
+                    {
+                        if (string.IsNullOrWhiteSpace(line)) continue;
+
+                        string[] parts = line.Split('|');
+                        // parts[1] is the Staff Number. Keep the line ONLY if it doesn't match.
+                        if (parts.Length >= 2 && parts[1] != staffNumber)
+                        {
+                            newLines.Add(line);
+                        }
+                    }
+                    File.WriteAllLines("Staff.txt", newLines);
+                }
+
+                // 5. Remove from the DataGridView
+                dgvStaffMembers.Rows.Remove(dgvStaffMembers.SelectedRows[0]);
+
+                MessageBox.Show("Staff account deleted successfully.", "Deleted",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+    
     }
 }
