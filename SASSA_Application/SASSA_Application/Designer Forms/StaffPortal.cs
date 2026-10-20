@@ -77,103 +77,7 @@ namespace SASSA_Application.Designer_Forms
             }
         }
 
-        // ============================================================
-        // DASHBOARD REFRESH
-        // ============================================================
-        //private void RefreshDashboardData()
-        //{
-        //    //allBookings = FileManager.LoadBookings();
-        //    List<Booking> allBookings = FileManager.LoadBookings();
-
-        //    //var centreBookings = allBookings.Where(b =>
-        //    //                    b.CentreName != null && (
-        //    //                    string.IsNullOrWhiteSpace(staffCentre) ||
-        //    //                    b.CentreName.Contains(staffCentre.Split(' ')[0], StringComparison.OrdinalIgnoreCase) ||
-        //    //                    staffCentre.Contains(b.CentreName, StringComparison.OrdinalIgnoreCase)
-        //    //                    )
-        //    //                    ).ToList();
-        //    //lblBookedCount.Text = centreBookings.Count(b => b.Status.Equals("Booked", StringComparison.OrdinalIgnoreCase)).ToString();
-        //    //lblCheckedInCount.Text = centreBookings.Count(b => b.Status.Equals("Checked In", StringComparison.OrdinalIgnoreCase)).ToString();
-        //    //lblWaitingCount.Text = centreBookings.Count(b => b.Status.Equals("Waiting", StringComparison.OrdinalIgnoreCase)).ToString();
-        //    //lblServingCount.Text = centreBookings.Count(b => b.Status.Equals("Serving", StringComparison.OrdinalIgnoreCase)).ToString();
-        //    //lblCompletedCount.Text = centreBookings.Count(b => b.Status.Equals("Completed", StringComparison.OrdinalIgnoreCase)).ToString();
-        //    //lblNoShowCount.Text = centreBookings.Count(b => b.Status.Equals("No-Show", StringComparison.OrdinalIgnoreCase)).ToString();
-
-        //    //var currentServing = centreBookings.FirstOrDefault(b => b.Status.Equals("Serving", StringComparison.OrdinalIgnoreCase));
-        //    //lblQueueNumberNowServing.Text = currentServing != null
-        //    //    ?$"{currentServing.QueueNumber} - {currentServing.BeneficiaryName}"
-        //    //   : "None";
-
-        //    //var nextWaiting = centreBookings.FirstOrDefault(b => b.Status.Equals("Checked In", StringComparison.OrdinalIgnoreCase)
-        //    //|| b.Status.Equals("Waiting", StringComparison.OrdinalIgnoreCase));
-
-        //    //lblQueueNumberAndBeneficiaryNameNowServing.Text = nextWaiting != null
-        //    //    ?$"{nextWaiting.QueueNumber} - {nextWaiting.BeneficiaryName}"
-        //    //   : "No one waiting";
-        //    var centreBookings = allBookings
-        //      .Where(b => b.CentreName != null && b.CentreName.StartsWith(staffCentre.Split(' ')[0],
-        //      StringComparison.OrdinalIgnoreCase))
-        //      .ToList();
-
-        //    if (lblBookedCount != null) lblBookedCount.Text = centreBookings.Count(b => b.Status.Equals("Booked", StringComparison.OrdinalIgnoreCase)).ToString();
-        //    if (lblCheckedInCount != null) lblCheckedInCount.Text = centreBookings.Count(b => b.Status.Equals("Checked In", StringComparison.OrdinalIgnoreCase)).ToString();
-        //    if (lblWaitingCount != null) lblWaitingCount.Text = centreBookings.Count(b => b.Status.Equals("Waiting", StringComparison.OrdinalIgnoreCase)).ToString();
-        //    if (lblServingCount != null) lblServingCount.Text = centreBookings.Count(b => b.Status.Equals("Serving", StringComparison.OrdinalIgnoreCase)).ToString();
-        //    if (lblCompletedCount != null) lblCompletedCount.Text = centreBookings.Count(b => b.Status.Equals("Completed", StringComparison.OrdinalIgnoreCase)).ToString();
-        //    if (lblNoShowCount != null) lblNoShowCount.Text = centreBookings.Count(b => b.Status.Equals("No-Show", StringComparison.OrdinalIgnoreCase)).ToString();
-        //    var currentServing = centreBookings.FirstOrDefault(b => b.Status == "Serving");
-        //    if (currentServing != null)
-        //    {
-        //        if (lblQueueNumberNowServing != null) lblQueueNumberNowServing.Text = currentServing.QueueNumberText;
-        //        if (lblQueueNumberNowServing != null) lblQueueNumberNowServing.Text = currentServing.BeneficiaryName;
-        //    }
-        //    else
-        //    {
-        //        if (lblQueueNumberNowServing != null) lblQueueNumberNowServing.Text = "Q-000";
-        //        if (lblQueueNumberNowServing != null) lblQueueNumberNowServing.Text = "None";
-        //    }
-        //    var nextWaiting = centreBookings.FirstOrDefault(b => b.Status == "Waiting" || b.Status == "Checked In");
-        //    if (nextWaiting != null)
-        //    {
-        //        if (lblQueueNumberAndBeneficiaryNameNowServing != null)
-        //            lblQueueNumberAndBeneficiaryNameNowServing.Text = $"{nextWaiting.QueueNumberText} - {nextWaiting.BeneficiaryName}";
-        //    }
-        //    else
-        //    {
-        //        if (lblQueueNumberAndBeneficiaryNameNowServing != null) lblQueueNumberAndBeneficiaryNameNowServing.Text = "No one Waiting";
-        //    }
-
-
-
-        //    //    .Where(b => b.CentreName != null &&
-        //    //           b.CentreName.StartsWith(staffCentre.Split(' ')[0], StringComparison.OrdinalIgnoreCase))
-        //    //    .ToList();
-
-        //    //lblBookedCount.Text = centreBookings.Count(b => b.Status == "Booked").ToString();
-        //    //lblCheckedInCount.Text = centreBookings.Count(b => b.Status == "Checked In").ToString();
-        //    //lblWaitingCount.Text = centreBookings.Count(b => b.Status == "Waiting").ToString();
-        //    //lblServingCount.Text = centreBookings.Count(b => b.Status == "Serving").ToString();
-        //    //lblCompletedCount.Text = centreBookings.Count(b => b.Status == "Completed").ToString();
-        //    //lblNoShowCount.Text = centreBookings.Count(b => b.Status == "No-Show").ToString();
-
-        //    //var currentServing = centreBookings.FirstOrDefault(b => b.Status == "Serving");
-        //    //lblQueueNumberNowServing.Text = currentServing != null
-        //    //    ? currentServing.QueueNumber + " - " + currentServing.BeneficiaryName
-        //    //    : "None";
-
-        //    //var nextWaiting = centreBookings.FirstOrDefault(b => b.Status == "Checked In" || b.Status == "Waiting");
-        //    //lblQueueNumberAndBeneficiaryNameNowServing.Text = nextWaiting != null
-        //    //    ? nextWaiting.QueueNumber + " - " + nextWaiting.BeneficiaryName
-        //    //    : "No one waiting";
-        //}
-
-        // ============================================================
-        // CALL NEXT
-        // ============================================================
-
-        // ============================================================
-        // SIDEBAR BUTTONS
-        // ============================================================
+       
         private void btnQManagement_Click(object sender, EventArgs e)
         {
             pnlQManagement.BringToFront();
@@ -198,45 +102,49 @@ namespace SASSA_Application.Designer_Forms
         {
             List<Booking> allBookings = FileManager.LoadBookings();
 
-            lblBookedCount.Text = allBookings.Count(b =>
-                b.Status.Equals("Booked", StringComparison.OrdinalIgnoreCase)
-            ).ToString();
+            // 1. Update the top counters
+            lblBookedCount.Text = allBookings.Count(b => b.Status.Equals("Booked", StringComparison.OrdinalIgnoreCase)).ToString();
+            lblCheckedInCount.Text = allBookings.Count(b => b.Status.Equals("Checked In", StringComparison.OrdinalIgnoreCase)).ToString();
+            lblWaitingCount.Text = allBookings.Count(b => b.Status.Equals("Waiting", StringComparison.OrdinalIgnoreCase)).ToString();
+            lblServingCount.Text = allBookings.Count(b => b.Status.Equals("Serving", StringComparison.OrdinalIgnoreCase)).ToString();
+            lblCompletedCount.Text = allBookings.Count(b => b.Status.Equals("Completed", StringComparison.OrdinalIgnoreCase)).ToString();
+            lblNoShowCount.Text = allBookings.Count(b => b.Status.Equals("No-Show", StringComparison.OrdinalIgnoreCase)).ToString();
 
-            lblWaitingCount.Text = allBookings.Count(b =>
-                b.Status.Equals("Waiting", StringComparison.OrdinalIgnoreCase)
-            ).ToString();
+            // ============================================================
+            // 2. Update the "Now Serving" Label
+            // ============================================================
+            Booking currentServing = allBookings.FirstOrDefault(b => b.Status.Equals("Serving", StringComparison.OrdinalIgnoreCase));
 
-            lblCheckedInCount.Text = allBookings.Count(b =>
-    b.Status.Equals("Checked In", StringComparison.OrdinalIgnoreCase)
-).ToString();
+            if (currentServing != null)
+            {
+                // Show Queue Number and Name
+                lblQueueNumberNowServing.Text = currentServing.QueueNumber + "\n" + currentServing.BeneficiaryName;
+            }
+            else
+            {
+                // Clear the box if no one is being served
+                lblQueueNumberNowServing.Text = "None";
+            }
 
-            lblWaitingCount.Text = allBookings.Count(b =>
-    b.Status.Equals("Waiting", StringComparison.OrdinalIgnoreCase)
-).ToString();
-            lblServingCount.Text = allBookings.Count(b =>
-    b.Status.Equals("Serving", StringComparison.OrdinalIgnoreCase)
-).ToString();
+            // ============================================================
+            // 3. Update the "Waiting Now" Label
+            // ============================================================
+            Booking nextWaiting = allBookings.FirstOrDefault(b =>
+                b.Status.Equals("Checked In", StringComparison.OrdinalIgnoreCase) ||
+                b.Status.Equals("Waiting", StringComparison.OrdinalIgnoreCase));
 
-            lblCompletedCount.Text = allBookings.Count(b =>
-                b.Status.Equals("Completed", StringComparison.OrdinalIgnoreCase)
-            ).ToString();
-
-            lblNoShowCount.Text = allBookings.Count(b =>
-                b.Status.Equals("No-Show", StringComparison.OrdinalIgnoreCase)
-            ).ToString();
+            if (nextWaiting != null)
+            {
+                // Show Queue Number and Name
+                lblQueueNumberAndBeneficiaryNameNowServing.Text = nextWaiting.QueueNumber + " - " + nextWaiting.BeneficiaryName;
+            }
+            else
+            {
+                // Clear the box if no one is waiting
+                lblQueueNumberAndBeneficiaryNameNowServing.Text = "No one waiting";
+            }
         }
 
-
-
-
-        // ============================================================
-        // SEARCH BUTTON
-        // ============================================================
-
-
-        // ============================================================
-        // LOGOUT
-        // ============================================================
         private void btnLogout_Click(object sender, EventArgs e)
         {
             DialogResult answer = MessageBox.Show("Are you sure you want to log out?",
@@ -348,6 +256,7 @@ namespace SASSA_Application.Designer_Forms
 
         private void btnCheckIn_Click(object sender, EventArgs e)
         {
+       
             if (dgvQueue.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Select a booking from the queue first.", "No Selection",
@@ -372,7 +281,6 @@ namespace SASSA_Application.Designer_Forms
                     }
 
                     // --- NEW QUEUE NUMBER LOGIC ---
-                    // 1. Count how many people are already in the active queue for this centre today
                     int queueCount = 0;
                     foreach (Booking b in bookings)
                     {
@@ -384,23 +292,57 @@ namespace SASSA_Application.Designer_Forms
                         }
                     }
 
-                    // 2. Assign the next number in line (formatted as Q-001, Q-002, etc.)
+                    // Assign next number (Q-001, Q-002, etc.)
                     bookings[i].QueueNumber = "Q-" + (queueCount + 1).ToString("D3");
-
-                    // 3. Update status
                     bookings[i].Status = "Checked In";
                     updated = true;
                     break;
                 }
             }
+
             if (updated)
             {
                 FileManager.SaveAllBookings(bookings);
-                MessageBox.Show("Beneficiary checked in successfully.\nQueue number assigned.", "Success",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // --- EMAIL SENDING LOGIC ---
+                // Find the booking we just updated to get their name, ID, and Queue Number
+                Booking checkedInBooking = bookings.Find(b => b.Reference == reference);
+
+                if (checkedInBooking != null)
+                {
+                    string beneficiaryEmail = "";
+
+                    // Look up their email in Beneficiaries.txt
+                    if (File.Exists("Beneficiaries.txt"))
+                    {
+                        foreach (string line in File.ReadAllLines("Beneficiaries.txt"))
+                        {
+                            string[] parts = line.Split('|');
+                            // Format: Name|Surname|ID|Phone|Email|Centre|Password
+                            if (parts.Length >= 5 && parts[2] == checkedInBooking.BeneficiaryId)
+                            {
+                                beneficiaryEmail = parts[4]; // Email is at index 4
+                                break;
+                            }
+                        }
+                    }
+
+                    // If we found an email, send the Q-Number!
+                    if (!string.IsNullOrWhiteSpace(beneficiaryEmail))
+                    {
+                        SendQueueEmail(beneficiaryEmail, checkedInBooking.BeneficiaryName, checkedInBooking.QueueNumber);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Beneficiary checked in, but no email address was found on their profile.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+
                 LoadActiveQueue();
                 RefreshStaffDashboardData();
             }
+        
+            
         }
         private void btnCallNext_Click(object sender, EventArgs e)
         {
@@ -443,11 +385,42 @@ namespace SASSA_Application.Designer_Forms
             RefreshStaffDashboardData();
             LoadActiveQueue();
         }
+        private void SendQueueEmail(string recipientEmail, string beneficiaryName, string queueNumber)
+        {
+            try
+            {
+               
+                string senderEmail = "sassaapplication642@gmail.com";      
+                string appPassword = "nlxqkdlfveelxumu";
 
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-        //private void pnlStaffDash_Paint(object sender, PaintEventArgs e)
-        //{
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress(senderEmail, "SASSA Queue Booking");
+                mail.To.Add(recipientEmail);
+                mail.Subject = "Your SASSA Queue Number";
+                mail.Body = $"Hello {beneficiaryName},\n\n" +
+                            $"You have been successfully checked in at the service centre.\n\n" +
+                            $"Your Queue Number is: {queueNumber}\n\n" +
+                            "Please keep an eye on the screen for your number to be called.";
 
-        //}
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                smtp.Credentials = new NetworkCredential(senderEmail, appPassword);
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+
+                smtp.Send(mail);
+
+                // Show a confirmation to the staff member
+                MessageBox.Show($"Beneficiary checked in successfully.\nQueue number {queueNumber} has been emailed to them.",
+                                "Success & Email Sent", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Beneficiary checked in, but failed to send email.\nError: " + ex.Message,
+                                "Email Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+       
     }
 }
