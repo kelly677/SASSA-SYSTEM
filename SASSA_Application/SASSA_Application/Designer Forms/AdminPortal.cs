@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -47,42 +48,64 @@ namespace SASSA_Application.Designer_Forms
         }
         private void LoadDemandChart()
         {
-            // 1. Clear the chart and any default dummy data
             chart1.Series.Clear();
-            chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false; // Optional: removes vertical grid lines
+            chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
             chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
+            chart1.ChartAreas[0].AxisY.Title = "Beneficiaries";
 
-            // 2. Create a new series for the bars
-            Series series = new Series("Demand");
-            series.ChartType = SeriesChartType.Column; // Use Column for vertical bars
-            series.IsValueShownAsLabel = true;         // Shows the number on top of the bar
+            Series series = new Series("Beneficiaries");
+            series.ChartType = SeriesChartType.Column;
+            series.IsValueShownAsLabel = true;
             series.LabelForeColor = Color.Black;
-            series.Color = Color.FromArgb(37, 99, 235); // SASSA Blue
+            series.Color = Color.FromArgb(37, 99, 235);
 
-            // 3. Read the bookings from the file
+            series.XValueType = ChartValueType.String;
+            series.IsXValueIndexed = true;
+            series["PointWidth"] = "0.5";
+            chart1.ChartAreas[0].AxisX.IsLabelAutoFit = true;
+
             List<Booking> allBookings = FileManager.LoadBookings();
-
-            // 4. Group by service and count them
-            var serviceCounts = allBookings
-                .GroupBy(b => b.ServiceName)
-                .Select(g => new { Service = g.Key, Count = g.Count() })
-                .ToList();
-
-            // 5. Add the data to the chart
-            if (serviceCounts.Count == 0)
+            var services = new List<(string Centre, string Name)>();
+            if (File.Exists("Services.txt"))
             {
-                series.Points.AddXY("No Data", 0);
+                services = File.ReadAllLines("Services.txt")
+                    .Where(line => !string.IsNullOrWhiteSpace(line))
+                    .Select(line => line.Split('|'))
+                    .Where(parts => parts.Length >= 2 && !string.IsNullOrWhiteSpace(parts[1]))
+                    .Select(parts => (Centre: parts[0].Trim(), Name: parts[1].Trim()))
+                    .GroupBy(service => $"{service.Centre}|{service.Name}", StringComparer.OrdinalIgnoreCase)
+                    .Select(group => group.First())
+                    .ToList();
+            }
+
+            if (services.Count == 0)
+            {
+                series.Points.AddXY("No services", 0);
             }
             else
             {
-                foreach (var item in serviceCounts)
+                foreach (var service in services)
                 {
-                    series.Points.AddXY(item.Service, item.Count);
+                    int beneficiaryCount = allBookings
+                        .Where(booking => string.Equals(booking.ServiceName?.Trim(), service.Name, StringComparison.OrdinalIgnoreCase)
+                            && string.Equals(booking.CentreName?.Trim(), service.Centre, StringComparison.OrdinalIgnoreCase))
+                        .Select(booking => !string.IsNullOrWhiteSpace(booking.BeneficiaryId)
+                            ? booking.BeneficiaryId.Trim()
+                            : !string.IsNullOrWhiteSpace(booking.BeneficiaryName)
+                                ? booking.BeneficiaryName.Trim()
+                                : booking.Reference.Trim())
+                        .Where(beneficiary => !string.IsNullOrWhiteSpace(beneficiary))
+                        .Distinct(StringComparer.OrdinalIgnoreCase)
+                        .Count();
+
+                    series.Points.AddXY($"{service.Name} ({service.Centre})", beneficiaryCount);
                 }
             }
 
-            // 6. Add the series back to the chart
             chart1.Series.Add(series);
+            chart1.ChartAreas[0].AxisY.Interval = 1;
+            chart1.ChartAreas[0].AxisY.LabelStyle.Format = "0";
+            chart1.ChartAreas[0].AxisX.Interval = 1;
         }
 
         // ============================================================

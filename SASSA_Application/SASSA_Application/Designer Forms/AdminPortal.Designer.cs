@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminPortal));
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             pictureBox1 = new PictureBox();
             pcLogo = new PictureBox();
             pnlTop = new Panel();
@@ -451,14 +451,14 @@
             dgvServices.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvServices.BackgroundColor = SystemColors.InactiveCaption;
             dgvServices.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.FromArgb(26, 70, 130);
-            dataGridViewCellStyle6.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle6.ForeColor = SystemColors.Window;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.ButtonShadow;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
-            dgvServices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(26, 70, 130);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.Window;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.ButtonShadow;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvServices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvServices.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvServices.Columns.AddRange(new DataGridViewColumn[] { Column1, Service, Description, Column2 });
             dgvServices.EnableHeadersVisualStyles = false;
@@ -644,7 +644,7 @@
             curvedCornerPanel2.Controls.Add(label17);
             curvedCornerPanel2.Location = new Point(373, 216);
             curvedCornerPanel2.Name = "curvedCornerPanel2";
-            curvedCornerPanel2.Size = new Size(692, 200);
+            curvedCornerPanel2.Size = new Size(259, 200);
             curvedCornerPanel2.TabIndex = 18;
             // 
             // lblBookedTotal
@@ -652,7 +652,7 @@
             lblBookedTotal.AutoSize = true;
             lblBookedTotal.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblBookedTotal.ForeColor = Color.FromArgb(26, 70, 130);
-            lblBookedTotal.Location = new Point(53, 51);
+            lblBookedTotal.Location = new Point(82, 66);
             lblBookedTotal.Name = "lblBookedTotal";
             lblBookedTotal.Size = new Size(57, 54);
             lblBookedTotal.TabIndex = 12;
@@ -677,7 +677,7 @@
             curvedCornerPanel1.Controls.Add(label2);
             curvedCornerPanel1.Location = new Point(635, 216);
             curvedCornerPanel1.Name = "curvedCornerPanel1";
-            curvedCornerPanel1.Size = new Size(692, 200);
+            curvedCornerPanel1.Size = new Size(274, 200);
             curvedCornerPanel1.TabIndex = 18;
             // 
             // lblOnQue
@@ -685,7 +685,7 @@
             lblOnQue.AutoSize = true;
             lblOnQue.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblOnQue.ForeColor = Color.SaddleBrown;
-            lblOnQue.Location = new Point(53, 51);
+            lblOnQue.Location = new Point(128, 66);
             lblOnQue.Name = "lblOnQue";
             lblOnQue.Size = new Size(57, 54);
             lblOnQue.TabIndex = 12;
@@ -709,7 +709,7 @@
             curvedCornerPanel3.Controls.Add(label4);
             curvedCornerPanel3.Location = new Point(917, 216);
             curvedCornerPanel3.Name = "curvedCornerPanel3";
-            curvedCornerPanel3.Size = new Size(692, 200);
+            curvedCornerPanel3.Size = new Size(275, 200);
             curvedCornerPanel3.TabIndex = 19;
             // 
             // lblCompleted
@@ -717,7 +717,7 @@
             lblCompleted.AutoSize = true;
             lblCompleted.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblCompleted.ForeColor = Color.FromArgb(0, 64, 0);
-            lblCompleted.Location = new Point(53, 51);
+            lblCompleted.Location = new Point(107, 66);
             lblCompleted.Name = "lblCompleted";
             lblCompleted.Size = new Size(57, 54);
             lblCompleted.TabIndex = 12;
@@ -739,9 +739,9 @@
             curvedCornerPanel4.BackColor = Color.FromArgb(255, 128, 128);
             curvedCornerPanel4.Controls.Add(lblNoshow);
             curvedCornerPanel4.Controls.Add(label8);
-            curvedCornerPanel4.Location = new Point(1195, 216);
+            curvedCornerPanel4.Location = new Point(1198, 216);
             curvedCornerPanel4.Name = "curvedCornerPanel4";
-            curvedCornerPanel4.Size = new Size(414, 200);
+            curvedCornerPanel4.Size = new Size(313, 200);
             curvedCornerPanel4.TabIndex = 20;
             // 
             // lblNoshow
@@ -749,7 +749,7 @@
             lblNoshow.AutoSize = true;
             lblNoshow.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblNoshow.ForeColor = Color.FromArgb(192, 0, 0);
-            lblNoshow.Location = new Point(53, 51);
+            lblNoshow.Location = new Point(141, 66);
             lblNoshow.Name = "lblNoshow";
             lblNoshow.Size = new Size(57, 54);
             lblNoshow.TabIndex = 12;
@@ -1020,14 +1020,14 @@
             dgvStaffMembers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvStaffMembers.BackgroundColor = SystemColors.InactiveCaption;
             dgvStaffMembers.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(26, 70, 130);
-            dataGridViewCellStyle7.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle7.ForeColor = SystemColors.Window;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.ButtonShadow;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            dgvStaffMembers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(26, 70, 130);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.Window;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ButtonShadow;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvStaffMembers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvStaffMembers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvStaffMembers.Columns.AddRange(new DataGridViewColumn[] { colName, dataGridViewTextBoxColumn1, Centre, Date });
             dgvStaffMembers.EnableHeadersVisualStyles = false;
@@ -1145,14 +1145,14 @@
             dgvSlots.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvSlots.BackgroundColor = SystemColors.InactiveCaption;
             dgvSlots.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(26, 70, 130);
-            dataGridViewCellStyle8.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle8.ForeColor = SystemColors.Window;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.ButtonShadow;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
-            dgvSlots.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(26, 70, 130);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.Window;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.ButtonShadow;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvSlots.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvSlots.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvSlots.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn10, dataGridViewTextBoxColumn11 });
             dgvSlots.EnableHeadersVisualStyles = false;
@@ -1296,14 +1296,14 @@
             dgvCentres.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCentres.BackgroundColor = SystemColors.InactiveCaption;
             dgvCentres.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = Color.FromArgb(26, 70, 130);
-            dataGridViewCellStyle9.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle9.ForeColor = SystemColors.Window;
-            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = SystemColors.ButtonShadow;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
-            dgvCentres.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(26, 70, 130);
+            dataGridViewCellStyle4.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = SystemColors.Window;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.ButtonShadow;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgvCentres.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dgvCentres.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCentres.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn4, Required, dataGridViewTextBoxColumn5 });
             dgvCentres.EnableHeadersVisualStyles = false;
@@ -1463,14 +1463,14 @@
             dgvTotalBookings.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvTotalBookings.BackgroundColor = SystemColors.GradientActiveCaption;
             dgvTotalBookings.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = Color.FromArgb(26, 70, 130);
-            dataGridViewCellStyle10.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle10.ForeColor = SystemColors.Window;
-            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = SystemColors.ButtonShadow;
-            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
-            dgvTotalBookings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(26, 70, 130);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = SystemColors.Window;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.ButtonShadow;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            dgvTotalBookings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dgvTotalBookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvTotalBookings.Columns.AddRange(new DataGridViewColumn[] { Reference, Beneficiary, dataGridViewTextBoxColumn2, C, Time, dataGridViewTextBoxColumn3 });
             dgvTotalBookings.EnableHeadersVisualStyles = false;
@@ -1618,17 +1618,17 @@
             // 
             // chart1
             // 
-            chartArea2.AxisX.IsLabelAutoFit = false;
-            chartArea2.AxisX.LabelStyle.Angle = -45;
-            chartArea2.BorderColor = Color.WhiteSmoke;
-            chartArea2.Name = "ChartArea1";
-            chart1.ChartAreas.Add(chartArea2);
+            chartArea1.AxisX.IsLabelAutoFit = false;
+            chartArea1.AxisX.LabelStyle.Angle = -45;
+            chartArea1.BorderColor = Color.WhiteSmoke;
+            chartArea1.Name = "ChartArea1";
+            chart1.ChartAreas.Add(chartArea1);
             chart1.Location = new Point(33, 45);
             chart1.Name = "chart1";
             chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
-            series2.ChartArea = "ChartArea1";
-            series2.Name = "Series1";
-            chart1.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Name = "Series1";
+            chart1.Series.Add(series1);
             chart1.Size = new Size(1084, 389);
             chart1.TabIndex = 0;
             chart1.Text = "chart1";
@@ -1887,12 +1887,12 @@
             ClientSize = new Size(1719, 901);
             Controls.Add(pnlSidePanel);
             Controls.Add(pnlTop);
-            Controls.Add(pnlAdminDashboard);
             Controls.Add(pnlReports);
             Controls.Add(pnlBookings);
             Controls.Add(pnlCentres);
             Controls.Add(pnlStaff);
             Controls.Add(pnlServices);
+            Controls.Add(pnlAdminDashboard);
             Name = "AdminPortal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AdminPortal";
